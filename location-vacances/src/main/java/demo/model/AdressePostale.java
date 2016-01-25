@@ -1,8 +1,11 @@
-package Model;
+package demo.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
 public class AdressePostale {
 	
 	@Id
@@ -11,6 +14,7 @@ public class AdressePostale {
 	private String Adresse;
 	private String CodePostal;
 	private String Ville;
+	@OneToOne
 	private Format_pays Pays;
 	public int getId() {
 		return Id;

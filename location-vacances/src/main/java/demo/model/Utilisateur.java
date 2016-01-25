@@ -1,20 +1,25 @@
-package Model;
+package demo.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Utilisateur {
 	@Id
 	@GeneratedValue
 	private int Id;
+	@OneToOne
 	private Login Login;
 	private String Nom;
 	private String Prenom;
 	private String Email;
 	
 	private Date DateNaissance;
+	@OneToOne
 	private AdressePostale Adresse;
 	
 	public int getId() {

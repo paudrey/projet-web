@@ -1,20 +1,26 @@
-package Model;
+package demo.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Logement {
 
 	@Id
 	@GeneratedValue
 	private int Id;
+	@OneToOne
 	private Utilisateur Proprietaire;
 	private String Description;
+	@OneToOne
 	private Format_typeLogement TypeLogement;
+	@OneToOne
 	private AdressePostale adresse;
 	
 	@OneToMany(fetch = FetchType.EAGER)

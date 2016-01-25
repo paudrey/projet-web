@@ -1,18 +1,23 @@
-package Model;
+package demo.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Reservation {
 	@Id
 	@GeneratedValue
 	private int Id;
-	
+	@OneToOne
 	private Utilisateur locataire;
+	@OneToOne
 	private Logement Logement;
 	private double prixTTC;
+	@OneToOne
 	private Format_statutReservation statut;
 	private Date dateDebut;
 	private Date dateFin;
