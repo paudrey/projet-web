@@ -1,0 +1,80 @@
+﻿body{
+    overflow : auto;
+}
+
+#content {
+    height : 90vh;
+    padding-top : 2vh;
+    /*background-image : url('../images/summer_holiday.jpg');*/
+    background-position : center;
+    background-size : cover;
+    background-repeat : no-repeat;
+}
+
+form {
+    width : 50vw;   
+    min-height : 100px;
+    margin-left : auto;
+    margin-right : auto;
+    padding-top : 2vh;
+    padding-bottom : 5vh;
+    padding-left : 3vw;
+    padding-right : 3vw;
+    background-color : rgba(255, 255, 255, 0.7);
+}
+    form table {
+        border-spacing : 5px;
+        margin-left : 7vw;
+    }
+
+        form table tr {
+             width : inherit;
+             min-height : 50px;
+        }
+            form table tr.topSection {
+                padding-top : 1vh;
+            }
+            form table tr td {
+                min-width : 300px;
+            }
+             form table tr td.topSection {
+                padding-top : 2vh;
+            }
+            form table tr td .buttonLine {
+                width : 100%;
+            }
+
+/*input {
+    min-height : 30px;
+    padding : 5px;
+    width : 15vw;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}
+
+    input.large {
+        width : 34.2vw;
+    }*/
+
+select {
+    min-height : 46px;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}
+
+select:hover {
+    cursor : pointer;
+}
+
+.resetPassword {
+    font-size : 18px;
+    margin-left : 3.2vw;
+}
+
+.resetMotDePasse {
+    width : 100%;
+    text-align : center;
+    color : rgb(41,143,244);
+    font-size : 24px;
+    font-family : 'Segoe UI Light';
+}

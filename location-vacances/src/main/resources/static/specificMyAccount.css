@@ -1,0 +1,134 @@
+﻿#content {
+    /*background-image : url('../images/under_construction.jpg');*/
+    background-position : center;
+    background-size : contain;
+    background-repeat : no-repeat;
+	background-color : white;
+    opacity : 0.9;
+    overflow : hidden;
+}
+
+#leftMenu {
+    margin-top : 5vh;
+    width : 15vw;
+    background-color : rgb(150,150,150);
+    float : left;
+    height : 72vh;
+}
+#leftMenu ul{
+    margin : 0;
+    margin-left : -2vw;
+}
+
+#leftMenu ul li{
+    padding : 1vh;
+    padding-right : 1vw;
+    padding-left : 1vw;
+    color : whitesmoke;
+}
+    #leftMenu li.title {
+        list-style-type : none;
+        text-decoration : underline;
+    }
+    #leftMenu li.item {
+        list-style-type : none;
+        padding-left : 1vw;
+    }
+        #leftMenu li.item:hover {
+            background-color : rgb(163,163,163);
+            cursor : pointer;
+        } 
+
+#innerContent {
+    margin-top : 5vh;
+    width : 85vw;
+    min-height : 72vh;
+    height : 10vh;
+    float : right;
+    background-color : whitesmoke;
+    overflow : auto;
+}
+
+    #innerContent form {
+        width : 80vw;
+        margin-left : auto;
+        margin-right : auto;
+    }
+
+    #innerContent form table{
+        border-spacing : 0;
+    }
+
+        #innerContent form table tr.rowTitle {
+            background-color : rgb(41,143,244);;
+        }
+
+        #innerContent form table tr th {
+            font-size : 14px;
+            font-weight : normal;
+            color : white;
+            padding-left : 1vw;
+            width : 14vw;
+            text-align : left;
+        }   
+
+        #innerContent form table tr td {
+            font-size : 14px;
+            color : black;
+            padding-left : 1vw;
+            width : 14vw;
+            text-align : left;
+        }   
+
+
+h1 {
+        font-size : 20px;
+        font-family : 'Segoe UI';
+        font-weight : normal;
+        color : rgb(41,143,244);
+        text-align : center;
+        width : 85vw;    
+    }
+
+
+
+
+
+/*form {
+    width : 90vw;
+    height : auto;
+    margin-left : auto;
+    margin-right : auto;
+    padding-top : 15%;
+}
+    form table {
+        width : 90vw;
+        border-spacing : 10px;
+    }
+
+        form table tr {
+             width : inherit;
+             min-height : 50px;
+             padding-left : 10px;
+        }
+
+            form table tr td .buttonLine {
+                width : 100%;
+            }*/
+
+/*input {
+    min-height : 40px;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}*/
+
+/*select {
+    min-height : 46px;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}*/
+
+/*select:hover {
+    cursor : pointer;
+}*/
+

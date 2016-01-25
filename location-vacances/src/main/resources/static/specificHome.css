@@ -1,0 +1,45 @@
+﻿#content {
+    background-image : url('../images/bungalow_outside.jpg');
+    background-position : center;
+    background-size : cover;
+    background-repeat : no-repeat;
+}
+
+form {
+    width : 90vw;
+    height : auto;
+    margin-left : auto;
+    margin-right : auto;
+    padding-top : 15%;
+}
+    form table {
+        width : 90vw;
+        border-spacing : 10px;
+    }
+
+        form table tr {
+             width : inherit;
+             min-height : 50px;
+             padding-left : 10px;
+        }
+
+            form table tr td .buttonLine {
+                width : 100%;
+            }
+
+input {
+    min-height : 40px;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}
+
+select {
+    min-height : 46px;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}
+
+select:hover {
+    cursor : pointer;
+}
+

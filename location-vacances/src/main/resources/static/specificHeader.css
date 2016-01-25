@@ -1,0 +1,61 @@
+﻿#logo {
+    width : 19vw;
+    min-width : 180px;
+    height : inherit;
+    min-height : 50px;
+    margin : 0;
+    background-image : url('../images/logo_light.png');
+    background-position : center;
+    background-size : cover;
+    background-repeat : no-repeat;
+    background-position-x : 0.5%;
+    background-position-y : 35%;
+}
+
+#menu {
+    width : 80vw;
+    min-width : inherit;
+    height : inherit;
+    min-height : inherit;
+    position : absolute;
+    float : left;
+    color : rgb(186,244,249);
+    font-size : 20px;
+    vertical-align : bottom;
+    margin-top : -10vh;
+    /*margin-left : 19vw;*/
+    margin-left : 20vw;
+}
+
+    #menu ul {
+        padding : 0;
+        height : 9vh;
+        list-style-type : none;
+        display : table-cell;
+        vertical-align : bottom;
+    }
+
+        #menu ul li {
+            position : relative;
+            float : left;
+            text-align : center;
+            margin-left : 5vw;
+        }
+
+        #menu ul li a {
+                color : rgb(186,244,249);
+                text-decoration : none;
+                padding-bottom : 5px;
+            }
+
+        #menu ul li a.selected {
+                
+                border-bottom : 4px solid rgb(186,244,249);
+            }
+
+            #menu ul li a:hover {             
+                border-bottom : 4px solid rgb(186,244,249);
+                cursor : pointer;
+            }
+
+            

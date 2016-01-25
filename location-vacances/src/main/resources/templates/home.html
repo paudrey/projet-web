@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../base.css" rel="stylesheet" />
+    <link href="../specificHeader.css" rel="stylesheet" />
+    <link href="../specificFooter.css" rel="stylesheet" />
+    <link href="../text.css" rel="stylesheet" />
+    <link href="../specificHome.css" rel="stylesheet" />
+    <link href="../button.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+        <div id="menu">
+            <ul>
+                <li><a class="selected">Accueil</a></li>
+                <li><a href="news.html">Actualité</a></li>
+                <li><a href="community.html">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+
+        <form>
+            <table>
+                <tr>
+                    <td><input placeholder="Pays" type="text"/></td>
+
+                    <td><input placeholder="Ville" type="text"/></td>
+
+                    <td><select>
+                        <option value="">Type de location</option>
+                        <option value="appartement">Appartement</option>
+                        <option value="bateau">Bateau</option>
+                        <option value="camping">Camping</option>
+                        <option value="maison">Maison</option>
+                    </select></td>
+
+                    <td><input placeholder="Date de début" type="text"/></td>
+
+                    <td><input placeholder="Date de fin" type="text"/></td>
+
+                    <td><input placeholder="Nb voyageurs" type="text"/></td>                  
+                </tr>
+            </table>  
+            <button class="searchButton">Rechercher</button>
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>

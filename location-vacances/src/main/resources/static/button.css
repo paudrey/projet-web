@@ -1,0 +1,62 @@
+﻿.searchButton {
+    width : 200px;
+    height : 50px;
+    margin-top : 5%;
+    margin-left : 40%;
+    margin-right : auto;
+    padding : 5px;
+    padding-left : 50px;
+
+    background-color : rgb(41,143,244);
+    background-image : url('../icons/searchIcon_light.png');
+    background-repeat : no-repeat;
+    background-size : 20%;
+    background-position-x : 15%;
+    background-position-y : 50%;
+    border : none;
+
+    font-variant : small-caps;
+    font-size : 18px;
+    color : rgb(186,244,249);
+}
+
+    .searchButton:hover {
+        cursor : pointer;
+        background-color : rgb(68,162,255);
+    }
+
+.connexionButton {
+    width : 200px;
+    height : 40px;
+    margin-top : 5%;
+    margin-left : 1.8vw;
+    margin-right : auto;
+    padding : 2px;
+
+    background-color : rgb(41,143,244);
+    border : none;
+
+    font-variant : small-caps;
+    font-size : 18px;
+    color : rgb(186,244,249);
+}
+
+.inscriptionButton {
+    width : 200px;
+    height : 40px;
+    margin-left : 12vw;
+    margin-right : auto;
+    padding : 2px;
+
+    background-color : rgb(41,143,244);
+    border : none;
+
+    font-variant : small-caps;
+    font-size : 18px;
+    color : rgb(186,244,249);
+}
+
+    .connexionButton:hover {
+        cursor : pointer;
+        background-color : rgb(68,162,255);
+    }
