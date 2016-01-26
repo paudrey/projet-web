@@ -32,22 +32,22 @@
     <div id="content">
         
 
-        <form>
+        <form th:object="${user}" method="POST">
             <h1 class="formTitle">Formulaire d'incription</h1>
             <table>
                 <tr>
-                    <td class="topSection"><input placeholder="Nom" type="text"/></td>
-                    <td class="topSection"><input placeholder="Pr�nom" type="text" /></td>
+                    <td class="topSection"><input placeholder="Nom" type="text" th:field="*{Nom}"/></td>
+                    <td class="topSection"><input placeholder="Prénom" type="text" th:field="*{Prenom}"/></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Date de naissance" type="text" /></td>
+                    <td><input placeholder="Date de naissance" type="text" th:field="*{DateNaissance}"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="topSection"><input placeholder="Adresse" class="large" type="text" /></td>
+                    <td colspan="2" class="topSection"><input placeholder="Adresse" class="large" type="text"  th:field="*{Adresse.Adresse}" name="Adresse"/></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Code Postal" type="text" /></td>
-                    <td><input placeholder="Ville" type="text" /></td>
+                    <td><input placeholder="Code Postal" type="text" th:field="*{Adresse.CodePostal}" name="CodePostal"/></td>
+                    <td><input placeholder="Ville" type="text" th:field="*{Adresse.Ville}" name="Ville"/></td>
                 </tr>
                 <tr>
                     <td><input placeholder="Pays" type="text" /></td>
@@ -56,16 +56,16 @@
                     <td colspan="2" class="topSection"><input placeholder="Adresse email" class="large" type="text" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input placeholder="Confirmation de l'adresse email" class="large" type="text" /></td>
+                    <td colspan="2"><input placeholder="Confirmation de l'adresse email" class="large" type="text" th:field="*{Email}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="topSection"><input placeholder="Mot de passe" class="large" type="text" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input placeholder="Confirmation du mot de passe" class="large" type="text" /></td>
+                    <td colspan="2"><input placeholder="Confirmation du mot de passe" class="large" type="text" th:field="*{Login.Password}"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="topSection"><button class="inscriptionButton">Valider</button></td>
+                    <td colspan="2" class="topSection"><button class="inscriptionButton" type="submit">Valider</button></td>
                 </tr>
             </table>
           

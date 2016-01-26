@@ -12,23 +12,65 @@ import demo.model.Login;
 import demo.model.Utilisateur;
 import demo.repository.AdressePostaleRepository;
 import demo.repository.LoginRepository;
+import demo.repository.PaysRepository;
 import demo.repository.UtilisateurRepository;
 
 @Controller
 public class UserController {
 
-	@RequestMapping("/inscription")
-	public String requestHome(Model model)
-	{
-		//model.addAttribute("bookmarkList", bookmarkRepository.findAll());
-		return "inscription";
-	}
-	/*@Autowired
+	@Autowired
 	private UtilisateurRepository userRepository;
 	@Autowired
 	private LoginRepository loginRespository;
 	@Autowired
 	private AdressePostaleRepository adresseRepository;
+	@Autowired
+	private PaysRepository paysRepository;
+	
+	@RequestMapping("/inscription")
+	public String requestInscription(Model model)
+	{
+		//model.addAttribute("paysList", paysRepository.findAll());
+		//model.addAttribute("adresse", new AdressePostale());
+		model.addAttribute("login", new Login());
+		model.addAttribute("user", new Utilisateur());
+		
+		return "inscription";
+	}
+	
+	@RequestMapping(value="/inscription", method=RequestMethod.POST)
+	public String requestSaveCreate(Utilisateur user, RedirectAttributes redirectAttribute)
+	{
+		String[] tabLogin = user.getEmail().split("@");
+		
+		Login login = user.getLogin();
+		login.setId(user.getId());
+		login.setLogin(tabLogin[0]);
+		AdressePostale adresse = user.getAdresse();
+		
+		loginRespository.save(login);
+		adresseRepository.save(adresse);
+		userRepository.save(user);	
+		
+		return "redirect:adminUsers";
+	}
+	
+	@RequestMapping("/suscribersViewData")
+	public String requestView(Model model)
+	{
+		int id = (int)model.asMap().get("userId");
+		Utilisateur user = userRepository.findOne(id);		
+		model.addAttribute("user", user);		
+		return "suscribersViewData";
+	}
+	
+	@RequestMapping(value="/suscribersViewData", method=RequestMethod.POST)
+	public String requestView(Model model, RedirectAttributes redirectAttribute)
+	{		
+		return "redirect:adminUsers";
+	}
+	
+	/*
 	
 	
 	private Utilisateur currentUser;
@@ -46,15 +88,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value="/inscription", method=RequestMethod.POST)
-	public String requestSaveCreate(Login login,AdressePostale adresse,Utilisateur user, RedirectAttributes redirectAttribute)
-	{
-		loginRespository.save(login);
-		adresseRepository.save(adresse);
-		userRepository.save(user);	
-		
-		return "redirect:home";
-	}
+	
 	
 	@RequestMapping(value="/suscribeMyData", method=RequestMethod.POST)
 	public String requestSaveEdit(AdressePostale adresse, Utilisateur user)
