@@ -30,13 +30,13 @@
 
     <div id="content">
 
-        <form th:object="${user}" method="POST">
+        <form th:object="${login}" method="POST">
             <table>
                 <tr>
-                    <td><input placeholder="Login" type="text" /></td>
+                    <td><input placeholder="Login" type="text" th:field="*{Login}"/></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Mot de passe" type="text" /></td>
+                    <td><input placeholder="Mot de passe" type="text"  th:field="*{Password}"/></td>
                 </tr>
                 <tr>
                     <td><button class="connexionButton">Connexion</button></td>

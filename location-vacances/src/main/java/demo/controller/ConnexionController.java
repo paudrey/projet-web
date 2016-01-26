@@ -19,25 +19,37 @@ public class ConnexionController {
 	@Autowired
 	private LoginRepository loginRespository;
 	
+	private static Login previousLogin;
+	private int iteration;
+	
 	
 	@RequestMapping("/connexion")
 	public String requestInscription(Model model)
 	{
-		model.addAttribute("user", new Utilisateur());		
+		model.addAttribute("login", new Login());		
 		return "connexion";
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
 	public String requestConnexion(Login login, RedirectAttributes redirectAttribute)
 	{
+		if(previousLogin == null || previousLogin.getId() != login.getId()) {
+			iteration = 0;
+		}
 		List<Login> loginList = (List<Login>)loginRespository.findAll();
 		Login result = loginList.stream()
 				.filter(user -> user.getLogin().equals(login.getLogin()) && user.getPassword().equals(login.getPassword()))
 				.findFirst()
-				.get();
+				.orElse(null);
 		
 		if(result != null) {
-			return "redirect:/suscribersHome";
+			previousLogin = login;
+			iteration ++;
+			if(iteration == 5)
+			{
+				//Passage du statut de l'utilisateur en bloqué
+			}
+			return "redirect:/home";
 		}
 		else {
 			return "connexion";
