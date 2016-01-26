@@ -83,6 +83,24 @@
         background-color : rgb(68,162,255);
     }
     
+.addNewItem{
+	width : 190px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 65vw;
+    background-color : rgb(41,143,244);
+    color : rgb(186,244,249);
+    font-variant : small-caps;
+    font-size : 14px;
+    border : none;
+}
+
+.addNewItem:hover{
+	cursor : pointer;
+	background-color : rgb(68,162,255);
+}
+
+    
     
 
     

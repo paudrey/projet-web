@@ -32,7 +32,7 @@ public class UserController {
 	{
 		//model.addAttribute("paysList", paysRepository.findAll());
 		//model.addAttribute("adresse", new AdressePostale());
-		model.addAttribute("login", new Login());
+		//model.addAttribute("login", new Login());
 		model.addAttribute("user", new Utilisateur());
 		
 		return "inscription";
