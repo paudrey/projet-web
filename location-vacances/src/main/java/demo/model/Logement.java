@@ -18,10 +18,11 @@ public class Logement {
 	@OneToOne
 	private Utilisateur Proprietaire;
 	private String Description;
+	private String ShortDescription;
 	@OneToOne
 	private Format_typeLogement TypeLogement;
 	@OneToOne
-	private AdressePostale adresse;
+	private AdressePostale Adresse;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Photo> PhotoList;
@@ -59,11 +60,11 @@ public class Logement {
 	}
 
 	public AdressePostale getAdresse() {
-		return adresse;
+		return Adresse;
 	}
 
 	public void setAdresse(AdressePostale adresse) {
-		this.adresse = adresse;
+		this.Adresse = adresse;
 	}
 
 	public List<Photo> getPhotoList() {
@@ -73,5 +74,14 @@ public class Logement {
 	public void setPhotoList(List<Photo> photoList) {
 		PhotoList = photoList;
 	}
+
+	public String getShortDescription() {
+		return ShortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		ShortDescription = shortDescription;
+	}
+	
 	
 }

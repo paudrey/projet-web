@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+
+
+
 import demo.model.AdressePostale;
+import demo.model.Contact;
 import demo.model.Logement;
 import demo.model.Photo;
 import demo.repository.AdressePostaleRepository;
 import demo.repository.LogementRepository;
+import demo.repository.PaysRepository;
 import demo.repository.PhotoRepository;
+import demo.repository.TypeLogementRepository;
 import demo.repository.UtilisateurRepository;
 
 
@@ -29,16 +35,34 @@ public class LogementController {
 	@Autowired
 	private LogementRepository logementRepository;
 	
+	@Autowired
+	PaysRepository paysRepository;
+	@Autowired
+	TypeLogementRepository typeLogRepository;
+	
 	private Logement currentLog;
 	
-	@RequestMapping(value="/logement", method=RequestMethod.POST)
-	public String requestSaveCreate(AdressePostale adresse,Logement logement, RedirectAttributes redirectAttribute)
-	{
-		adresseRepository.save(adresse);
-		logementRepository.save(logement);
-		return "redirect:home";
+	@RequestMapping("/createEditHousing")
+	public String requestHousing(Model model)
+	{	    
+		model.addAttribute("typeLogList", typeLogRepository.findAll());
+		model.addAttribute("paysList", paysRepository.findAll());
+		model.addAttribute("housing", new Logement());
+		return "createEditHousing";
 	}
 	
+	
+	
+	@RequestMapping(value="/logement", method=RequestMethod.POST)
+	public String requestCreate(Logement logement, RedirectAttributes redirectAttribute)
+	{
+		//Récupération de l'user 
+		logementRepository.save(logement);
+		AdressePostale adresse = logement.getAdresse();
+		adresseRepository.save(adresse);
+		return "home";
+	}
+	/*
 	@RequestMapping(value="/photo", method=RequestMethod.POST)
 	public String requestSaveCreatePhoto(Photo photo, RedirectAttributes redirectAttribute, Model model)
 	{
@@ -49,6 +73,6 @@ public class LogementController {
 		model.addAttribute("photo", new Photo());
 		photoRespository.save(photo);
 		return "redirect:home";
-	}
+	}*/
 	
 }
