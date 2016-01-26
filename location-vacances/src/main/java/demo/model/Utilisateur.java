@@ -16,9 +16,9 @@ public class Utilisateur {
 	private Login Login;
 	private String Nom;
 	private String Prenom;
-	private String Email;
+	private String Email;	
+	private String DateNaissance;
 	
-	private Date DateNaissance;
 	@OneToOne
 	private AdressePostale Adresse;
 	
@@ -46,10 +46,10 @@ public class Utilisateur {
 	public void setPrenom(String prenom) {
 		Prenom = prenom;
 	}
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
 		return DateNaissance;
 	}
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(String dateNaissance) {
 		DateNaissance = dateNaissance;
 	}
 	public AdressePostale getAdresse() {

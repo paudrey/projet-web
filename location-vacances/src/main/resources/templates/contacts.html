@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../base.css" rel="stylesheet" />
+    <link href="../specificHeader.css" rel="stylesheet" />
+    <link href="../specificFooter.css" rel="stylesheet" />
+    <link href="../text.css" rel="stylesheet" />
+    <link href="../specificContact.css" rel="stylesheet" />
+    <link href="../button.css" rel="stylesheet" />    <!--<link href="../styles/specificConstruction.css" rel="stylesheet" />-->
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+        <div id="menu">
+            <ul>
+                <li><a href="home.html">Accueil</a></li>
+                <li><a href="news.html">Actualité</a></li>
+                <li><a href="community.html">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a class="selected">Contacts</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+
+        <form th:object="${contact}" method="POST">
+            <h1 class="formTitle">N'hésitez pas à nous faire part de vos remarques</h1>
+            <table>
+                <tr>
+                    <td class="topSection"><input placeholder="Vos Nom et prénom" type="text" th:field="*{Name}"/></td>
+                    <td class="topSection"><input placeholder="Votre adresse mail" type="text" th:field="*{Email}"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="topSection"><input placeholder="Objet" class="large" type="text" th:field="*{Objet}" /></td>
+                </tr>
+                <tr>
+                    <td colspan ="2"><textarea placeholder="Votre message" rows="10" th:field="*{Message}"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="topSection"><button class="inscriptionButton" type="submit">Envoyer</button></td>
+                </tr>
+            </table>
+
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>

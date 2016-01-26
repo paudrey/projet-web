@@ -40,8 +40,6 @@ public class LogementController {
 	@Autowired
 	TypeLogementRepository typeLogRepository;
 	
-	private Logement currentLog;
-	
 	@RequestMapping("/createEditHousing")
 	public String requestHousing(Model model)
 	{	    
@@ -53,14 +51,14 @@ public class LogementController {
 	
 	
 	
-	@RequestMapping(value="/logement", method=RequestMethod.POST)
+	@RequestMapping(value="/createEditHousing", method=RequestMethod.POST)
 	public String requestCreate(Logement logement, RedirectAttributes redirectAttribute)
 	{
 		//Récupération de l'user 
-		logementRepository.save(logement);
 		AdressePostale adresse = logement.getAdresse();
 		adresseRepository.save(adresse);
-		return "home";
+		logementRepository.save(logement);
+		return "redirect:adminHousing";
 	}
 	/*
 	@RequestMapping(value="/photo", method=RequestMethod.POST)

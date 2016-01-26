@@ -1,4 +1,4 @@
-﻿body{
+body{
     overflow : auto;
 }
 
@@ -43,18 +43,6 @@ form {
             form table tr td .buttonLine {
                 width : 100%;
             }
-
-/*input {
-    min-height : 30px;
-    padding : 5px;
-    width : 15vw;
-    border : 2px solid rgb(41,143,244);
-    background-color : rgba(255, 255, 255, 0.9);
-}
-
-    input.large {
-        width : 34.2vw;
-    }*/
 
 select {
     min-height : 46px;

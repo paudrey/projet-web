@@ -1,4 +1,4 @@
-﻿.searchButton {
+.searchButton {
     width : 200px;
     height : 50px;
     margin-top : 5%;
@@ -40,6 +40,10 @@
     font-size : 18px;
     color : rgb(186,244,249);
 }
+	.connexionButton:hover {
+        cursor : pointer;
+        background-color : rgb(68,162,255);
+    }
 
 .inscriptionButton {
     width : 200px;
@@ -55,8 +59,48 @@
     font-size : 18px;
     color : rgb(186,244,249);
 }
-
-    .connexionButton:hover {
+.inscriptionButton {
         cursor : pointer;
         background-color : rgb(68,162,255);
     }
+
+.standardButton {
+    width : 200px;
+    height : 40px;
+    margin-left : 13vw;
+    margin-right : auto;
+    padding : 2px;
+
+    background-color : rgb(41,143,244);
+    border : none;
+
+    font-variant : small-caps;
+    font-size : 18px;
+    color : rgb(186,244,249);
+}
+.standardButton {
+        cursor : pointer;
+        background-color : rgb(68,162,255);
+    }
+    
+.addNewItem{
+	width : 190px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 65vw;
+    background-color : rgb(41,143,244);
+    color : rgb(186,244,249);
+    font-variant : small-caps;
+    font-size : 14px;
+    border : none;
+}
+
+.addNewItem:hover{
+	cursor : pointer;
+	background-color : rgb(68,162,255);
+}
+
+    
+    
+
+    

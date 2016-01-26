@@ -1,4 +1,4 @@
-﻿#content {
+#content {
     /*background-image : url('../images/under_construction.jpg');*/
     background-position : center;
     background-size : contain;
@@ -78,6 +78,26 @@
             padding-left : 1vw;
             width : 14vw;
             text-align : left;
+        }
+        
+        
+        #innerContent form.readOnly table
+        {
+        	margin-left : 20vw;
+        	margin-right : auto;
+        	border-spacing : 10px;
+        	width : 50vw;
+        }
+        #innerContent form.readOnly table tr td.topSection
+        {
+        	margin-top : 20px;
+        }   
+        #innerContent form.readOnly table tr td.description
+        {
+        	width : 8vw;
+        	text-align : right;
+        	font-weight : semi-bold;
+        	color : rgb(41,143,244);
         }   
 
 
