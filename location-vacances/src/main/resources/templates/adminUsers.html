@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../base.css" rel="stylesheet" />
+    <link href="../specificHeader.css" rel="stylesheet" />
+    <link href="../specificFooter.css" rel="stylesheet" />
+    <link href="../text.css" rel="stylesheet" />
+    <link href="../specificMyAccount.css" rel="stylesheet" />
+    <link href="../button.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+        <div id="menu">
+            <ul>
+                <li><a href="home.html">Accueil</a></li>
+                <li><a class="selected">Actualité</a></li>
+                <li><a href="community.html">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+       <div id="leftMenu">
+           <ul>
+               <li class="title">Mon compte</li>
+               <li class="item"><a href="Administration/suscribersMyData.html">Mes données</a></li>
+               <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
+           </ul>
+           <ul>
+               <li class="title">Administration</li>
+               <li class="item"><a>Tableau de bord</a></li>
+               <li class="item selected"><a>Utilisateurs</a></li>
+               <li class="item"><a href="adminHousing.html">Logements</a></li>
+               <li class="item"><a>Mailing</a></li>
+           </ul>
+       </div>
+
+        <div id="innerContent">
+            
+            <form class="management">
+                <h1>Gestion des utilisateurs</h1>
+                <table>
+                    <tr class="rowTitle">
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Mail</th>
+                        <th>Adresse</th>
+                        <th>Code Postal</th>
+                        <th>Ville</th>
+                        <th>Pays</th>
+                        <th>Détails</th>
+                        <th>Statut</th>
+                        <th>Écrire</th>
+                        <th>Login</th>
+                        <th>Mot de passe</th>
+                    </tr>
+                    <tr th:each="user : ${userList}">
+                        <td th:text="${user.Id}"></td>
+                        <td th:text="${user.Nom}"></td>
+                        <td th:text="${user.Prenom}"></td>
+                        <td th:text="${user.Email}"></td>
+                        <td th:text="${user.Adresse.Adresse}"></td>
+                        <td th:text="${user.Adresse.CodePostal}"></td>
+                        <td th:text="${user.Adresse.Ville}"></td>
+                        <td th:text="${user.Adresse.Pays}"></td>
+                        <td><a class="form" th:href="@{'/view/'+${user.id}}">Voir</a></td>
+                        <td>ToDo</td>
+                        <td>ToDo</td>
+                        <td th:text="${user.Login.Login}"></td>
+                        <td th:text="${user.Login.Password}"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>

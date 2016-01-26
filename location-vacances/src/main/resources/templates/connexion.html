@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../base.css" rel="stylesheet" />
+    <link href="../specificHeader.css" rel="stylesheet" />
+    <link href="../specificFooter.css" rel="stylesheet" />
+    <link href="../text.css" rel="stylesheet" />
+    <link href="../specificConnexion.css" rel="stylesheet" />
+    <link href="../button.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+        <div id="menu">
+            <ul>
+                <li><a href="home.html">Accueil</a></li>
+                <li><a href="news.html">Actualité</a></li>
+                <li><a href="community.html">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a class="selected" >Connexion</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+
+        <form th:object="${user}" method="POST">
+            <table>
+                <tr>
+                    <td><input placeholder="Login" type="text" /></td>
+                </tr>
+                <tr>
+                    <td><input placeholder="Mot de passe" type="text" /></td>
+                </tr>
+                <tr>
+                    <td><button class="connexionButton">Connexion</button></td>
+                </tr>
+                <tr>
+                    <td><a href="resetPassword.html" class="resetPassword">Mot de passe oublié ?</a></td>
+                </tr>
+            </table>
+
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>
