@@ -1,5 +1,15 @@
 package demo.controller;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
+import org.thymeleaf.dom.Document;
+
 import demo.model.AdressePostale;
 import demo.model.Contact;
+import demo.model.Format_pays;
+import demo.model.Format_typeLogement;
 import demo.model.Logement;
 import demo.model.Photo;
 import demo.repository.AdressePostaleRepository;
@@ -40,24 +56,55 @@ public class LogementController {
 	@Autowired
 	TypeLogementRepository typeLogRepository;
 	
-	@RequestMapping("/createEditHousing")
+	Logement currentLog=null;
+	@RequestMapping(value="/createEditHousing",method=RequestMethod.GET)
 	public String requestHousing(Model model)
-	{	    
+	{	
 		model.addAttribute("typeLogList", typeLogRepository.findAll());
 		model.addAttribute("paysList", paysRepository.findAll());
-		model.addAttribute("housing", new Logement());
-		return "createEditHousing";
+		try{
+			int id = (int)model.asMap().get("LogId");
+			currentLog = logementRepository.findOne(id);
+			model.addAttribute("housing", currentLog);
+			return "createEditHousing";
+		}
+		catch(Exception e){
+			model.addAttribute("housing", new Logement());
+			return "createEditHousing";
+		}	
 	}
 	
 	
 	
 	@RequestMapping(value="/createEditHousing", method=RequestMethod.POST)
-	public String requestCreate(Logement logement, RedirectAttributes redirectAttribute)
+	public String requestCreate(Logement logement, RedirectAttributes redirectAttribute) throws ScriptException, IOException, NoSuchMethodException
 	{
 		//Récupération de l'user 
-		AdressePostale adresse = logement.getAdresse();
-		adresseRepository.save(adresse);
-		logementRepository.save(logement);
+		if (currentLog == null){
+			AdressePostale adresse = logement.getAdresse();
+			ScriptEngineManager manager = new ScriptEngineManager();		
+			//Format_typeLogement type = logement.getTypeLogement();
+			//System.out.println(pays);
+			adresseRepository.save(adresse);
+			logementRepository.save(logement);
+			
+		}
+		else
+		{
+			AdressePostale currentAdr = currentLog.getAdresse();
+			AdressePostale adresse = logement.getAdresse();
+			currentAdr.setAdresse(adresse.getAdresse());
+			currentAdr.setCodePostal(adresse.getCodePostal());
+			currentAdr.setVille(adresse.getVille());
+			currentAdr.setPays(adresse.getPays());
+			adresseRepository.save(currentAdr);
+			currentLog.setAdresse(currentAdr);
+			currentLog.setProprietaire(logement.getProprietaire());
+			currentLog.setShortDescription(logement.getShortDescription());
+			currentLog.setDescription(logement.getDescription());
+			currentLog.setTypeLogement(logement.getTypeLogement());
+			logementRepository.save(currentLog);
+		}
 		return "redirect:adminHousing";
 	}
 	/*

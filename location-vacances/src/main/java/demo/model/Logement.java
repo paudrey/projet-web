@@ -19,8 +19,8 @@ public class Logement {
 	private Utilisateur Proprietaire;
 	private String Description;
 	private String ShortDescription;
-	@OneToOne
-	private Format_typeLogement TypeLogement;
+	//@OneToOne
+	private String TypeLogement;
 	@OneToOne
 	private AdressePostale Adresse;
 	
@@ -51,11 +51,11 @@ public class Logement {
 		Description = description;
 	}
 
-	public Format_typeLogement getTypeLogement() {
+	public String getTypeLogement() {
 		return TypeLogement;
 	}
 
-	public void setTypeLogement(Format_typeLogement typeLogement) {
+	public void setTypeLogement(String typeLogement) {
 		TypeLogement = typeLogement;
 	}
 

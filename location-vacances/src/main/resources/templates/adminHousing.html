@@ -48,7 +48,7 @@
             
             <form class="management">
                 <h1>Gestion des logements</h1>
-                <a class="pseudoButton" href="createEditHousing"><button class="addNewItem">Ajouter un nouvel élément</button></a>
+                <a class="pseudoButton" type="submit" href="createEditHousing.html"><button class="addNewItem">Ajouter un nouvel élément</button></a>
                 <table>
                     <tr class="rowTitle">
                         <th>Id</th>
@@ -64,8 +64,8 @@
                       <!--    <td th:text="${housing.Proprietaire.Nom}"></td>
                         <td th:text="${housing.Proprietaire.Prenom}"></td>-->
                         <td th:text="${housing.ShortDescription}"></td>
-                        <td><a class="form" th:href="@{'/view/'+${housing.id}}">Voir</a></td>
-                        <td><a class="form" th:href="@{'/delete/'+${housing.id}}">Supprimer</a></td>
+                        <td><a class="form" th:href="@{'/viewHousing/'+${housing.id}}">Voir</a></td>
+                        <td><a class="form" th:href="@{'/deleteHousing/'+${housing.id}}">Supprimer</a></td>
                     </tr>
                 </table>
             </form>

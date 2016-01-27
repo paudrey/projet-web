@@ -40,6 +40,20 @@ public class AdministrationController {
 		return "/adminHousing";
 	}
 	
+	@RequestMapping("/viewHousing/{id}")
+	public String requestViewHousingDetails(@PathVariable("id") Integer LogId, RedirectAttributes redirectAttributes)
+	{
+		redirectAttributes.addFlashAttribute("LogId", LogId);				
+		return "redirect:/createEditHousing";
+	}
+	
+	@RequestMapping("/deleteHousing/{id}")
+	public String requestDeleteHousing(@PathVariable("id") Integer LogId)
+	{
+		logementRepository.delete(LogId);		
+		return "redirect:/adminHousing";
+	}
+	
 	/*@RequestMapping("/view/{id}")
 	public String editProductRequest(@PathVariable("id") Integer userId, RedirectAttributes redirectAttributes)
 	{
