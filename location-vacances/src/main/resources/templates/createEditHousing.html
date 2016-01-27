@@ -8,6 +8,7 @@
     <link href="../text.css" rel="stylesheet" />
     <link href="../specificInscription.css" rel="stylesheet" />
     <link href="../button.css" rel="stylesheet" />
+    <link href="../liste.js" rel="javascript"/>
 </head>
 
 <body>
@@ -47,14 +48,16 @@
                     <td><input placeholder="Ville" type="text" th:field="*{Adresse.Ville}"/></td>
                 </tr>
                 <tr>
-                    <td> <select>
-                     	<option th:each="pays : ${paysList}" th:value="${pays.Pays}" th:text="${pays.Pays}"/>                       
+                    <td> <select id="paysL">
+                    	<option value="" label="Pays" />
+                     	<option th:each="pays : ${paysList}" value="${pays.Pays}" th:text="${pays.Pays}"/>                       
                      </select></td>
                 </tr>
                 <tr>
                		 <td>
-                     <select>
-                     	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}"/>                       
+                     <select th:object="${typeLogList}" >
+                     	<option value="" label="Type Logement" />
+                     	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}" />                
                      </select>
                      </td>
                 </tr>

@@ -14,8 +14,8 @@ public class AdressePostale {
 	private String Adresse;
 	private String CodePostal;
 	private String Ville;
-	@OneToOne
-	private Format_pays Pays;
+	//@OneToOne
+	private String Pays;
 	public int getId() {
 		return Id;
 	}
@@ -40,10 +40,10 @@ public class AdressePostale {
 	public void setVille(String ville) {
 		Ville = ville;
 	}
-	public Format_pays getPays() {
+	public String getPays() {
 		return Pays;
 	}
-	public void setPays(Format_pays pays) {
+	public void setPays(String pays) {
 		Pays = pays;
 	}
 	

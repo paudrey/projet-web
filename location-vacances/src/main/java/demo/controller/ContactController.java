@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -18,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sun.mail.smtp.SMTPTransport;
 
 import demo.model.Contact;
 import demo.repository.ContactRepository;
@@ -36,55 +39,52 @@ public class ContactController {
 	}
 	
 	@RequestMapping(value="/contacts", method=RequestMethod.POST)
-	public String requestSaveCreate(Contact contact, RedirectAttributes redirectAttribute)
+	public String requestSaveCreate(Contact contact,Model model, RedirectAttributes redirectAttribute) throws AddressException, MessagingException
 	{
 		contactRepository.save(contact);
-		EnvoieMail(contact);
-		return "redirect:home";
+		boolean envoi = EnvoieMail(contact);
+		if(envoi = true){
+			return "redirect:home";
+		}
+		else
+		{
+			model.addAttribute("contact", contact);
+			return "contacts";
+		}
+		
 	}
 	
-	public void EnvoieMail(Contact contact)
+	public boolean EnvoieMail(Contact contact) 
 	{
-	     Properties properties = System.getProperties();
-
-	      // Setup mail server
-	    //  properties.setProperty("mail.smtp.host", "localhost");
-	     properties.put("mail.smtp.host", "smtp.gmail.com");
-	     properties.put("mail.smtp.user", "holidayme.project@gmail.com");
-	     properties.put("mail.smtp.password", "HolidayMe2015");
-	   //  properties.put("mail.smtp.port", "25"); 
-	   //  properties.put("mail.smtp.ssl.enable", "true"); 
-	     //properties.put("mail.smtp.auth", "true");
-
-	      // Get the default Session object.
-	      //Session session = Session.getDefaultInstance(properties);
-	     Session session = Session.getInstance(properties, new SocialAuth());  
-
-	      try{
-	    	  
-	         Message message = new MimeMessage(session);
-	         message.setFrom(new InternetAddress("holidayme.project@gmail.com"));
-	         message.addRecipient(Message.RecipientType.TO, new InternetAddress("holidayme.project@gmail.com"));
-	         message.setSubject(contact.getObjet() + " - contact : " + contact.getEmail());
-	         message.setText(contact.getMessage());
-	         message.setSentDate(new Date());
-	         
-	         //Transport.send(message);
-	        Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", "holidayme.project@gmail.com", "HolidayMe2015");
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
-	         System.out.println("------------ Message envoyé -----------------");
-    	  } catch (MessagingException e) {
-    	  e.printStackTrace();
-    	  System.out.println("-------- Erreur ---------");
-    	  }
+		try
+		{
+			Properties props = System.getProperties();
+	        props.put("mail.smtps.host","smtp.gmail.com");
+	        props.put("mail.smtps.auth","true");
+	        Session session = Session.getInstance(props, null);
+	        Message msg = new MimeMessage(session);
+	        msg.setFrom(new InternetAddress("holidayme.project@gmail.com"));;
+	        msg.setRecipients(Message.RecipientType.TO,
+	        InternetAddress.parse("holidayme.project@gmail.com", false));
+	        msg.setSubject(contact.getObjet() + " contact : " + contact.getEmail());
+	        msg.setText("Nom du contact : " + contact.getName()+ "\n" + contact.getMessage());
+	        msg.setSentDate(new Date());
+	        SMTPTransport t =
+	            (SMTPTransport)session.getTransport("smtps");
+	        t.connect("smtp.gmail.com", "holidayme.project@gmail.com", "HolidayMe2015");
+	        t.sendMessage(msg, msg.getAllRecipients());
+	        System.out.println("Response: " + t.getLastServerResponse());
+	        t.close();
+	       
+	        return true;
+		}
+        catch(AddressException e){ 
+        	return false;
+		}
+		catch(MessagingException e){
+        	return false;
+		}
+       
 	}
 	
-	class SocialAuth extends Authenticator {  
-        @Override  
-        protected PasswordAuthentication getPasswordAuthentication() { 
-            return new PasswordAuthentication("holidayme.project@gmail.com","HolidayMe2015" );    
-        }  
-    }  
 }

@@ -24,5 +24,10 @@ public class Format_typeLogement {
 	public void setTypeLogement(String typeLogement) {
 		this.TypeLogement = typeLogement;
 	}
+	@Override
+	public String toString() {
+		return getTypeLogement();
+	}
 
+	
 }

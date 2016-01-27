@@ -25,8 +25,8 @@ public class LocationVacancesApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Format_typeLogement tl1 = new Format_typeLogement();
-    	tl1.setTypeLogement("Type de logement");
+		//Format_typeLogement tl1 = new Format_typeLogement();
+    	//tl1.setTypeLogement("Type de logement");
     	Format_typeLogement tl2 = new Format_typeLogement();
     	tl2.setTypeLogement("Camping");
     	Format_typeLogement tl3 = new Format_typeLogement();
@@ -36,7 +36,7 @@ public class LocationVacancesApplication implements CommandLineRunner{
     	Format_typeLogement tl5 = new Format_typeLogement();
     	tl5.setTypeLogement("Maison");
     	
-    	typeLogRepository.save(tl1);
+    	//typeLogRepository.save(tl1);
     	typeLogRepository.save(tl2);
     	typeLogRepository.save(tl3);
     	typeLogRepository.save(tl4);
