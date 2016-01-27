@@ -2,6 +2,11 @@ package demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +36,7 @@ public class ConnexionController {
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
-	public String requestConnexion(Login login, RedirectAttributes redirectAttribute)
+	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpServletResponse response)
 	{
 		if(previousLogin == null || previousLogin.getId() != login.getId()) {
 			iteration = 0;
@@ -43,15 +48,19 @@ public class ConnexionController {
 				.orElse(null);
 		
 		if(result != null) {
+			Cookie cookie = new Cookie(result.getLogin(), String.valueOf(result.getId())); // création du cookie
+			cookie.setMaxAge(3600);
+			response.addCookie(cookie);
+			return "redirect:/home";
+		}
+		else 
+		{
 			previousLogin = login;
 			iteration ++;
 			if(iteration == 5)
 			{
 				//Passage du statut de l'utilisateur en bloqué
 			}
-			return "redirect:/home";
-		}
-		else {
 			return "connexion";
 		}
 		
