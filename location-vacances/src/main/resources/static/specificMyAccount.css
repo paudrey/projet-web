@@ -99,7 +99,27 @@
         	font-weight : semi-bold;
         	color : rgb(41,143,244);
         }   
-
+		#innerContent form.edit table
+		{
+			margin-left : 18vw;
+			margin-right : auto;
+        	border-spacing : 10px;
+		}
+		#innerContent form.edit table tr td.topSection
+        {
+        	margin-top : 20px;
+        }   
+        #innerContent form.edit table tr td input
+        {
+        	width : 25vw;
+        }
+         #innerContent form.edit table tr td.description
+        {
+        	width : 8vw;
+        	text-align : right;
+        	font-weight : semi-bold;
+        	color : rgb(41,143,244);
+        } 
 
 h1 {
         font-size : 20px;

@@ -3,6 +3,7 @@ package demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,33 +28,63 @@ public class UserController {
 	@Autowired
 	private PaysRepository paysRepository;
 	
+	private Utilisateur user;
+	/* Specific user */
+	
 	@RequestMapping("/inscription")
 	public String requestInscription(Model model)
 	{
 		//model.addAttribute("paysList", paysRepository.findAll());
 		//model.addAttribute("adresse", new AdressePostale());
-		//model.addAttribute("login", new Login());
-		model.addAttribute("user", new Utilisateur());
+		model.addAttribute("login", new Login());
+		//model.addAttribute("user", new Utilisateur());
 		
 		return "inscription";
 	}
 	
 	@RequestMapping(value="/inscription", method=RequestMethod.POST)
-	public String requestSaveCreate(Utilisateur user, RedirectAttributes redirectAttribute)
+	public String requestSaveCreate(Login login, RedirectAttributes redirectAttribute)
 	{
-		String[] tabLogin = user.getEmail().split("@");
-		
-		Login login = user.getLogin();
-		login.setId(user.getId());
-		login.setLogin(tabLogin[0]);
-		AdressePostale adresse = user.getAdresse();
-		
-		loginRespository.save(login);
+		AdressePostale adresse = login.getUser().getAdresse();		
 		adresseRepository.save(adresse);
-		userRepository.save(user);	
+		userRepository.save(login.getUser());
+		
+		String[] tabLogin = login.getUser().getEmail().split("@");
+		login.setLogin(tabLogin[0]);
+		login.setId(login.getUser().getId());
+		loginRespository.save(login);
 		
 		return "redirect:adminUsers";
 	}
+	
+	@RequestMapping("/editMyData")
+	public String requestEditMyData(@CookieValue(value="login") String idLogin, Model model)
+	{
+		int id = Integer.valueOf(idLogin);
+		user = userRepository.findOne(id);
+		model.addAttribute("user", user);
+		return "editMyData";
+	}
+	
+	@RequestMapping(value="/editMyData", method=RequestMethod.POST)
+	public String requestEditMyData(Utilisateur utilisateur, RedirectAttributes redirectAttribute)
+	{
+		AdressePostale adresse = utilisateur.getAdresse();		
+		
+		
+		user.setNom(utilisateur.getNom());
+		user.setPrenom(utilisateur.getPrenom());
+		user.setDateNaissance(utilisateur.getDateNaissance());
+		user.setAdresse(utilisateur.getAdresse());
+		user.setEmail(utilisateur.getEmail());	
+		
+		adresseRepository.save(user.getAdresse());
+		userRepository.save(user);
+		
+		return "redirect:adminGeneral";
+	}
+	
+	/* Specific administration */
 	
 	@RequestMapping("/suscribersViewData")
 	public String requestView(Model model)

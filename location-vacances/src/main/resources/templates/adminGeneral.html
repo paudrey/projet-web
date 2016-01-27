@@ -32,8 +32,8 @@
        <div id="leftMenu">
            <ul>
                <li class="title">Mon compte</li>
-               <li class="item"><a href="Administration/suscribersMyData.html">Mes données</a></li>
-               <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
+               <li class="item"><a href="editMyData.html">Mes données</a></li>
+               <li class="item"><a href="">Changer de mot de passe</a></li>
            </ul>
            <ul>
                <li class="title">Administration</li>
@@ -45,32 +45,10 @@
        </div>
 
         <div id="innerContent">
-            
-            <form class="management">
-                <h1>Gestion des utilisateurs</h1>
-                <table>
-                    <tr class="rowTitle">
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Mail</th>
-                        <th>Détails</th>
-                        <th>Statut</th>
-                        <th>Écrire</th>
-                    </tr>
-                    <tr th:each="user : ${userList}">
-                        <td th:text="${user.Id}"></td>
-                        <td th:text="${user.Nom}"></td>
-                        <td th:text="${user.Prenom}"></td>
-                        <td th:text="${user.Email}"></td>
-                        <td><a class="form" th:href="@{'/view/'+${user.id}}">Voir</a></td>
-                        <td>ToDo</td>
-                        <td>ToDo</td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-
+        	<form th:object="${user}" class="message">
+        		<span>Bonjour <label class="hightlight" th:text="${user.Prenom}"></label> <label class="hightlight" th:text="${user.Nom}"></label></span>
+        	</form>
+		</div>
     </div>
 
     <div id="footer">

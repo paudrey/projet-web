@@ -12,8 +12,8 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue
 	private int Id;
-	@OneToOne
-	private Login Login;
+	/*@OneToOne
+	private Login Login;*/
 	private String Nom;
 	private String Prenom;
 	private String Email;	
@@ -28,12 +28,12 @@ public class Utilisateur {
 	public void setId(int id) {
 		Id = id;
 	}
-	public Login getLogin() {
+	/*public Login getLogin() {
 		return Login;
 	}
 	public void setLogin(Login login) {
 		Login = login;
-	}
+	}*/
 	public String getNom() {
 		return Nom;
 	}

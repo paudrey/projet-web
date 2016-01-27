@@ -43,15 +43,15 @@ public class ConnexionController {
 		}
 		List<Login> loginList = (List<Login>)loginRespository.findAll();
 		Login result = loginList.stream()
-				.filter(user -> user.getLogin().equals(login.getLogin()) && user.getPassword().equals(login.getPassword()))
+				.filter(l -> l.getLogin().equals(login.getLogin()) && l.getPassword().equals(login.getPassword()))
 				.findFirst()
 				.orElse(null);
 		
 		if(result != null) {
-			Cookie cookie = new Cookie(result.getLogin(), String.valueOf(result.getId())); // création du cookie
+			Cookie cookie = new Cookie("login", String.valueOf(result.getId())); // création du cookie
 			cookie.setMaxAge(3600);
 			response.addCookie(cookie);
-			return "redirect:/home";
+			return "redirect:/adminGeneral";
 		}
 		else 
 		{

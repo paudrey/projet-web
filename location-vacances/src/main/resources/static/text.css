@@ -30,3 +30,16 @@ h1.formTitle {
     font-weight : 400;
 }
 
+label.hightlight
+{
+	color : rgb(41,143,244);
+	font-size : 24px;
+}
+
+form.message
+{
+	margin-top : 5vh;
+	margin-left : 5vw;
+	font-size : 20px;
+}
+

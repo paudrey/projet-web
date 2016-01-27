@@ -19,11 +19,11 @@
         <div id="menu">
             <ul>
                 <li><a href="home.html">Accueil</a></li>
-                <li><a class="selected">Actualité</a></li>
+                <li><a href="news.html"Actualité</a></li>
                 <li><a href="community.html">Notre communauté</a></li>
                 <li><a href="project.html">Notre projet</a></li>
                 <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
+                <li><a href="adminGeneral.html">Mon compte</a></li>
             </ul>
         </div>
 
@@ -33,7 +33,7 @@
        <div id="leftMenu">
            <ul>
                <li class="title">Mon compte</li>
-               <li class="item"><a href="Administration/suscribersMyData.html">Mes données</a></li>
+               <li class="item selected"><a>Mes données</a></li>
                <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
            </ul>
            <ul>
@@ -47,7 +47,7 @@
 
         <div id="innerContent">
 	        <form th:object="${housing}" class="readOnly" method="POST">
-	            <h1 class="formTitle">Données de l'utilisateur</h1>
+	            <h1 class="formTitle">Mes données</h1>
 	            <table>
 	                <tr>
 	                	<td class="topSection description"><label>Nom :</label></td>
@@ -81,8 +81,7 @@
 	                <tr>
 	                	<td colspan="2" class="topSection"><button class="standardButton">Retour</button></td>
 	                </tr>
-	            </table>
-	                      
+	            </table>                
 	        </form>
 		</div>
     </div>

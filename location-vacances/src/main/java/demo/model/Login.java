@@ -3,6 +3,7 @@ package demo.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Login {
@@ -11,6 +12,8 @@ public class Login {
 	private int Id;
 	private String Login;
 	private String Password;
+	@OneToOne Utilisateur User;
+	
 	
 	public int getId() {
 		return Id;
@@ -29,6 +32,12 @@ public class Login {
 	}
 	public void setPassword(String password) {
 		Password = password;
+	}
+	public Utilisateur getUser() {
+		return User;
+	}
+	public void setUser(Utilisateur user) {
+		User = user;
 	}
 	
 	
