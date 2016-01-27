@@ -2,6 +2,11 @@ package demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,27 +24,43 @@ public class ConnexionController {
 	@Autowired
 	private LoginRepository loginRespository;
 	
+	private static Login previousLogin;
+	private int iteration;
+	
 	
 	@RequestMapping("/connexion")
 	public String requestInscription(Model model)
 	{
-		model.addAttribute("user", new Utilisateur());		
+		model.addAttribute("login", new Login());		
 		return "connexion";
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
-	public String requestConnexion(Login login, RedirectAttributes redirectAttribute)
+	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpServletResponse response)
 	{
+		if(previousLogin == null || previousLogin.getId() != login.getId()) {
+			iteration = 0;
+		}
 		List<Login> loginList = (List<Login>)loginRespository.findAll();
 		Login result = loginList.stream()
 				.filter(user -> user.getLogin().equals(login.getLogin()) && user.getPassword().equals(login.getPassword()))
 				.findFirst()
-				.get();
+				.orElse(null);
 		
 		if(result != null) {
-			return "redirect:/suscribersHome";
+			Cookie cookie = new Cookie(result.getLogin(), String.valueOf(result.getId())); // création du cookie
+			cookie.setMaxAge(3600);
+			response.addCookie(cookie);
+			return "redirect:/home";
 		}
-		else {
+		else 
+		{
+			previousLogin = login;
+			iteration ++;
+			if(iteration == 5)
+			{
+				//Passage du statut de l'utilisateur en bloqué
+			}
 			return "connexion";
 		}
 		
