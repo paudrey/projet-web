@@ -16,11 +16,10 @@ public class Reservation {
 	private Utilisateur locataire;
 	@OneToOne
 	private Logement Logement;
-	private double prixTTC;
-	@OneToOne
-	private Format_statutReservation statut;
-	private Date dateDebut;
-	private Date dateFin;
+	//@OneToOne
+	private String statut;
+	private String dateDebut;
+	private String dateFin;
 	public int getId() {
 		return Id;
 	}
@@ -39,28 +38,23 @@ public class Reservation {
 	public void setLogement(Logement logement) {
 		Logement = logement;
 	}
-	public double getPrixTTC() {
-		return prixTTC;
-	}
-	public void setPrixTTC(double prixTTC) {
-		this.prixTTC = prixTTC;
-	}
-	public Format_statutReservation getStatut() {
+	
+	public String getStatut() {
 		return statut;
 	}
-	public void setStatut(Format_statutReservation statut) {
+	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-	public Date getDateDebut() {
+	public String getDateDebut() {
 		return dateDebut;
 	}
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(String dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-	public Date getDateFin() {
+	public String getDateFin() {
 		return dateFin;
 	}
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(String dateFin) {
 		this.dateFin = dateFin;
 	}
 	
