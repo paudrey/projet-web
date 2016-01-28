@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../base.css" rel="stylesheet" />
+    <link href="../specificHeader.css" rel="stylesheet" />
+    <link href="../specificFooter.css" rel="stylesheet" />
+    <link href="../text.css" rel="stylesheet" />
+    <link href="../specificInscription.css" rel="stylesheet" />
+    <link href="../button.css" rel="stylesheet" />
+    <link href="../liste.js" rel="javascript"/>
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="home.html">Accueil</a></li>
+                <li><a class="selected">Actualité</a></li>
+                <li><a href="community.html">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+        
+
+        <form th:object="${booking}" method="POST">
+            <h1 class="formTitle">Réserver</h1>
+            <table>
+                <tr>
+                    <td><input placeholder="Date début" type="text" th:field="*{dateDebut}"/></td>
+                    <td><input placeholder="Date fin" type="text" th:field="*{dateFin}"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="topSection"><button class="inscriptionButton">Valider</button></td>
+                </tr>
+            </table>
+          
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>

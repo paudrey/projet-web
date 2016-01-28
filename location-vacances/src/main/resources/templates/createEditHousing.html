@@ -60,6 +60,8 @@
                      	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}" />                
                      </select>
                      </td>
+                     <td><input placeholder="PrixTTC" type="text" th:field="*{prixTTC}"/></td>
+                     
                 </tr>
                  <tr>
                     <td colspan="2" class="topSection"><input placeholder="ShortDescription" class="large" type="text" th:field="*{ShortDescription}" /></td>

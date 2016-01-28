@@ -1,6 +1,8 @@
 package demo.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import demo.model.Logement;
 import demo.model.Utilisateur;
 import demo.repository.LogementRepository;
 import demo.repository.UtilisateurRepository;
@@ -59,9 +62,14 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/deleteHousing/{id}")
-	public String requestDeleteHousing(@PathVariable("id") Integer LogId)
+	public String requestDeleteHousing(@PathVariable("id") Integer LogId,@CookieValue(value="login") String idLogin)
 	{
-		logementRepository.delete(LogId);		
+		int userId = Integer.valueOf(idLogin);
+		Utilisateur user = utilisateurRepository.findOne(userId);
+		Logement log = logementRepository.findOne(LogId);
+		List<Logement> logList = user.getLogementList();
+		logList.remove(log);
+		logementRepository.delete(LogId);
 		return "redirect:/adminHousing";
 	}
 	

@@ -15,14 +15,15 @@ public class Logement {
 	@Id
 	@GeneratedValue
 	private int Id;
-	@OneToOne
-	private Utilisateur Proprietaire;
+	//@OneToOne
+	//private Utilisateur Proprietaire;
 	private String Description;
 	private String ShortDescription;
 	//@OneToOne
 	private String TypeLogement;
 	@OneToOne
 	private AdressePostale Adresse;
+	private double prixTTC;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Photo> PhotoList;
@@ -34,7 +35,7 @@ public class Logement {
 	public void setId(int id) {
 		Id = id;
 	}
-
+/*
 	public Utilisateur getProprietaire() {
 		return Proprietaire;
 	}
@@ -42,7 +43,7 @@ public class Logement {
 	public void setProprietaire(Utilisateur proprietaire) {
 		Proprietaire = proprietaire;
 	}
-
+*/
 	public String getDescription() {
 		return Description;
 	}
@@ -65,6 +66,15 @@ public class Logement {
 
 	public void setAdresse(AdressePostale adresse) {
 		this.Adresse = adresse;
+	}
+
+	
+	public double getPrixTTC() {
+		return prixTTC;
+	}
+
+	public void setPrixTTC(double prixTTC) {
+		this.prixTTC = prixTTC;
 	}
 
 	public List<Photo> getPhotoList() {

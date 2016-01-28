@@ -1,10 +1,13 @@
 package demo.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,6 +24,9 @@ public class Utilisateur {
 	
 	@OneToOne
 	private AdressePostale Adresse;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Logement> LogementList;
 	
 	public int getId() {
 		return Id;
@@ -66,5 +72,11 @@ public class Utilisateur {
 		Email = email;
 	}
 	
+	public List<Logement> getLogementList() {
+		return LogementList;
+	}
+	public void setLogementList(List<Logement> logementList) {
+		LogementList = logementList;
+	}
 	
 }
