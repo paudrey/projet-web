@@ -15,8 +15,8 @@ public class Logement {
 	@Id
 	@GeneratedValue
 	private int Id;
-	//@OneToOne
-	//private Utilisateur Proprietaire;
+	@OneToOne
+	private Utilisateur Proprietaire;
 	private String Description;
 	private String ShortDescription;
 	//@OneToOne
@@ -35,7 +35,7 @@ public class Logement {
 	public void setId(int id) {
 		Id = id;
 	}
-/*
+	
 	public Utilisateur getProprietaire() {
 		return Proprietaire;
 	}
@@ -43,7 +43,7 @@ public class Logement {
 	public void setProprietaire(Utilisateur proprietaire) {
 		Proprietaire = proprietaire;
 	}
-*/
+
 	public String getDescription() {
 		return Description;
 	}

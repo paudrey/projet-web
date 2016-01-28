@@ -12,6 +12,8 @@ public class Reservation {
 	@Id
 	@GeneratedValue
 	private int Id;
+	//@OneToOne
+	//private Utilisateur prorietaire;
 	@OneToOne
 	private Utilisateur locataire;
 	@OneToOne
@@ -26,6 +28,14 @@ public class Reservation {
 	public void setId(int id) {
 		Id = id;
 	}
+	
+	/*public Utilisateur getProrietaire() {
+		return prorietaire;
+	}
+	public void setProrietaire(Utilisateur prorietaire) {
+		this.prorietaire = prorietaire;
+	}*/
+	
 	public Utilisateur getLocataire() {
 		return locataire;
 	}

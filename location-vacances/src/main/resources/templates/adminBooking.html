@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../base.css" rel="stylesheet" />
+    <link href="../specificHeader.css" rel="stylesheet" />
+    <link href="../specificFooter.css" rel="stylesheet" />
+    <link href="../text.css" rel="stylesheet" />
+    <link href="../specificMyAccount.css" rel="stylesheet" />
+    <link href="../button.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+        <div id="menu">
+            <ul>
+                <li><a href="home.html">Accueil</a></li>
+                <li><a class="selected">Actualité</a></li>
+                <li><a href="community.html">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="connexion.html">Connexion</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+       <div id="leftMenu">
+           <ul>
+               <li class="title">Mon compte</li>
+               <li class="item"><a href="Administration/suscribersMyData.html">Mes données</a></li>
+               <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
+           </ul>
+           <ul>
+               <li class="title">Administration</li>
+               <li class="item"><a>Tableau de bord</a></li>
+               <li class="item selected"><a>Utilisateurs</a></li>
+               <li class="item"><a href="adminHousing.html">Logements</a></li>
+               <li class="item"><a>Mailing</a></li>
+           </ul>
+       </div>
+
+        <div id="innerContent">
+            
+            <form class="management">
+                <h1>Gestion des réservations</h1>
+                <table>
+                    <tr class="rowTitle">
+                        <th>Id Propriéraire</th>
+                        <th>Id Locataire</th>
+                        <th>Id Logement</th>
+                        <th>Date début</th>
+                        <th>Date fin</th>
+                        <th>Statut</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="booking : ${bookingList}">
+                    	<td th:text="${booking.Logement.Proprietaire.Id}"></td>
+                        <td th:text="${booking.locataire.Id}"></td>
+                        <td th:text="${booking.Logement.Id}"></td>
+                        <td th:text="${booking.dateDebut}"></td>
+                        <td th:text="${booking.dateFin}"></td>
+                        <td th:text="${booking.statut}"></td>
+                        <td><a class="form" th:href="@{'/viewBooking/mod/'+${booking.id}}">Voir</a></td>
+                        <td><a class="form" th:href="@{'/deleteBooking/'+${booking.id}}">Supprimer</a></td> 
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>
