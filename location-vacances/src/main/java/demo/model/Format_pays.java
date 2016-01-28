@@ -7,21 +7,36 @@ import javax.persistence.Id;
 @Entity
 public class Format_pays {
 	@Id
-	@GeneratedValue
 	private int Id;
 	private String Pays;
+	
+	public Format_pays() {
+		super();
+	}
+	
+	public Format_pays(int id, String pays) {
+		super();
+		Id = id;
+		Pays = pays;
+	}
+
 	public int getId() {
 		return Id;
 	}
+
 	public void setId(int id) {
 		Id = id;
 	}
+
 	public String getPays() {
 		return Pays;
 	}
+
 	public void setPays(String pays) {
-		this.Pays = pays;
+		Pays = pays;
 	}
+	
+
 	
 	
 }

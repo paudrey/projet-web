@@ -1,5 +1,7 @@
 package demo;
 
+import javax.persistence.GeneratedValue;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +27,8 @@ public class LocationVacancesApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+		
+		//Initialisation de  la liste des types de logements
 		//Format_typeLogement tl1 = new Format_typeLogement();
     	//tl1.setTypeLogement("Type de logement");
     	Format_typeLogement tl2 = new Format_typeLogement();
@@ -42,23 +46,37 @@ public class LocationVacancesApplication implements CommandLineRunner{
     	typeLogRepository.save(tl4);
     	typeLogRepository.save(tl5);
     	
-    	Format_pays p1 = new Format_pays();
+    	
+    	// Initialisation des la liste des pays
+    	/*Format_pays p1 = new Format_pays();
+    	p1.setId(1);
     	p1.setPays("France");
     	Format_pays p2 = new Format_pays();
+    	p2.setId(2);
     	p2.setPays("Italie");
     	Format_pays p3 = new Format_pays();
+    	p3.setId(3);
     	p3.setPays("Espagne");
     	Format_pays p4 = new Format_pays();
+    	p4.setId(4);
     	p4.setPays("Etat-Unis");
     	Format_pays p5 = new Format_pays();
-    	p5.setPays("Maldives");
+    	p5.setId(5);
+    	p5.setPays("Maldives");*/
+    	
+    	Format_pays p1 = new Format_pays(1, "Non défini");
+    	Format_pays p2 = new Format_pays(2, "France");
+    	Format_pays p3 = new Format_pays(3, "Italie");
+    	Format_pays p4 = new Format_pays(4, "Espagne");
+    	Format_pays p5 = new Format_pays(5, "États-Unis");
+    	Format_pays p6 = new Format_pays(6, "Maldives");
     	
     	paysRepository.save(p1);
     	paysRepository.save(p2);
     	paysRepository.save(p3);
     	paysRepository.save(p4);
-    	paysRepository.save(p5);
-    
+    	paysRepository.save(p5);  
+    	paysRepository.save(p6);
 	}
     
     
