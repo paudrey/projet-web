@@ -85,10 +85,11 @@ public class LogementController {
 		return "redirect:/housingDetails";	
 	}
 	
-	@RequestMapping("/createBooking/{id}")
-	public String requestBooking(@PathVariable("id") Integer LogId, RedirectAttributes redirectAttributes)
+	@RequestMapping("/createBooking/{action}/{id}")
+	public String requestBooking(@PathVariable("id") Integer LogId,@PathVariable("action") String action, RedirectAttributes redirectAttributes)
 	{
-		redirectAttributes.addFlashAttribute("LogId", LogId);				
+		redirectAttributes.addFlashAttribute("LogId", LogId);	
+		redirectAttributes.addFlashAttribute("action", "creat");	
 		return "redirect:/createEditBooking";	
 	}
 	
@@ -109,17 +110,19 @@ public class LogementController {
 			ScriptEngineManager manager = new ScriptEngineManager();		
 			//Format_typeLogement type = logement.getTypeLogement();
 			//System.out.println(pays);
-			adresseRepository.save(adresse);
-			logementRepository.save(logement);
 			int userId = Integer.valueOf(idLogin);
 			Utilisateur user = userRepository.findOne(userId);
+			logement.setProprietaire(user);
+			adresseRepository.save(adresse);
+			logementRepository.save(logement);
+			
 			List<Logement> logList = user.getLogementList();
 			logList.add(logement);
 			
 			user.setLogementList(logList);
 			userRepository.save(user);
 			
-			System.out.println(user.getLogementList().get(user.getLogementList().size()-1).getShortDescription());
+			System.out.println(logement.getProprietaire().getNom());
 		}
 		else
 		{

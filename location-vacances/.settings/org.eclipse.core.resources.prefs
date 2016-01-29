@@ -4,6 +4,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/adminBooking.html=UTF-8
 encoding//src/main/resources/templates/adminGeneral.html=UTF-8
 encoding//src/main/resources/templates/adminHousing.html=UTF-8
 encoding//src/main/resources/templates/adminUsers.html=UTF-8
@@ -17,5 +18,7 @@ encoding//src/main/resources/templates/housingDetails.html=UTF-8
 encoding//src/main/resources/templates/inscription.html=UTF-8
 encoding//src/main/resources/templates/listHousing.html=UTF-8
 encoding//src/main/resources/templates/suscribersViewData.html=UTF-8
+encoding//src/main/resources/templates/validationBooking.html=UTF-8
+encoding//src/main/resources/templates/validationModifBooking.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

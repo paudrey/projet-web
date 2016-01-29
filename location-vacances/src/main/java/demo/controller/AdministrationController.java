@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import demo.model.Logement;
 import demo.model.Utilisateur;
 import demo.repository.LogementRepository;
+import demo.repository.ReservationRepository;
 import demo.repository.UtilisateurRepository;
 
 @Controller
@@ -23,6 +24,9 @@ public class AdministrationController {
 	private UtilisateurRepository utilisateurRepository;
 	@Autowired
 	private LogementRepository logementRepository;
+	
+	@Autowired
+	private ReservationRepository bookingRepository;
 	
 	@RequestMapping("/adminGeneral")
 	public String requestAdminGeneral(@CookieValue(value="login") String idLogin, Model model)
@@ -73,10 +77,31 @@ public class AdministrationController {
 		return "redirect:/adminHousing";
 	}
 	
-	/*@RequestMapping("/view/{id}")
-	public String editProductRequest(@PathVariable("id") Integer userId, RedirectAttributes redirectAttributes)
+	@RequestMapping("/adminBooking")
+	public String requestAdminBooking(Model model)
 	{
-		redirectAttributes.addFlashAttribute("userId", userId);				
-		return "redirect:/suscribersViewData";
-	}*/
+		model.addAttribute("bookingList", bookingRepository.findAll());
+		return "/adminBooking";
+	}
+	
+	@RequestMapping("/viewBooking/{action}/{id}")
+	public String requestViewBookingDetails(@PathVariable("id") Integer LogId, @PathVariable("id") String action, RedirectAttributes redirectAttributes)
+	{
+		redirectAttributes.addFlashAttribute("LogId", LogId);	
+		redirectAttributes.addFlashAttribute("action", "mod");
+		return "redirect:/createEditBooking";
+	}
+	
+	@RequestMapping("/deleteBooking/{id}")
+	public String requestDeleteBooking(@PathVariable("id") Integer LogId,@CookieValue(value="login") String idLogin)
+	{
+		/*
+		int userId = Integer.valueOf(idLogin);
+		Utilisateur user = utilisateurRepository.findOne(userId);
+		Logement log = logementRepository.findOne(LogId);
+		List<Logement> logList = user.getLogementList();
+		logList.remove(log);
+		logementRepository.delete(LogId);*/
+		return "redirect:/adminBooking";
+	}
 }
