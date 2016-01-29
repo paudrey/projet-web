@@ -124,9 +124,10 @@ public class LogementController {
 		//Récupération de l'user ,
 		if (currentLog == null){
 			AdressePostale adresse = logement.getAdresse();
-			ScriptEngineManager manager = new ScriptEngineManager();		
+			//ScriptEngineManager manager = new ScriptEngineManager();		
 			//Format_typeLogement type = logement.getTypeLogement();
 			//System.out.println(pays);
+			System.out.println(adresse.getPays());
 			int userId = Integer.valueOf(idLogin);
 			Utilisateur user = userRepository.findOne(userId);
 			logement.setProprietaire(user);

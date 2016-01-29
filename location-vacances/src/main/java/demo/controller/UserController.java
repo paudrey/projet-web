@@ -1,19 +1,32 @@
 package demo.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sun.mail.smtp.SMTPTransport;
+
 import demo.model.AdressePostale;
 import demo.model.Format_pays;
 import demo.model.Login;
+import demo.model.Reservation;
 import demo.model.Utilisateur;
 import demo.repository.AdressePostaleRepository;
 import demo.repository.LoginRepository;
@@ -34,6 +47,8 @@ public class UserController {
 	
 	private Utilisateur user;
 	List<Format_pays> countryList = new ArrayList<Format_pays>();
+	
+	private Login currentLogin;
 	
 	/* Specific user */
 	
@@ -137,6 +152,104 @@ public class UserController {
 	{		
 		return "redirect:adminUsers";
 	}
+	
+	@RequestMapping("/resetPassword")
+	public String requestPassword(Model model)
+	{	
+		model.addAttribute("login", new Login());
+		return "resetPassword";
+	}
+	
+	@RequestMapping(value="/resetPassword", method=RequestMethod.POST)
+	public String requestResetPassword(Model model, Login login, RedirectAttributes redirectAttribute)
+	{	
+		List<Login> loginList = (List<Login>)loginRespository.findAll();
+		
+		Login result = loginList.stream()
+				.filter(l -> l.getLogin().equals(login.getLogin()))
+				.findFirst()
+				.orElse(null);
+		
+		if(result != null)
+		{
+			Utilisateur user = userRepository.findOne(result.getId());
+			EnvoieMail(user);		
+		}
+		
+		return "redirect:home";
+	}
+	
+	
+	public boolean EnvoieMail(Utilisateur user) 
+	{
+		String objet;
+		String message;
+		
+		//String log = logementRepository.findOne(booking.getLogement().getId()).getShortDescription();
+		String lienVal;
+		String email = user.getEmail();
+		
+		objet = "Mot de passe oublié sur Holiday Me";
+		lienVal = "localhost:8080/resetPasswordProcess/" + user.getId();
+		message = " Cliquez sur ce lien pour changer votre mot de passe: \n" + lienVal;
+
+		
+		try 
+		{
+			Properties props = System.getProperties();
+	        props.put("mail.smtps.host","smtp.gmail.com");
+	        props.put("mail.smtps.auth","true");
+	        Session session = Session.getInstance(props, null);
+	        Message msg = new MimeMessage(session);
+	        msg.setFrom(new InternetAddress("holidayme.project@gmail.com"));;
+	        msg.setRecipients(Message.RecipientType.TO,
+	        InternetAddress.parse(email, false));
+	        msg.setSubject(objet);
+	        msg.setText(message);
+	        msg.setSentDate(new Date());
+	        SMTPTransport t =
+	            (SMTPTransport)session.getTransport("smtps");
+	        t.connect("smtp.gmail.com", "holidayme.project@gmail.com", "HolidayMe2015");
+	        t.sendMessage(msg, msg.getAllRecipients());
+	        System.out.println("Response: " + t.getLastServerResponse());
+	        t.close();       
+	        return true;
+		}
+        catch(AddressException e){ 
+        	return false;
+		}
+		catch(MessagingException e){
+        	return false;
+		}   
+	}
+	
+	@RequestMapping("/resetPasswordProcess/{id}")
+	public String requestPassword(Model model,@PathVariable("id") Integer LogId,RedirectAttributes redirectAttributes)
+	{
+		//redirectAttributes.addFlashAttribute("LogId", LogId);
+		currentLogin = loginRespository.findOne(LogId);
+		model.addAttribute("login", new Login());
+		return "resetPasswordProcess";
+	}
+	
+	/*@RequestMapping("/resetPasswordProcess")
+	public String requestResetPassword(Model model)
+	{
+		//int id = (int)model.asMap().get("LogId");
+	//	currentLogin = loginRespository.findOne(id);
+		model.addAttribute("login", new Login());
+		return "resetPasswordProcess";
+	}*/
+	
+	@RequestMapping(value="/resetPasswordProcess" , method=RequestMethod.POST)
+	public String requestModifPassword(Model model, Login login)
+	{
+		currentLogin.setPassword(login.getPassword());
+		loginRespository.save(currentLogin);
+		return "redirect:/connexion";
+		
+	}
+	
 	
 	/*
 	

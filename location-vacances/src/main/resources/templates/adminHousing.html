@@ -61,8 +61,9 @@
                     </tr>
                     <tr th:each="housing : ${housingList}">
                         <td th:text="${housing.Id}"></td>
-                      <!--    <td th:text="${housing.Proprietaire.Nom}"></td>
-                        <td th:text="${housing.Proprietaire.Prenom}"></td>-->
+                        <td th:text="${housing.Proprietaire.Nom}"></td>
+                        <td th:text="${housing.Proprietaire.Prenom}"></td>
+                        <td th:text="${housing.TypeLogement}"></td>
                         <td th:text="${housing.ShortDescription}"></td>
                         <td><a class="form" th:href="@{'/viewHousing/'+${housing.id}}">Voir</a></td>
                         <td><a class="form" th:href="@{'/deleteHousing/'+${housing.id}}">Supprimer</a></td>

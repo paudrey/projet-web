@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../styles/base.css" rel="stylesheet" />
+    <link href="../styles/specificHeader.css" rel="stylesheet" />
+    <link href="../styles/specificFooter.css" rel="stylesheet" />
+    <link href="../styles/text.css" rel="stylesheet" />
+    <link href="../styles/specificConnexion.css" rel="stylesheet" />
+    <link href="../styles/button.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+
+        
+
+    </div>
+
+    <div id="content">
+        
+
+        <form th:object="${login}" method="POST">
+            <h1 class="formTitle">Récupération de votre compte</h1>
+            <table>
+                <tr>
+                    <td><input placeholder="Nouveau mot de passe" type="text"/></td>
+                </tr>
+                <tr>
+                    <td><input placeholder="Confirmation du nouveau mot de passe" type="text" th:field="*{Password}" /></td>
+                </tr>
+                <tr>
+                    <td><button class="connexionButton">Valider</button></td>
+                </tr>
+            </table>
+            
+        </form>
+
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>

@@ -36,10 +36,6 @@
         <form th:object="${housing}" method="POST">
             <h1 class="formTitle">Ajouter un logement</h1>
             <table>
-           		<tr>
-           			<td></td>
-           			<td>/</td>
-           		</tr>
                 <!--<tr>
                     <td class="topSection"><input placeholder="Nom" type="text" th:field="*{Proprietaire.Nom}" name="nom"/></td>
                     <td class="topSection"><input placeholder="Prénom" type="text" th:field="*{Proprietaire.Prenom}" name="nom" /></td>
@@ -53,15 +49,15 @@
                 </tr>
                 <tr>
                     <td> 
-                    	<select id="paysL">
+                    	<select th:field="*{Adresse.Pays}">
                     		<option value="" label="Pays" />
-                     		<option th:each="pays : ${paysList}" value="${pays.Pays}" th:text="${pays.Pays}"/>                       
+                     		<option th:each="pays : ${paysList}" th:value="${pays.Pays}" th:text="${pays.Pays}"/>                       
                      	</select>
                    	</td>
                 </tr>
                 <tr>
                		 <td>
-                     <select th:object="${typeLogList}" >
+                     <select th:field="*{TypeLogement}" >
                      	<option value="" label="Type Logement" />
                      	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}" />                
                      </select>
