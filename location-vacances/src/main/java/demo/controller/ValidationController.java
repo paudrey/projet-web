@@ -1,5 +1,7 @@
 package demo.controller;
 
+import java.util.Currency;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,6 +111,54 @@ public class ValidationController {
 				currentReservation.setStatut("Validée");
 		}
 		bookingRespository.save(currentReservation);
+		return "redirect:adminBooking";
+	}
+	
+	@RequestMapping("/validationDeleteBooking/{type}/{id}")
+	public String requestDeleteMailBooking(Model model,@PathVariable("id") Integer LogId, @PathVariable("type") String type,RedirectAttributes redirectAttributes)
+	{
+		
+		redirectAttributes.addFlashAttribute("type", type);
+		redirectAttributes.addFlashAttribute("LogId", LogId);
+		
+		return "redirect:/validationDeleteBooking";
+	}
+	
+	@RequestMapping(value="/validationDeleteBooking")
+	public String requestDeleteMailBoking(Model model)
+	{
+		int id = (int)model.asMap().get("LogId");
+		typeUtilisateur = (String)model.asMap().get("type");
+		currentReservation = bookingRespository.findOne(id);
+		model.addAttribute("booking", currentReservation);
+		return "/validationDeleteBooking";
+	}
+	
+
+	@RequestMapping(value="/validationDeleteBooking" , method=RequestMethod.POST)
+	public String requestDeleteValidatiion(Model model)
+	{
+		if(typeUtilisateur.equals("loc"))
+		{
+			if (currentReservation.getStatut() == "En attente d'annulation")
+			{
+				currentReservation.setStatut("Annulation validée par le locataire");
+				bookingRespository.save(currentReservation);
+			}
+			else
+				bookingRespository.delete(currentReservation);
+		}
+		else
+		{
+			if (currentReservation.getStatut() == "En attente d'annulation")
+			{
+				currentReservation.setStatut("Annulation validée par le propriètaire");
+				bookingRespository.save(currentReservation);
+			}
+			else
+				bookingRespository.delete(currentReservation);
+		}
+		//bookingRespository.save(currentReservation);
 		return "redirect:adminBooking";
 	}
 	
