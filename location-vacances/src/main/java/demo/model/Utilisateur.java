@@ -28,6 +28,11 @@ public class Utilisateur {
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Logement> LogementList;
 	
+	private int PaysId;
+	@OneToOne
+	private Format_pays FormatPays;
+	
+
 	public int getId() {
 		return Id;
 	}
@@ -77,6 +82,18 @@ public class Utilisateur {
 	}
 	public void setLogementList(List<Logement> logementList) {
 		LogementList = logementList;
+	}
+	public int getPaysId() {
+		return PaysId;
+	}
+	public void setPaysId(int paysId) {
+		PaysId = paysId;
+	}
+	public Format_pays getFormatPays() {
+		return FormatPays;
+	}
+	public void setFormatPays(Format_pays formatPays) {
+		FormatPays = formatPays;
 	}
 	
 }

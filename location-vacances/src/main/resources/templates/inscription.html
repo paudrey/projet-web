@@ -51,7 +51,11 @@
                     <td><input placeholder="Ville" type="text" th:field="*{User.Adresse.Ville}" name="Ville"/></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Pays" type="text" /></td>
+                    <td>
+                    	<select th:field="*{User.PaysId}">
+							<option th:each="country : ${countryList}" th:value="${country.Id}" th:text="${country.Pays}"></option>
+						</select>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="topSection"><input placeholder="Adresse email" class="large" type="text" /></td>

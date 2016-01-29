@@ -52,7 +52,7 @@ public class HomeController {
 	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String requestSearch(Recherche recherche, RedirectAttributes redirectAttribute)
 	{	    
-		
+		//Add flash attributes
 		return "home";
 	}
 	

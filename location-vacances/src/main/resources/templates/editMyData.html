@@ -34,13 +34,13 @@
        <div id="leftMenu">
            <ul>
                <li class="title">Mon compte</li>
-               <li class="item"><a href="Administration/suscribersMyData.html">Mes données</a></li>
+               <li class="item selected"><a>Mes données</a></li>
                <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
            </ul>
            <ul>
                <li class="title">Administration</li>
                <li class="item"><a>Tableau de bord</a></li>
-               <li class="item selected"><a>Utilisateurs</a></li>
+               <li class="item"><a href="adminUsers.html">Utilisateurs</a></li>
                <li class="item"><a href="adminHousing.html">Logements</a></li>
                <li class="item"><a>Mailing</a></li>
            </ul>
@@ -78,7 +78,11 @@
                 </tr>
                 <tr>
                 	<td class="description"><label>Pays :</label></td>
-                    <td><input type="text" /></td>
+                    <td>
+                    	<select th:field="*{PaysId}">
+							<option th:each="country : ${countryList}" th:value="${country.Id}" th:text="${country.Pays}"></option>
+						</select>
+                    </td>
                 </tr>
                 <tr>
                 	<td class="topSection description"><label>Email :</label></td>

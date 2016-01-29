@@ -1,5 +1,8 @@
 package demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import demo.model.AdressePostale;
+import demo.model.Format_pays;
 import demo.model.Login;
 import demo.model.Utilisateur;
 import demo.repository.AdressePostaleRepository;
@@ -29,15 +33,17 @@ public class UserController {
 	private PaysRepository paysRepository;
 	
 	private Utilisateur user;
+	List<Format_pays> countryList = new ArrayList<Format_pays>();
+	
 	/* Specific user */
 	
 	@RequestMapping("/inscription")
 	public String requestInscription(Model model)
 	{
-		//model.addAttribute("paysList", paysRepository.findAll());
-		//model.addAttribute("adresse", new AdressePostale());
+		countryList.clear();
+		countryList.addAll((List<Format_pays>)paysRepository.findAll());
 		model.addAttribute("login", new Login());
-		//model.addAttribute("user", new Utilisateur());
+		model.addAttribute("countryList", countryList);
 		
 		return "inscription";
 	}
@@ -54,15 +60,19 @@ public class UserController {
 		login.setId(login.getUser().getId());
 		loginRespository.save(login);
 		
-		return "redirect:adminUsers";
+		return "redirect:connexion";
 	}
 	
 	@RequestMapping("/editMyData")
 	public String requestEditMyData(@CookieValue(value="login") String idLogin, Model model)
 	{
+		countryList.clear();
+		countryList.addAll((List<Format_pays>)paysRepository.findAll());
 		int id = Integer.valueOf(idLogin);
 		user = userRepository.findOne(id);
+		
 		model.addAttribute("user", user);
+		model.addAttribute("countryList", countryList);
 		return "editMyData";
 	}
 	
@@ -71,11 +81,11 @@ public class UserController {
 	{
 		AdressePostale adresse = utilisateur.getAdresse();		
 		
-		
 		user.setNom(utilisateur.getNom());
 		user.setPrenom(utilisateur.getPrenom());
 		user.setDateNaissance(utilisateur.getDateNaissance());
 		user.setAdresse(utilisateur.getAdresse());
+		user.setPaysId(utilisateur.getPaysId());
 		user.setEmail(utilisateur.getEmail());	
 		
 		adresseRepository.save(user.getAdresse());
@@ -90,7 +100,8 @@ public class UserController {
 	public String requestView(Model model)
 	{
 		int id = (int)model.asMap().get("userId");
-		Utilisateur user = userRepository.findOne(id);		
+		Utilisateur user = userRepository.findOne(id);
+		user.setFormatPays(paysRepository.findOne(user.getPaysId()));
 		model.addAttribute("user", user);		
 		return "suscribersViewData";
 	}
