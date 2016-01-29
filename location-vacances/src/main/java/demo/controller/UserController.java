@@ -94,6 +94,32 @@ public class UserController {
 		return "redirect:adminGeneral";
 	}
 	
+	@RequestMapping("/editPassword")
+	public String requestChangePassword(Model model)
+	{
+		model.addAttribute("login", new Login());
+		return "editPassword";
+	}
+	
+	@RequestMapping(value="/editPassword", method=RequestMethod.POST)
+	public String requestChangePassword(@CookieValue(value="login") String idLogin, Login login, RedirectAttributes redirectAttribute)
+	{
+		int id = Integer.valueOf(idLogin);
+		Login userLogin = loginRespository.findOne(id);
+		if(userLogin.getPassword().equals(login.getPassword()))
+		{
+			return "redirect:editPassword";
+		}
+		else
+		{
+			userLogin.setPassword(login.getPassword());
+			loginRespository.save(userLogin);
+			return "redirect:adminGeneral";
+		}		
+	}
+	
+	
+	
 	/* Specific administration */
 	
 	@RequestMapping("/suscribersViewData")
