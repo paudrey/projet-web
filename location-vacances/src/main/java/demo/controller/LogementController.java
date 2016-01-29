@@ -54,24 +54,9 @@ public class LogementController {
 	TypeLogementRepository typeLogRepository;
 	
 	Logement currentLog=null;
-	/*@RequestMapping("/createEditHousing")
-	public String requestHousing(Model model)
-	{	
-		model.addAttribute("typeLogList", typeLogRepository.findAll());
-		model.addAttribute("paysList", paysRepository.findAll());
-		try{
-			int id = (int)model.asMap().get("LogId");
-			currentLog = logementRepository.findOne(id);
-			model.addAttribute("housing", currentLog);
-			return "createEditHousing";
-		}
-		catch(Exception e){
-			model.addAttribute("housing", new Logement());
-			return "createEditHousing";
-		}	
-	}*/
 	
-	@RequestMapping(value="/createEditHousing",method=RequestMethod.GET)
+	//@RequestMapping(value="/createEditHousing",method=RequestMethod.GET)
+	@RequestMapping("/createEditHousing")
 	public String requestHousing(Model model)
 	{	
 		model.addAttribute("typeLogList", typeLogRepository.findAll());

@@ -70,6 +70,12 @@ public class AdministrationController {
 		return "/adminHousing";
 	}
 	
+	@RequestMapping("/addNewItem}")
+	public String requestAddNewItem(Model model)
+	{
+		return "/createEditHousing";
+	}
+	
 	@RequestMapping("/viewHousing/{id}")
 	public String requestViewHousingDetails(@PathVariable("id") Integer LogId, RedirectAttributes redirectAttributes)
 	{

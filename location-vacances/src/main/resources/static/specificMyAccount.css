@@ -6,6 +6,7 @@
 	background-color : white;
     opacity : 0.9;
     overflow : hidden;
+    background-color : whitesmoke;
 }
 
 #leftMenu {
@@ -130,24 +131,33 @@
         	font-weight : semi-bold;
         	color : rgb(41,143,244);
         } 
+        
+     	#innerContent form.edit2 table
+		{
+			margin-left : 18vw;
+			margin-right : auto;
+        	border-spacing : 10px;
+		}
+		#innerContent form.edit2 table tr td
+        {
+        	min-width : 2vw;
+        }
+		#innerContent form.edit2 table tr td.topSection
+        {
+        	margin-top : 20px;
+        }   
+        #innerContent form.edit2 table tr td input
+        {
+        	width : 25vw;
+        }
+         #innerContent form.edit2 table tr td.description
+        {
+        	width : 2vw;
+        	text-align : right;
+        	font-weight : semi-bold;
+        	color : rgb(41,143,244);
+        } 
+        
 
-h1 {
-        font-size : 20px;
-        font-family : 'Segoe UI';
-        font-weight : normal;
-        color : rgb(41,143,244);
-        text-align : center;
-        width : 85vw;    
-    }
-
-select {
-    min-height : 40px;
-    border : 2px solid rgb(41,143,244);
-    background-color : rgba(255, 255, 255, 0.9);
-}
-
-select:hover {
-    cursor : pointer;
-}
 
 

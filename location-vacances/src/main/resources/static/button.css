@@ -83,6 +83,17 @@
         background-color : rgb(68,162,255);
     }
     
+    
+a.pseudoButton{
+	
+	margin-left : 65vw;
+	width : 190px;
+	height : 30px;
+}
+a.pseudoButton:hover{	
+	cursor : pointer;
+}
+
 .addNewItem{
 	width : 190px;
     height : 30px;
@@ -96,7 +107,6 @@
 }
 
 .addNewItem:hover{
-	cursor : pointer;
 	background-color : rgb(68,162,255);
 }
 
