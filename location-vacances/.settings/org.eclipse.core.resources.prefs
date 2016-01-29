@@ -20,6 +20,7 @@ encoding//src/main/resources/templates/inscription.html=UTF-8
 encoding//src/main/resources/templates/listHousing.html=UTF-8
 encoding//src/main/resources/templates/suscribersViewData.html=UTF-8
 encoding//src/main/resources/templates/validationBooking.html=UTF-8
+encoding//src/main/resources/templates/validationDeleteBooking.html=UTF-8
 encoding//src/main/resources/templates/validationModifBooking.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
