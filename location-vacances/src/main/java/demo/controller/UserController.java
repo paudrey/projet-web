@@ -190,7 +190,7 @@ public class UserController {
 		String email = user.getEmail();
 		
 		objet = "Mot de passe oublié sur Holiday Me";
-		lienVal = "localhost:8080/resetPasswordProcess/" + user.getId();
+		lienVal = "localhost:8080/resetPasswdProcess/" + user.getId();
 		message = " Cliquez sur ce lien pour changer votre mot de passe: \n" + lienVal;
 
 		
@@ -223,15 +223,22 @@ public class UserController {
 		}   
 	}
 	
-	@RequestMapping("/resetPasswordProcess/{id}")
+	@RequestMapping(value="/resetPasswdProcess/{id}")
 	public String requestPassword(Model model,@PathVariable("id") Integer LogId,RedirectAttributes redirectAttributes)
 	{
-		//redirectAttributes.addFlashAttribute("LogId", LogId);
-		currentLogin = loginRespository.findOne(LogId);
-		model.addAttribute("login", new Login());
-		return "resetPasswordProcess";
+		redirectAttributes.addFlashAttribute("LogId", LogId);
+	
+		return "redirect:/resetPasswdProcess";
 	}
 	
+	@RequestMapping(value="/resetPasswdProcess")
+	public String requestResetPassword(Model model)
+	{
+		int id = (int)model.asMap().get("LogId");
+		currentLogin = loginRespository.findOne(id);
+		model.addAttribute("login", new Login());
+		return "resetPasswdProcess";
+	}
 	/*@RequestMapping("/resetPasswordProcess")
 	public String requestResetPassword(Model model)
 	{
@@ -241,7 +248,7 @@ public class UserController {
 		return "resetPasswordProcess";
 	}*/
 	
-	@RequestMapping(value="/resetPasswordProcess" , method=RequestMethod.POST)
+	@RequestMapping(value="/resetPasswdProcess" , method=RequestMethod.POST)
 	public String requestModifPassword(Model model, Login login)
 	{
 		currentLogin.setPassword(login.getPassword());
