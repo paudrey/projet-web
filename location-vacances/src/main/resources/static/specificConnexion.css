@@ -1,6 +1,6 @@
-﻿#content {
-    height : 64.5vh;
-    padding-top : 10%;
+#content {
+    height : 65.2vh;
+    margin-top : 15vh;
     background-image : url('../images/summer_holiday.jpg');
     background-position : center;
     background-size : cover;
@@ -10,7 +10,7 @@
 form {
     width : 25vw;   
     min-height : 100px;
-    min-width : 250px;
+    min-width : 250px;    
     margin-left : auto;
     margin-right : auto;
     padding-top : 5vh;
@@ -22,7 +22,11 @@ form {
     form table {
         width : 10vw;
         border-spacing : 5px;
-        margin-left : 4vw;
+        margin-left : 3vw;
+    }
+    form table.editPwd
+    {
+    	margin-left : 25.5vw;
     }
 
         form table tr {
@@ -37,13 +41,13 @@ form {
                 width : 100%;
             }
 
-input {
+/*input {
     min-height : 30px;
     padding : 5px;
     width : 15vw;
     border : 2px solid rgb(41,143,244);
     background-color : rgba(255, 255, 255, 0.9);
-}
+}*/
 
 select {
     min-height : 46px;

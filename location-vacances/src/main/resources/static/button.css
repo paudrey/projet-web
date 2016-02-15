@@ -29,7 +29,7 @@
     width : 200px;
     height : 40px;
     margin-top : 5%;
-    margin-left : 1.8vw;
+    margin-left : 3vw;
     margin-right : auto;
     padding : 2px;
 
@@ -67,7 +67,7 @@
 .standardButton {
     width : 200px;
     height : 40px;
-    margin-left : 13vw;
+    margin-left : 8vw;
     margin-right : auto;
     padding : 2px;
 
@@ -82,6 +82,12 @@
         cursor : pointer;
         background-color : rgb(68,162,255);
     }
+    .standardButton.editPwdBtn{
+    	margin-left : 4vw;
+    } 
+   .standardButton.returnButton{
+   margin-left: 18vw;
+   }
     
 .addNewItem{
 	width : 190px;

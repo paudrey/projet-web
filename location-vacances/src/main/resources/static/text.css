@@ -3,22 +3,20 @@
 }
 
 input {
-    min-height : 30px;
-    padding : 5px;
-    width : 15vw;
+    padding : 12px;
+    width : 100%;
     border : 2px solid rgb(41,143,244);
     background-color : rgba(255, 255, 255, 0.9);
+	box-sizing: border-box;
 }
 
-    input.large {
-        width : 34.2vw;
-    }
-
 textarea {
-    padding : 5px;
-    width : 34.2vw;
+    padding : 12px;
+    /*width : 34.2vw;*/
+    width : 100%;
     border : 2px solid rgb(41,143,244);
     background-color : rgba(255, 255, 255, 0.9);
+	box-sizing: border-box;
 }
 
 h1.formTitle {
@@ -28,6 +26,15 @@ h1.formTitle {
     font-size : 24px;
     font-family : 'Segoe UI';
     font-weight : 400;
+}
+h1.editDataTitle{
+	width : 50%;
+    text-align : left;
+    color : rgb(41,143,244);
+    font-size : 24px;
+    font-family : 'Segoe UI';
+    font-weight : 400;
+    margin-left : 25vw;
 }
 
 label.hightlight

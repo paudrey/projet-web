@@ -1,9 +1,8 @@
 #content {
-    /*background-image : url('../images/under_construction.jpg');*/
     background-position : center;
     background-size : contain;
     background-repeat : no-repeat;
-	background-color : white;
+	background-color : whitesmoke;
     opacity : 0.9;
     overflow : hidden;
 }
@@ -59,6 +58,8 @@
     overflow : auto;
 }
 
+/* Form et table standards */
+
     #innerContent form {
         width : 80vw;
         margin-left : auto;
@@ -68,11 +69,9 @@
     #innerContent form table{
         border-spacing : 0;
     }
-
         #innerContent form table tr.rowTitle {
             background-color : rgb(41,143,244);;
         }
-
         #innerContent form table tr th {
             font-size : 14px;
             font-weight : normal;
@@ -86,14 +85,18 @@
             font-size : 14px;
             color : black;
             padding-left : 1vw;
-            width : 14vw;
+            width : 15vw;
             text-align : left;
         }
-        
-        
+        #innerContent form table tr td.topSection{
+        	margin-top : 20px;
+        }
+       
+       /* Form et table READONLY */
+       
         #innerContent form.readOnly table
         {
-        	margin-left : 20vw;
+        	margin-left : 15vw;
         	margin-right : auto;
         	border-spacing : 10px;
         	width : 50vw;
@@ -104,25 +107,27 @@
         }   
         #innerContent form.readOnly table tr td.description
         {
-        	width : 8vw;
+        	width : 15vw;
         	text-align : right;
-        	font-weight : semi-bold;
+        	font-size : 16px;
         	color : rgb(41,143,244);
         }   
+        
+        /* Form et table EDIT */
 		#innerContent form.edit table
 		{
 			margin-left : 18vw;
 			margin-right : auto;
         	border-spacing : 10px;
 		}
+		#innerContent form.edit table.editPwd{
+			width : 30%;
+			margin-left : 27.5vw;
+		}
 		#innerContent form.edit table tr td.topSection
         {
         	margin-top : 20px;
         }   
-        #innerContent form.edit table tr td input
-        {
-        	width : 25vw;
-        }
          #innerContent form.edit table tr td.description
         {
         	width : 8vw;
@@ -131,6 +136,42 @@
         	color : rgb(41,143,244);
         } 
 
+		#innerContent form.addContent table{
+			width : 80%;
+		}
+		#innerContent form.addContent table tr
+		{
+			width :inherit;
+		}
+		#innerContent form.addContent table tr td
+		{
+			width : 20vw;
+			padding: 5px;
+			box-sizing: border-box;
+		}
+		
+		#innerContent form.addContent table tr td.half-table
+		{
+			width: 50%;
+		}
+		
+		#innerContent form.addContent table tr td.topSection
+		{
+			margin-top : 20px;
+		}
+		
+#innerContent form.management{
+	width : 98%;
+}
+#innerContent form.management tr th{
+	padding-top : 2px;
+	padding-bottom : 2px;
+}
+#innerContent form.management tr td{
+	padding-top : 2px;
+	padding-bottom : 2px;
+}
+		
 h1 {
         font-size : 20px;
         font-family : 'Segoe UI';
@@ -145,9 +186,8 @@ select {
     border : 2px solid rgb(41,143,244);
     background-color : rgba(255, 255, 255, 0.9);
 }
-
-select:hover {
-    cursor : pointer;
-}
+	select:hover {
+    	cursor : pointer;
+	}
 
 
