@@ -1,10 +1,10 @@
 #content {
-    height : 65.2vh;
-    margin-top : 15vh;
-    background-image : url('../images/summer_holiday.jpg');
+    background-image : url('../images/holidays.jpg');
     background-position : center;
     background-size : cover;
     background-repeat : no-repeat;
+    box-sizing : border-box;
+    padding-top : 15vh;
 }
 
 form {

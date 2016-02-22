@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mockito.internal.matchers.CompareTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,14 @@ import demo.enums.UserStatus;
 import demo.model.Login;
 import demo.model.Utilisateur;
 import demo.repository.LoginRepository;
+import demo.repository.UtilisateurRepository;
 
 @Controller
 public class ConnexionController {
 	@Autowired
 	private LoginRepository loginRespository;
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
 	
 	private static Login previousLogin;
 	private int iteration;
@@ -43,28 +47,37 @@ public class ConnexionController {
 			iteration = 0;
 		}
 
-		return "connexion";
-		/*List<Login> loginList = (List<Login>)loginRespository.findAll();
-		Login result = loginList.stream()
-				.filter(l -> l.getLogin().equals(login.getLogin()) && l.getPassword().equals(login.getPassword()))
+		List<Login> loginList = (List<Login>)loginRespository.findAll();
+		Login loginToTest = loginList.stream()
+				.filter(l -> l.getLogin().equals(login.getLogin()))
 				.findFirst()
 				.orElse(null);
 		
-		if(result != null && result.getUser().getCurrentUserStatus() != UserStatus.BLOCKED) {
-			Cookie cookie = new Cookie("login", String.valueOf(result.getId())); // création du cookie
-			cookie.setMaxAge(3600);
-			response.addCookie(cookie);
-			return "redirect:/adminGeneral";
-		}
-		else 
+		if(loginToTest != null)
 		{
-			previousLogin = login;
-			iteration ++;
-			if(result != null && iteration == 5)
+			Utilisateur userToTest = loginToTest.getUser();
+			
+			if(loginToTest.getPassword().equals(login.getPassword()) && userToTest.getCurrentUserStatus() != UserStatus.BLOCKED)
 			{
-				result.getUser().setCurrentUserStatus(UserStatus.BLOCKED);
+				Cookie cookie = new Cookie("login", String.valueOf(loginToTest.getId())); // création du cookie
+				cookie.setMaxAge(3600);
+				response.addCookie(cookie);
+				return "redirect:/adminGeneral";
 			}
+			else{
+				iteration ++;
+				previousLogin = login;
+				if(iteration == 5)
+				{
+					userToTest.setCurrentUserStatus(UserStatus.BLOCKED);
+					utilisateurRepository.save(userToTest);
+				}
+				return "connexion";
+			}	
+		}
+		else
+		{
 			return "connexion";
-		}*/
+		}
 	}
 }
