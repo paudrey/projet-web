@@ -12,6 +12,7 @@ public class Recherche {
 	@Id
 	@GeneratedValue
 	private int Id;
+	/*****Modification de selectedCountry en string ***/
 	private String SelectedCountry;
 	
 	private String Ville;

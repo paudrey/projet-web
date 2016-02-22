@@ -56,6 +56,7 @@ public class HomeController {
 		return "home";
 	}
 	
+	/***Mise en place de la recherche *******/
 	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String requestSearch(Recherche recherche, RedirectAttributes redirectAttribute, Model model)
 	{	    

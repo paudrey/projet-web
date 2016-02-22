@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class AdressePostale {
 	
+	/*****Modification de pays en String ****/
 	@Id
 	@GeneratedValue
 	private int Id;
