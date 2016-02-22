@@ -47,41 +47,6 @@
 	       </div>
 
 	        <div id="innerContent">	
-	        <!-- <form th:object="${housing}" method="POST" class="addContent">
-	        	<h1 class="formTitle">Ajouter un logement</h1>
-	        	<table>
-	        		<tr>
-	                    <td colspan="2"><input placeholder="Adresse" type="text" th:field="*{Adresse.Adresse}" /></td>
-	                </tr>
-	        		<tr>
-	                    <td><input placeholder="Code Postal" type="text" th:field="*{Adresse.CodePostal}"/></td>
-	                    <td><input placeholder="Ville" type="text" th:field="*{Adresse.Ville}"/></td>
-	                </tr>
-	        		 <tr>
-	                    <td> 
-	                    	<select th:field="*{Adresse.Pays}">
-	                    		<option value="" label="Pays" />
-	                     		<option th:each="pays : ${paysList}" th:value="${pays.Pays}" th:text="${pays.Pays}"/>                       
-	                     	</select>
-	                   	</td>
-	                </tr>
-	                 <tr>
-	               		 <td>
-		                     <select th:field="*{TypeLogement}" >
-		                     	<option value="" label="Type Logement" />
-		                     	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}" />                
-		                     </select>
-	                     </td>
-	                     <td><input placeholder="PrixTTC" type="text" th:field="*{prixTTC}"/></td>		                     
-	                </tr>
-	                <tr>
-	                    <td><input placeholder="ShortDescription" type="text" th:field="*{ShortDescription}" /></td>
-	                </tr>
-	        		<tr>
-	                    <td colspan="2"><textarea  placeholder="Full description" rows="10" th:field="*{Description}"></textarea></td>
-	                </tr>
-	        	</table>
-	        </form> -->
 		        <form th:object="${housing}" method="POST" class="addContent">
 		            <h1 class="formTitle">Ajouter un logement</h1>
 		            <table>
