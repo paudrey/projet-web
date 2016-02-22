@@ -50,15 +50,13 @@
                 <tr>
                     <td> 
                     	<select th:field="*{Adresse.Pays}">
-                    		<option value="" label="Pays" />
-                     		<option th:each="pays : ${paysList}" th:value="${pays.Pays}" th:text="${pays.Pays}"/>                       
+                     		<option th:each="pays : ${paysList}" th:value="${pays.Pays}" th:text="${pays.Pays}"/> 
                      	</select>
                    	</td>
                 </tr>
                 <tr>
                		 <td>
                      <select th:field="*{TypeLogement}" >
-                     	<option value="" label="Type Logement" />
                      	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}" />                
                      </select>
                      </td>

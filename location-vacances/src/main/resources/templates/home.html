@@ -35,15 +35,15 @@
             <table>
                 <tr>                   
                     <td>
-                    	<select th:field="*{SelectedCountryId}">
-							<option th:each="country : ${countryList}" th:value="${country.Id}" th:text="${country.Pays}"></option>
+                    	<select th:field="*{SelectedCountry}">
+							<option th:each="country : ${countryList}" th:value="${country.Pays}" th:text="${country.Pays}"></option>
 						</select>
                     </td>
 
                     <td><input placeholder="Ville" th:field="*{Ville}" type="text"/></td>
                     <td>
-	                     <select th:field="*{TypeLogementId}">
-	                     	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.Id}" th:text="${typeLog.TypeLogement}"/>                       
+	                     <select th:field="*{TypeLogement}">
+	                     	<option th:each="typeLog : ${typeLogList}" th:value="${typeLog.TypeLogement}" th:text="${typeLog.TypeLogement}"/>                       
 	                     </select>
                      </td>
 					

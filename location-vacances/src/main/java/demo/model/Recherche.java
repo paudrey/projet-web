@@ -12,10 +12,10 @@ public class Recherche {
 	@Id
 	@GeneratedValue
 	private int Id;
-	private int SelectedCountryId;
+	private String SelectedCountry;
 	
 	private String Ville;
-	private int TypeLogementId;
+	private String TypeLogement;
 	private String DateDebut;
 	private String DateFin;
 	private int NbVoyageurs;
@@ -50,18 +50,19 @@ public class Recherche {
 	public void setNbVoyageurs(int nbVoyageurs) {
 		NbVoyageurs = nbVoyageurs;
 	}
-	public int getSelectedCountryId() {
-		return SelectedCountryId;
+	public String getSelectedCountry() {
+		return SelectedCountry;
 	}
-	public void setSelectedCountryId(int selectedCountryId) {
-		SelectedCountryId = selectedCountryId;
+	public void setSelectedCountry(String selectedCountry) {
+		SelectedCountry = selectedCountry;
 	}
-	public int getTypeLogementId() {
-		return TypeLogementId;
+	public String getTypeLogement() {
+		return TypeLogement;
 	}
-	public void setTypeLogementId(int typeLogementId) {
-		TypeLogementId = typeLogementId;
+	public void setTypeLogement(String typeLogement) {
+		TypeLogement = typeLogement;
 	}
+
 
 
 
