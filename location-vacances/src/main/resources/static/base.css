@@ -1,4 +1,4 @@
-﻿body {
+body {
     margin : 0;
     min-width : 850px;
     width : 100vw;
@@ -7,8 +7,8 @@
    
     font-family : 'Segoe UI';
     background-color : whitesmoke;
-
-    overflow : hidden;
+    overflow-x : hidden;
+    overflow-y : auto;
 }
 
 #header {
@@ -24,7 +24,7 @@
 #content {
     margin : 0;
     width : inherit;
-    height : 82vh;
+    height : 80.2vh;
 }
 
 #footer {

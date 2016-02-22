@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.mail.smtp.SMTPTransport;
 
+import demo.enums.UserStatus;
 import demo.model.AdressePostale;
 import demo.model.Format_pays;
 import demo.model.Login;
@@ -50,6 +51,8 @@ public class UserController {
 	
 	private Login currentLogin;
 	
+
+	
 	/* Specific user */
 	
 	@RequestMapping("/inscription")
@@ -68,7 +71,9 @@ public class UserController {
 	{
 		AdressePostale adresse = login.getUser().getAdresse();		
 		adresseRepository.save(adresse);
-		userRepository.save(login.getUser());
+		
+		login.getUser().setCurrentUserStatus(UserStatus.CONFIRMED);
+		userRepository.save(login.getUser());	
 		
 		String[] tabLogin = login.getUser().getEmail().split("@");
 		login.setLogin(tabLogin[0]);

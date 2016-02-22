@@ -38,7 +38,7 @@
            <ul>
                <li class="title">Administration</li>
                <li class="item"><a>Tableau de bord</a></li>
-               <li class="item"><a>Utilisateurs</a></li>
+               <li class="item selected"><a>Utilisateurs</a></li>
                <li class="item"><a href="adminHousing.html">Logements</a></li>
                <li class="item"><a>Mailing</a></li>
            </ul>
@@ -64,7 +64,7 @@
                         <td th:text="${user.Prenom}"></td>
                         <td th:text="${user.Email}"></td>
                         <td><a class="form" th:href="@{'/view/'+${user.id}}">Voir</a></td>
-                        <td>ToDo</td>
+                        <td th:text="${user.CurrentUserStatus}"></td>
                         <td>ToDo</td>
                     </tr>
                 </table>

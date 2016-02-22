@@ -15,14 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import demo.enums.UserStatus;
 import demo.model.Login;
 import demo.model.Utilisateur;
 import demo.repository.LoginRepository;
+import demo.repository.UtilisateurRepository;
 
 @Controller
 public class ConnexionController {
 	@Autowired
 	private LoginRepository loginRespository;
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
 	
 	private static Login previousLogin;
 	private int iteration;
@@ -41,28 +45,38 @@ public class ConnexionController {
 		if(previousLogin == null || previousLogin.getId() != login.getId()) {
 			iteration = 0;
 		}
+
 		List<Login> loginList = (List<Login>)loginRespository.findAll();
-		Login result = loginList.stream()
-				.filter(l -> l.getLogin().equals(login.getLogin()) && l.getPassword().equals(login.getPassword()))
+		Login loginToTest = loginList.stream()
+				.filter(l -> l.getLogin().equals(login.getLogin()))
 				.findFirst()
 				.orElse(null);
 		
-		if(result != null) {
-			Cookie cookie = new Cookie("login", String.valueOf(result.getId())); // création du cookie
-			cookie.setMaxAge(3600);
-			response.addCookie(cookie);
-			return "redirect:/adminGeneral";
-		}
-		else 
+		if(loginToTest != null)
 		{
-			previousLogin = login;
-			iteration ++;
-			if(iteration == 5)
+			Utilisateur userToTest = loginToTest.getUser();
+			
+			if(loginToTest.getPassword().equals(login.getPassword()) && userToTest.getCurrentUserStatus() != UserStatus.BLOCKED)
 			{
-				//Passage du statut de l'utilisateur en bloqué
+				Cookie cookie = new Cookie("login", String.valueOf(loginToTest.getId())); // création du cookie
+				cookie.setMaxAge(3600);
+				response.addCookie(cookie);
+				return "redirect:/adminGeneral";
 			}
+			else{
+				iteration ++;
+				previousLogin = login;
+				if(iteration == 5)
+				{
+					userToTest.setCurrentUserStatus(UserStatus.BLOCKED);
+					utilisateurRepository.save(userToTest);
+				}
+				return "connexion";
+			}	
+		}
+		else
+		{
 			return "connexion";
 		}
-		
 	}
 }

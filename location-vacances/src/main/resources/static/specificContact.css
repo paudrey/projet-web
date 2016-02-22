@@ -1,20 +1,15 @@
-﻿body{
-    overflow : hidden;
-}
-
 #content {
-    height : 80vh;
-    padding-top : 2vh;
     background-image : url('../images/contact.jpg');
     background-position : center;
     background-size : cover;
     background-repeat : no-repeat;
+    box-sizing : border-box;
+    padding-top : 10vh;
 }
 
 form {
     width : 50vw;   
     min-height : 100px;
-    margin-top : 10vh;
     margin-left : auto;
     margin-right : auto;
     padding-top : 2vh;
