@@ -1,5 +1,5 @@
 #content {
-    background-image : url('../images/bungalow_outside.jpg');
+    background-image : url('/images/bungalow_outside.jpg');
     background-position : center;
     background-size : cover;
     background-repeat : no-repeat;
@@ -22,7 +22,6 @@ form {
              min-height : 50px;
              padding-left : 10px;
         }
-
             form table tr td .buttonLine {
                 width : 100%;
             }

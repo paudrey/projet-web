@@ -64,7 +64,7 @@
                         <td th:text="${user.Prenom}"></td>
                         <td th:text="${user.Email}"></td>
                         <td><a class="form" th:href="@{'/view/'+${user.id}}">Voir</a></td>
-                        <td>ToDo</td>
+                        <td th:text="${user.CurrentUserStatus}"></td>
                         <td>ToDo</td>
                     </tr>
                 </table>

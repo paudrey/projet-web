@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import demo.enums.UserStatus;
 import demo.model.Login;
 import demo.model.Utilisateur;
 import demo.repository.LoginRepository;
@@ -41,13 +42,15 @@ public class ConnexionController {
 		if(previousLogin == null || previousLogin.getId() != login.getId()) {
 			iteration = 0;
 		}
-		List<Login> loginList = (List<Login>)loginRespository.findAll();
+
+		return "connexion";
+		/*List<Login> loginList = (List<Login>)loginRespository.findAll();
 		Login result = loginList.stream()
 				.filter(l -> l.getLogin().equals(login.getLogin()) && l.getPassword().equals(login.getPassword()))
 				.findFirst()
 				.orElse(null);
 		
-		if(result != null) {
+		if(result != null && result.getUser().getCurrentUserStatus() != UserStatus.BLOCKED) {
 			Cookie cookie = new Cookie("login", String.valueOf(result.getId())); // création du cookie
 			cookie.setMaxAge(3600);
 			response.addCookie(cookie);
@@ -57,12 +60,11 @@ public class ConnexionController {
 		{
 			previousLogin = login;
 			iteration ++;
-			if(iteration == 5)
+			if(result != null && iteration == 5)
 			{
-				//Passage du statut de l'utilisateur en bloqué
+				result.getUser().setCurrentUserStatus(UserStatus.BLOCKED);
 			}
 			return "connexion";
-		}
-		
+		}*/
 	}
 }

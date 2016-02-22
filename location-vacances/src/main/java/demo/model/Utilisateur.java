@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import demo.enums.UserStatus;
+
 @Entity
 public class Utilisateur {
 	@Id
@@ -31,6 +33,8 @@ public class Utilisateur {
 	private int PaysId;
 	@OneToOne
 	private Format_pays FormatPays;
+	
+	private UserStatus CurrentUserStatus;
 	
 
 	public int getId() {
@@ -95,5 +99,13 @@ public class Utilisateur {
 	public void setFormatPays(Format_pays formatPays) {
 		FormatPays = formatPays;
 	}
+	public UserStatus getCurrentUserStatus() {
+		return CurrentUserStatus;
+	}
+	public void setCurrentUserStatus(UserStatus currentUserStatus) {
+		CurrentUserStatus = currentUserStatus;
+	}
+
+	
 	
 }
