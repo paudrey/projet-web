@@ -1,4 +1,4 @@
-﻿#logo {
+#logo {
     width : 19vw;
     min-width : 180px;
     height : inherit;
@@ -19,7 +19,7 @@
     min-height : inherit;
     position : absolute;
     float : left;
-    color : rgb(186,244,249);
+    color : rgb(245,245,245);
     font-size : 20px;
     vertical-align : bottom;
     margin-top : -10vh;
@@ -43,18 +43,18 @@
         }
 
         #menu ul li a {
-                color : rgb(186,244,249);
+                color : rgb(245,245,245);
                 text-decoration : none;
                 padding-bottom : 5px;
             }
 
         #menu ul li a.selected {
                 
-                border-bottom : 4px solid rgb(186,244,249);
+                border-bottom : 4px solid rgb(245,245,245);
             }
 
             #menu ul li a:hover {             
-                border-bottom : 4px solid rgb(186,244,249);
+                border-bottom : 4px solid rgb(245,245,245);
                 cursor : pointer;
             }
 

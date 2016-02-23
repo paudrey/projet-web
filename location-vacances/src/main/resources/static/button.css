@@ -17,7 +17,7 @@
 
     font-variant : small-caps;
     font-size : 18px;
-    color : rgb(186,244,249);
+    color : rgb(245,245,245);
 }
 
     .searchButton:hover {
@@ -38,7 +38,7 @@
 
     font-variant : small-caps;
     font-size : 18px;
-    color : rgb(186,244,249);
+    color : rgb(245,245,245);
 }
 	.connexionButton:hover {
         cursor : pointer;
@@ -57,7 +57,7 @@
 
     font-variant : small-caps;
     font-size : 18px;
-    color : rgb(186,244,249);
+    color : rgb(245,245,245);
 }
 .inscriptionButton {
         cursor : pointer;
@@ -76,7 +76,7 @@
 
     font-variant : small-caps;
     font-size : 18px;
-    color : rgb(186,244,249);
+    color : rgb(245,245,245);
 }
 .standardButton {
         cursor : pointer;
@@ -95,7 +95,7 @@
     margin : 10px;
     margin-left : 65vw;
     background-color : rgb(41,143,244);
-    color : rgb(186,244,249);
+    color : rgb(245,245,245);
     font-variant : small-caps;
     font-size : 14px;
     border : none;
