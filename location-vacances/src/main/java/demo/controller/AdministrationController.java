@@ -1,6 +1,7 @@
 package demo.controller;
 
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -11,6 +12,9 @@ import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +51,23 @@ public class AdministrationController {
 		Utilisateur user = utilisateurRepository.findOne(userId);
 		model.addAttribute("user", user);
 		return "/adminGeneral";
+	}
+	
+	@RequestMapping("/adminGeneral/deconnect")
+	public String requestForDeconnexion(@CookieValue(value="login") String idLogin, Model model, HttpServletRequest request, HttpServletResponse response)
+	{
+		List<Cookie> cookies = Arrays.asList(request.getCookies());
+		Cookie myCookie = cookies.stream()
+				.filter(c -> c.getName().equals("login"))
+				.findFirst()
+				.orElse(null);
+		
+		if(myCookie != null)
+		{
+			myCookie.setMaxAge(0);
+			response.addCookie(myCookie);			
+		}
+		return "redirect:/home";
 	}
 	
 	@RequestMapping("/adminUsers")

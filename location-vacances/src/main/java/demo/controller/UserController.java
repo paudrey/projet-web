@@ -12,6 +12,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,6 +79,7 @@ public class UserController {
 		String[] tabLogin = login.getUser().getEmail().split("@");
 		login.setLogin(tabLogin[0]);
 		login.setId(login.getUser().getId());
+		login.setPassword(DigestUtils.sha512Hex(login.getPassword()));
 		loginRespository.save(login);
 		
 		return "redirect:connexion";
@@ -131,8 +133,8 @@ public class UserController {
 			return "redirect:editPassword";
 		}
 		else
-		{
-			userLogin.setPassword(login.getPassword());
+		{			
+			userLogin.setPassword(DigestUtils.sha512Hex(login.getPassword()));
 			loginRespository.save(userLogin);
 			return "redirect:adminGeneral";
 		}		
@@ -255,11 +257,10 @@ public class UserController {
 	
 	@RequestMapping(value="/resetPasswdProcess" , method=RequestMethod.POST)
 	public String requestModifPassword(Model model, Login login)
-	{
-		currentLogin.setPassword(login.getPassword());
+	{	
+		currentLogin.setPassword(DigestUtils.sha512Hex(login.getPassword()));
 		loginRespository.save(currentLogin);
-		return "redirect:/connexion";
-		
+		return "redirect:/connexion";		
 	}
 	
 	

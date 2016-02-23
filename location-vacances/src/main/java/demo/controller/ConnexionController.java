@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import demo.enums.UserStatus;
 import demo.model.Login;
@@ -42,6 +43,7 @@ public class ConnexionController {
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
 	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpServletResponse response)
 	{
+		String pwdHashed = DigestUtils.sha512Hex(login.getPassword());
 		if(previousLogin == null || previousLogin.getId() != login.getId()) {
 			iteration = 0;
 		}
@@ -56,7 +58,7 @@ public class ConnexionController {
 		{
 			Utilisateur userToTest = loginToTest.getUser();
 			
-			if(loginToTest.getPassword().equals(login.getPassword()) && userToTest.getCurrentUserStatus() != UserStatus.BLOCKED)
+			if(loginToTest.getPassword().equals(pwdHashed) && userToTest.getCurrentUserStatus() != UserStatus.BLOCKED)
 			{
 				Cookie cookie = new Cookie("login", String.valueOf(loginToTest.getId())); // création du cookie
 				cookie.setMaxAge(3600);

@@ -4,9 +4,9 @@
     height : inherit;
     min-height : 50px;
     margin : 0;
-    background-image : url('../images/logo_light.png');
+    background-image : url('/images/logo_light.png');
     background-position : center;
-    background-size : cover;
+    background-size : 80%;
     background-repeat : no-repeat;
     background-position-x : 0.5%;
     background-position-y : 35%;
