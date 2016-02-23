@@ -1,6 +1,8 @@
 package demo.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,9 +25,11 @@ import demo.model.Format_typeLogement;
 import demo.model.Logement;
 import demo.model.Login;
 import demo.model.Recherche;
+import demo.model.Reservation;
 import demo.repository.LogementRepository;
 import demo.repository.PaysRepository;
 import demo.repository.RechercheRepository;
+import demo.repository.ReservationRepository;
 import demo.repository.TypeLogementRepository;
 
 @Controller
@@ -41,12 +45,16 @@ public class HomeController {
 	@Autowired
 	private LogementRepository logementRepository;
 	
+	@Autowired
+	private ReservationRepository reservationRepository;
+	
 	List<Format_pays> countryList = new ArrayList<Format_pays>();
 	List<Format_typeLogement> typeLogementList = new ArrayList<Format_typeLogement>();
 	
 	@RequestMapping("/home")
 	public String requestHome(Model model)
-	{	    
+	{	
+		countryList.clear();
 		countryList.addAll((List<Format_pays>)paysRepository.findAll());
 		typeLogementList.addAll((List<Format_typeLogement>)typeLogRepository.findAll());
 		
@@ -56,22 +64,92 @@ public class HomeController {
 		return "home";
 	}
 	
-	/***Mise en place de la recherche *******/
+	/***Mise en place de la recherche 
+	 * @throws ParseException *******/
 	@RequestMapping(value="/home", method=RequestMethod.POST)
-	public String requestSearch(Recherche recherche, RedirectAttributes redirectAttribute, Model model)
-	{	    
-		Format_typeLogement typLog;
+	public String requestSearch(Recherche recherche, RedirectAttributes redirectAttribute, Model model) 
+	{	  
 		List<Logement> listLog = (List<Logement>) logementRepository.findAll();
+		List<Logement> listHousing;
+		
+		
 		List <Logement> list = listLog.stream()
-				.filter(l-> l.getAdresse().getVille().equalsIgnoreCase(recherche.getVille()))
 				.filter(l-> l.getTypeLogement().equalsIgnoreCase(recherche.getTypeLogement()))
 				.collect(Collectors.toList());
-				
 		
-		model.addAttribute("housingList",list);
+		listHousing = list;
+		
+		if(!recherche.getSelectedCountry().equals("Non défini"))
+		{
+			List <Logement> listFilter = listHousing.stream()
+					.filter(l->l.getAdresse().getPays().equalsIgnoreCase(recherche.getSelectedCountry()))
+					.collect(Collectors.toList());
+			listHousing = listFilter;
+		}
+		if(!recherche.getVille().equals(""))
+		{
+			List <Logement> listFilter = listHousing.stream()
+					.filter(l-> l.getAdresse().getVille().equalsIgnoreCase(recherche.getVille()))
+					.collect(Collectors.toList());
+			listHousing = listFilter;
+		}
+		
+		List<Reservation> reservationList = (List<Reservation>) reservationRepository.findAll();
+		List<Logement> logList = new ArrayList<Logement>();
+		if(recherche.getDateDebut()!= "" && recherche.getDateFin()!="")
+		{
+			for(Logement log : listHousing)
+			{
+				//List des réservations pour le logement
+				List<Reservation> bookingList = reservationList.stream()
+						.filter(r -> r.getLogement().getId() == log.getId())
+						.collect(Collectors.toList());
+				
+				//List des réservations possible à la date donnée pour le logement
+				List<Reservation> listBooking = bookingList.stream()
+						.filter(r -> (CompareDateBefore(recherche.getDateDebut(), r.getDateDebut()) == true && CompareDateBefore(recherche.getDateFin(), r.getDateDebut()) == true)
+						    		|| (CompareDateAfter(recherche.getDateDebut(), r.getDateFin()) == true && CompareDateAfter(recherche.getDateFin(), r.getDateFin()) == true))
+						.collect(Collectors.toList());
+				
+				//Ajout du logement dans la liste si réseravation possible
+				if (listBooking.size()>0)
+				{
+					logList.add(log);
+				}	
+			}
+			listHousing = logList;
+		}
+		
+		model.addAttribute("housingList",listHousing);
 		//Add flash attributes
 		return "/listhousing";
 	}
 	
+	public boolean CompareDateBefore(String Date1, String Date2)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try{
+			if(dateFormat.parse(Date1).before(dateFormat.parse(Date2)))
+				return true;
+			else
+				return false;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+	public boolean CompareDateAfter(String Date1, String Date2)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try{
+			if(dateFormat.parse(Date1).after(dateFormat.parse(Date2)))
+				return true;
+			else
+				return false;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
 	
 }
