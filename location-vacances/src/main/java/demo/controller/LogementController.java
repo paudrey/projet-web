@@ -1,5 +1,6 @@
 package demo.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -80,6 +81,7 @@ public class LogementController {
 			int id = (int)model.asMap().get("LogId");
 			currentLog = logementRepository.findOne(id);
 			model.addAttribute("housing", currentLog);
+
 			return "createEditHousing";
 		}
 		catch(Exception e){

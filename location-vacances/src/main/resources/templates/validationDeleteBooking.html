@@ -34,12 +34,14 @@
         
 
         <form th:object="${booking}" method="POST">
-            <h1 class="formTitle">Annulation</h1>
+            <h1 class="formTitle">Annulation de la réservation</h1>
             <table>
                 <tr>
-                     <td><label>Annulation de la réservation du </label></td>
+                     <td><label>Du </label></td>
                       <td><label th:text="${booking.dateDebut}"></label></td>
-                      <td><label> au </label></td>
+                </tr>
+                <tr>
+                      <td><label> Au </label></td>
                       <td><label th:text="${booking.dateFin}"></label></td>
                 </tr>
                 <tr>
