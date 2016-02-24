@@ -44,6 +44,11 @@
         cursor : pointer;
         background-color : rgb(68,162,255);
     }
+    .connexionButton:disabled {
+        color : rgb(117,117,117);
+		background-color : rgb(219,219,219);
+		cursor : default;
+    }
 
 .inscriptionButton {
     width : 200px;
@@ -88,6 +93,17 @@
         cursor : pointer;
         background-color : rgb(68,162,255);
     }
+.standardButton:disabled
+{
+	color : rgb(117,117,117);
+	background-color : rgb(219,219,219);
+	cursor : default;
+}
+.standardButton:hover
+{
+	cursor : pointer;
+    background-color : rgb(68,162,255);
+}
     .standardButton.editPwdBtn{
     	margin-left : 4vw;
     } 

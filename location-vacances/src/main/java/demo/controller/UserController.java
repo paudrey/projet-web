@@ -11,12 +11,15 @@ import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -124,21 +127,33 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/editPassword", method=RequestMethod.POST)
-	public String requestChangePassword(@CookieValue(value="login") String idLogin, Login login, RedirectAttributes redirectAttribute)
+	public String requestChangePassword(@CookieValue(value="login") String idLogin, HttpServletRequest request, Login login, RedirectAttributes redirectAttribute)
 	{
+		String oldPassword = DigestUtils.sha512Hex(request.getParameter("OldPassword"));
 		int id = Integer.valueOf(idLogin);
 		Login userLogin = loginRespository.findOne(id);
-		if(userLogin.getPassword().equals(login.getPassword()))
+		if(userLogin.getPassword().equals(oldPassword))
 		{
-			return "redirect:editPassword";
+			if(userLogin.getPassword().equals(login.getPassword()))
+			{
+				return "redirect:editPassword";
+			}
+			else
+			{			
+				userLogin.setPassword(DigestUtils.sha512Hex(login.getPassword()));
+				loginRespository.save(userLogin);
+				return "redirect:adminGeneral";
+			}	
 		}
-		else
-		{			
-			userLogin.setPassword(DigestUtils.sha512Hex(login.getPassword()));
-			loginRespository.save(userLogin);
-			return "redirect:adminGeneral";
-		}		
+		else 
+			return "redirect:editPassword";
 	}
+	
+	 @ModelAttribute("OldPassword")
+    public String getOldPassword(HttpServletRequest request) 
+    {
+        return (String) request.getAttribute("OldPassword");
+    }
 	
 	
 	

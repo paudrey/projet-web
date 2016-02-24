@@ -48,8 +48,7 @@
                 padding-bottom : 5px;
             }
 
-        #menu ul li a.selected {
-                
+        #menu ul li a.selected {          
                 border-bottom : 4px solid rgb(245,245,245);
             }
 

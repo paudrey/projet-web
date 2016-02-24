@@ -37,18 +37,18 @@
             <h1 class="formTitle">Formulaire d'incription</h1>
             <table>
                 <tr>
-                    <td class="topSection"><input placeholder="Nom" type="text" th:field="*{User.Nom}"/></td>
-                    <td class="topSection"><input placeholder="Prénom" type="text" th:field="*{User.Prenom}"/></td>
+                    <td class="topSection"><input placeholder="Nom" type="text" th:field="*{User.Nom}" required="required" /></td>
+                    <td class="topSection"><input placeholder="Prénom" type="text" th:field="*{User.Prenom}" required="required" /></td>
                 </tr>
                 <tr>
                     <td><input placeholder="Date de naissance" type="text" th:field="*{User.DateNaissance}"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="topSection"><input placeholder="Adresse" type="text"  th:field="*{User.Adresse.Adresse}" name="Adresse"/></td>
+                    <td colspan="2" class="topSection"><input placeholder="Adresse" type="text"  th:field="*{User.Adresse.Adresse}" name="Adresse" required="required"/></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Code Postal" type="text" th:field="*{User.Adresse.CodePostal}" name="CodePostal"/></td>
-                    <td><input placeholder="Ville" type="text" th:field="*{User.Adresse.Ville}" name="Ville"/></td>
+                    <td><input placeholder="Code Postal" type="text" th:field="*{User.Adresse.CodePostal}" name="CodePostal" required="required"/></td>
+                    <td><input placeholder="Ville" type="text" th:field="*{User.Adresse.Ville}" name="Ville" required="required"/></td>
                 </tr>
                 <tr>
                     <td>
@@ -64,7 +64,7 @@
                     <td colspan="2"><input id="emailToConfirm" placeholder="Confirmation de l'adresse email" type="text" th:field="*{User.Email}"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="topSection"><input placeholder="Mot de passe" type="text" /></td>
+                    <td colspan="2" class="topSection"><input placeholder="Mot de passe" type="password" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input id="pwdToConfirm" placeholder="Confirmation du mot de passe" type="password" th:field="*{Password}"/></td>
