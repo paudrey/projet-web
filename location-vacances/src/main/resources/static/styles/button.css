@@ -59,10 +59,16 @@
     font-size : 18px;
     color : rgb(245,245,245);
 }
-.inscriptionButton {
+.inscriptionButton:hover {
         cursor : pointer;
         background-color : rgb(68,162,255);
     }
+.inscriptionButton:disabled
+{
+	color : rgb(117,117,117);
+	background-color : rgb(219,219,219);
+	cursor : default;
+}
 
 .standardButton {
     width : 200px;

@@ -3,12 +3,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Holiday Me</title>
-    <link href="../base.css" rel="stylesheet" />
-    <link href="../specificHeader.css" rel="stylesheet" />
-    <link href="../specificFooter.css" rel="stylesheet" />
-    <link href="../text.css" rel="stylesheet" />
-    <link href="../specificInscription.css" rel="stylesheet" />
-    <link href="../button.css" rel="stylesheet" />
+    <link href="../styles/base.css" rel="stylesheet" />
+    <link href="../styles/specificHeader.css" rel="stylesheet" />
+    <link href="../styles/specificFooter.css" rel="stylesheet" />
+    <link href="../styles/text.css" rel="stylesheet" />
+    <link href="../styles/specificInscription.css" rel="stylesheet" />
+    <link href="../styles/button.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -61,16 +61,16 @@
                     <td colspan="2" class="topSection"><input placeholder="Adresse email" type="text" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input placeholder="Confirmation de l'adresse email" type="text" th:field="*{User.Email}"/></td>
+                    <td colspan="2"><input id="emailToConfirm" placeholder="Confirmation de l'adresse email" type="text" th:field="*{User.Email}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="topSection"><input placeholder="Mot de passe" type="text" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input placeholder="Confirmation du mot de passe" type="password" th:field="*{Password}"/></td>
+                    <td colspan="2"><input id="pwdToConfirm" placeholder="Confirmation du mot de passe" type="password" th:field="*{Password}"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="topSection"><button class="inscriptionButton" type="password">Valider</button></td>
+                    <td colspan="2" class="topSection"><button id="inscriptionBtn" class="inscriptionButton" type="password">Valider</button></td>
                 </tr>
             </table>
           
@@ -85,3 +85,6 @@
 </body>
 
 </html>
+
+<script language="javascript" type="text/javascript" src="../scripts/jquery-1.12.1.min.js"></script>
+<script language="javascript" type="text/javascript" src="../scripts/inputControls.js"></script>
