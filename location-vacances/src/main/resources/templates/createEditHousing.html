@@ -83,6 +83,18 @@
 		                <tr>
 		                    <td colspan="2"><button class="inscriptionButton">Valider</button></td>
 		                </tr>
+		                <tr>
+		                	<td><input type="file" name="photoFile" id="import-file"/></td>
+		                	 <td><a class="form" th:href="@{/addPhoto}">Ajouter photo</a></td>
+		                </tr>
+		                <tr>
+		                <table>
+			                 <tr th:each="photo : ${photoList}">
+		                        <td th:text="${photo.Id}"></td>
+		                        <td><a class="form" th:href="@{'/deletePhoto/'+${photo.id}}">Supprimer</a></td>
+	                    	</tr>
+		                </table>
+		                </tr>
 		            </table>		          
 		        </form>
 	        </div>
