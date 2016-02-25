@@ -12,8 +12,31 @@ public class Photo {
 	@Id
 	@GeneratedValue
 	private int Id;
+	private String Name;
 	private String Path;
-	private File file;
+	
+	public Photo(){
+		super();
+	}
+	
+	public Photo(String path) {
+		super();
+		Path = path;
+	}
+	
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
 	
 	public String getPath() {
 		return Path;
@@ -21,28 +44,5 @@ public class Photo {
 	public void setPath(String path) {
 		Path = path;
 	}
-	public int getId() {
-		return Id;
-	}
-	public void setId(int id) {
-		Id = id;
-	}
-	public Photo(String path) {
-		super();
-		Path = path;
-	}
-	
-	public Photo()
-	{
-		super();
-	}
-	
-	public File getFile() {
-		return file;
-	}
-	public void setFile(File file) {
-		this.file = file;
-	}
-
 
 }

@@ -27,9 +27,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.mail.smtp.SMTPTransport;
 
 import demo.model.Logement;
+import demo.model.Photo;
 import demo.model.Reservation;
 import demo.model.Utilisateur;
 import demo.repository.LogementRepository;
+import demo.repository.PhotoRepository;
 import demo.repository.ReservationRepository;
 import demo.repository.UtilisateurRepository;
 
@@ -43,6 +45,9 @@ public class AdministrationController {
 	
 	@Autowired
 	private ReservationRepository bookingRepository;
+	
+	@Autowired
+	private PhotoRepository photoRepository;
 	
 	@RequestMapping("/adminGeneral")
 	public String requestAdminGeneral(@CookieValue(value="login") String idLogin, Model model)
@@ -104,6 +109,14 @@ public class AdministrationController {
 		int userId = Integer.valueOf(idLogin);
 		Utilisateur user = utilisateurRepository.findOne(userId);
 		Logement log = logementRepository.findOne(LogId);
+		/*String folderPath = "src/main/resources/static/logement/" + log.getId();
+		java.io.File folder = new java.io.File(folderPath);
+		folder.delete();
+		List<Photo> photoList = log.getPhotoList();		
+		for(Photo p : photoList)
+		{
+			photoRepository.delete(p.getId());
+		}*/
 		List<Logement> logList = user.getLogementList();
 		logList.remove(log);
 		logementRepository.delete(LogId);

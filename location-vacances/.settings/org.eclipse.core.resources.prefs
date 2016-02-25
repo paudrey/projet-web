@@ -4,6 +4,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/addPhoto.html=UTF-8
 encoding//src/main/resources/templates/adminBooking.html=UTF-8
 encoding//src/main/resources/templates/adminGeneral.html=UTF-8
 encoding//src/main/resources/templates/adminHousing.html=UTF-8

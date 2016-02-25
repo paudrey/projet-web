@@ -1,11 +1,13 @@
 package demo.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -24,6 +26,7 @@ import org.thymeleaf.dom.Document;
 
 import demo.model.AdressePostale;
 import demo.model.Contact;
+import demo.model.File;
 import demo.model.Format_pays;
 import demo.model.Format_typeLogement;
 import demo.model.Logement;
@@ -54,23 +57,9 @@ public class LogementController {
 	@Autowired
 	TypeLogementRepository typeLogRepository;
 	
-	Logement currentLog=null;
-	/*@RequestMapping("/createEditHousing")
-	public String requestHousing(Model model)
-	{	
-		model.addAttribute("typeLogList", typeLogRepository.findAll());
-		model.addAttribute("paysList", paysRepository.findAll());
-		try{
-			int id = (int)model.asMap().get("LogId");
-			currentLog = logementRepository.findOne(id);
-			model.addAttribute("housing", currentLog);
-			return "createEditHousing";
-		}
-		catch(Exception e){
-			model.addAttribute("housing", new Logement());
-			return "createEditHousing";
-		}	
-	}*/
+	Map<Integer, Photo> photoMap = new HashMap();
+	List <Photo> listPhoto = new ArrayList();
+	Logement currentLog = null;
 	
 	@RequestMapping(value="/createEditHousing",method=RequestMethod.GET)
 	public String requestHousing(Model model)
@@ -80,8 +69,7 @@ public class LogementController {
 		try{
 			int id = (int)model.asMap().get("LogId");
 			currentLog = logementRepository.findOne(id);
-			model.addAttribute("housing", currentLog);
-
+			model.addAttribute("housing", currentLog);			
 			return "createEditHousing";
 		}
 		catch(Exception e){
@@ -121,9 +109,9 @@ public class LogementController {
 		return "housingDetails";
 	}
 	@RequestMapping(value="/createEditHousing", method=RequestMethod.POST)
-	public String requestCreate(Logement logement,@CookieValue(value="login") String idLogin, RedirectAttributes redirectAttribute) throws ScriptException, IOException, NoSuchMethodException
+	public String requestCreate(Logement logement,@CookieValue(value="login") String idLogin, RedirectAttributes redirectAttribute, Model model) throws ScriptException, IOException, NoSuchMethodException
 	{
-		//Récupération de l'user ,
+		//Récupération de l'user 
 		if (currentLog == null){
 			AdressePostale adresse = logement.getAdresse();
 			//ScriptEngineManager manager = new ScriptEngineManager();		
@@ -141,8 +129,6 @@ public class LogementController {
 			
 			user.setLogementList(logList);
 			userRepository.save(user);
-			
-			System.out.println(logement.getProprietaire().getNom());
 		}
 		else
 		{
@@ -162,18 +148,5 @@ public class LogementController {
 			logementRepository.save(currentLog);
 		}
 		return "redirect:adminHousing";
-	}
-	/*
-	@RequestMapping(value="/photo", method=RequestMethod.POST)
-	public String requestSaveCreatePhoto(Photo photo, RedirectAttributes redirectAttribute, Model model)
-	{
-		
-		int id = (int)model.asMap().get("id");
-		currentLog = logementRepository.findOne(id);
-		model.addAttribute("logement", currentLog);
-		model.addAttribute("photo", new Photo());
-		photoRespository.save(photo);
-		return "redirect:home";
-	}*/
-	
+	}	
 }
