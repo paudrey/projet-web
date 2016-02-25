@@ -31,10 +31,48 @@
     </div>
 
     <div id="content">
-        
-
-        <form >
-            <h1 class="formTitle">Logement</h1>
+    
+    	<form >
+            <h1 class="formTitle" th:text="${housing.ShortDescription}"></h1>
+            <table th:object="${housing}">
+               <tr>
+                   <td>
+                   		<label class="dataLabel">Type de logement : </label>
+                   		<label th:text="${housing.TypeLogement}"></label>
+                   </td>
+                   <td>
+                   		<label class="dataLabel">Coût de la nuitée (TTC) : </label>
+                   		<label th:text="${housing.prixTTC}"></label>€
+                   </td>
+               </tr>
+               <tr>
+               		<td  class="topSection">
+               			<label class="dataLabel">Adresse :</label>
+               			<label th:text="${housing.Adresse.Adresse}"></label>
+              		</td>
+               </tr>
+               <tr>
+               		<td>
+               			<label class="textWithIndent" th:text="${housing.Adresse.CodePostal}"></label>
+               			<label th:text="${housing.Adresse.Ville}"></label>
+            		</td>
+               </tr>
+               <tr>
+                   <td><label class="dataLabel">Description : </label></td>
+               </tr>
+               <tr>
+               		<td colspan="2"><label class="textWithIndent" th:text="${housing.Description}"></label></td>
+               </tr>
+            	<tr>
+            		<td class="lastLine"><a class="pseudoButton" th:href="listHousing.html">Retour</a></td>
+                  	<td class="lastLine"><a class="pseudoButton" th:href="@{'/createBooking/creat/'+${housing.id}}">Réserver</a></td>
+              	</tr>
+            </table>
+          
+        </form>
+    
+        <!--  <form >
+            <h1 class="formTitle" >Logement</h1>
             <table th:object="${housing}">
                	<tr>
                    <td colspan="2" class="topSection"><label th:text="${housing.ShortDescription}"></label></td>
@@ -62,7 +100,7 @@
               	</tr>
             </table>
           
-        </form>
+        </form> -->
 
     </div>
 

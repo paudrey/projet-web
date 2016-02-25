@@ -6,7 +6,8 @@
     <link href="../styles/specificHeader.css" rel="stylesheet" />
     <link href="../styles/specificFooter.css" rel="stylesheet" />
     <link href="../styles/text.css" rel="stylesheet" />
-    <link href="../styles/specificHousing.css" rel="stylesheet" />
+    <link href="../styles/specificResultList.css" rel="stylesheet" />
+    <!--  <link href="../styles/specificHousing.css" rel="stylesheet" /> -->
     <link href="../styles/button.css" rel="stylesheet" />
     <link href="../styles/liste.js" rel="javascript"/>
 </head>
@@ -35,7 +36,28 @@
 
         <form >
             <h1 class="formTitle">Liste des logements disponibles</h1>
-            <table>
+            <table class="resultList">
+                 <tr th:each="housing : ${housingList}">
+	                 <table class="resultItem">
+	                 	<tr>
+		                    <td><label class="shortDescription" th:text="${housing.ShortDescription}"></label></td>		                    
+		                </tr>
+		                <tr>
+		                	<td><label class="precision" th:text="${housing.Adresse.Adresse}"></label></td>
+		                	<td>Nuitée : <label class="precision" th:text="${housing.prixTTC}"></label> €</td>
+		                    <td rowspan="2"><label >Photo</label></td>
+		                </tr>
+		                <tr>
+		                	<td><label class="precision" th:text="${housing.Adresse.CodePostal}"></label>  
+		                		<label class="precision" th:text="${housing.Adresse.Ville}"></label>
+	                		</td>
+		                	<td><a class="seeDetails" th:href="@{'/detailsHousing/'+${housing.id}}">Voir détails</a></td>
+		                </tr>
+	                 </table>
+                </tr>
+            </table>
+          
+            <!-- <table>
                  <tr th:each="housing : ${housingList}">
 	                 <table id="tabHousing">
 	                 	<tr>
@@ -51,12 +73,11 @@
 		                </tr>
 			            <tr>
 			            	<td><a class="form" th:href="@{'/detailsHousing/'+${housing.id}}">Voir détail</a></td>
-	                    	<!--<td colspan="2" class="topSection"><button class="inscriptionButton" th:href="@{'/housingDetails/'+${housing.id}}">Voir détail</button></td>-->
+	                    	<td colspan="2" class="topSection"><button class="inscriptionButton" th:href="@{'/housingDetails/'+${housing.id}}">Voir détail</button></td>
 	                	</tr>
 	                 </table>
                 </tr>
-            </table>
-          
+            </table> -->
         </form>
 
     </div>

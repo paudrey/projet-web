@@ -89,10 +89,6 @@
     font-size : 18px;
     color : rgb(245,245,245);
 }
-.standardButton {
-        cursor : pointer;
-        background-color : rgb(68,162,255);
-    }
 .standardButton:disabled
 {
 	color : rgb(117,117,117);

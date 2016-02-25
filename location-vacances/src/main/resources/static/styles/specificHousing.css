@@ -12,14 +12,35 @@ form {
     height : auto;
     margin-left : auto;
     margin-right : auto;
-    padding-top : 15%;
+    padding-top : 2%;
 }
 
-#tabHousing {
-	width : 90vw;
-    border: 1px solid;
-    border-color : rgba(255, 255, 255, 0.9);
+form table{
+	width : 80%;
+	box-sizing : border-box;
+	border-spacing: 15px;
+	margin-right : auto;
+	margin-left : auto;
 }
+
+form table tr td{
+	width : 50%;
+}
+
+form table tr td.lastLine{
+	padding-top : 40px;
+}
+
+label.textWithIndent{
+	box-sizing : border-box;
+	padding-left : 78px;
+}
+
+label.dataLabel{
+	color : rgb(41,143,244);
+	font-size : 18px;
+}
+
 
 input {
     min-height : 40px;
@@ -37,3 +58,17 @@ select:hover {
     cursor : pointer;
 }
 
+a.pseudoButton{
+	box-sizing : border-box;
+	text-decoration: none;
+	font-variant : small-caps;
+	padding : 5px;
+	color : rgb(245,245,245);
+	background-color: rgb(41,143,244);
+	margin-left : 48%;
+}
+
+a.pseudoButton:hover{
+	cursor : pointer;
+    background-color : rgb(68,162,255);
+}

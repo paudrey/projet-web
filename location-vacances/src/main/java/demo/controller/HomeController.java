@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +28,13 @@ import demo.model.Logement;
 import demo.model.Login;
 import demo.model.Recherche;
 import demo.model.Reservation;
+import demo.model.Utilisateur;
 import demo.repository.LogementRepository;
 import demo.repository.PaysRepository;
 import demo.repository.RechercheRepository;
 import demo.repository.ReservationRepository;
 import demo.repository.TypeLogementRepository;
+import demo.repository.UtilisateurRepository;
 
 @Controller
 public class HomeController {
@@ -51,13 +55,22 @@ public class HomeController {
 	List<Format_pays> countryList = new ArrayList<Format_pays>();
 	List<Format_typeLogement> typeLogementList = new ArrayList<Format_typeLogement>();
 	
+	Utilisateur user;
+	@Autowired
+	private UtilisateurRepository userRepository;
+	
 	@RequestMapping("/home")
-	public String requestHome(Model model)
+	public String requestHome(Model model, HttpServletRequest request)
 	{	
+		//nous ne gérons qu'un cookie à la fois
+		/*Cookie cookie = request.getCookies()[0];
+		user = userRepository.findOne(Integer.parseInt(cookie.getValue()));*/
+		
 		countryList.clear();
 		countryList.addAll((List<Format_pays>)paysRepository.findAll());
 		typeLogementList.addAll((List<Format_typeLogement>)typeLogRepository.findAll());
 		
+		//model.addAttribute("user", user);
 		model.addAttribute("search", new Recherche());
 		model.addAttribute("countryList", countryList);
 		model.addAttribute("typeLogList", typeLogRepository.findAll());

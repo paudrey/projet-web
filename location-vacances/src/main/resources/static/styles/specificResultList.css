@@ -1,0 +1,69 @@
+#content {
+    background-position : center;
+    background-size : contain;
+    background-repeat : no-repeat;
+	background-color : whitesmoke;
+    opacity : 0.9;
+}
+
+form {
+	box-sizing : border-box;
+    width : 90vw;
+    height : auto;
+    margin-left : auto;
+    margin-right : auto;
+}
+
+form table.resultList{
+	box-sizing : border-box;
+	width : 100%;
+}
+
+table.resultItem{
+	box-sizing : border-box;
+	width : 90%;
+	border-top : 1px dashed rgb(41,143,244);
+	margin-left : auto;
+	margin-right : auto;
+}
+
+table.resultItem tr td{
+	width : 33%;
+	box-sizing : border-box;
+	padding : 10px;
+}
+
+label.shortDescription{
+	box-sizing : border-box;
+	padding-top : 10px;
+	padding-bottom : 20px;
+	color : rgb(41,143,244);
+	font-size : 20px;
+}
+
+label.precision{
+	box-sizing : border-box;
+	margin-left : 50px;
+	padding-bottom : 10px;
+}
+
+a.seeDetails{
+	box-sizing : border-box;
+	text-decoration: none;
+	font-variant : small-caps;
+	padding : 5px;
+	color : rgb(245,245,245);
+	background-color: rgb(41,143,244);
+}
+
+a.seeDetails:hover{
+	cursor : pointer;
+    background-color : rgb(68,162,255);
+}
+/*tabHousing {
+	width : 90vw;
+    border: 1px solid;
+    border-color : rgba(255, 255, 255, 0.9);
+}*/
+
+
