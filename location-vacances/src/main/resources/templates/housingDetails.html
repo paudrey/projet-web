@@ -98,8 +98,8 @@
             		<td><a class="form" th:href="listHousing.html">Retour</a></td>
                   	<td><a class="form" th:href="@{'/createBooking/creat/'+${housing.id}}">Réserver</a></td>
               	</tr>
-               <!--<tr th:each="photo : ${housing.PhotoList}">
-              		<img th:src="${photo.Path}" />-->
+               <tr th:each="photo : ${housing.PhotoList}">
+              		<img th:src="${photo.Path}" />
               	</tr>
             </table>
           
