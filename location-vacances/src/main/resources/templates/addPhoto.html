@@ -54,9 +54,11 @@
 			             <td colspan="2"><button class="inscriptionButton">Ajouter photo</button></td>
 	               	 </tr>  	
 	               	 <tr th:each="name : ${photoList}">
-                        <td th:text="${name.value.name}"></td>
+                        <!--td th:text="${name.value.name}"></td>-->
+                		<td> <img th:src="${name.value.pathImage}" width="100" height="100" th:alt="${name.value.name}"/> </td>
                         <td><a class="form" th:href="@{'/deletePhoto/'+${name.key}}">Supprimer</a></td>
-                   	</tr> 	
+                   	</tr> 
+     
 	                 <!-- <tr th:each="photo : ${photoList}">
                         <td th:text="${photo.Name}"></td>
                         <td><a class="form" th:href="@{'/deletePhoto/'+${photo.id}}">Supprimer</a></td>
