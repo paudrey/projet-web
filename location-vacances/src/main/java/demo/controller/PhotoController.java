@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -50,21 +51,14 @@ public class PhotoController {
 	List<Photo> photoList = new ArrayList();
 	Map<Integer, Photo> photoMap = new HashMap();
 	Logement currentLog;
+	private int idLogement;
 	
-	@RequestMapping("/newPhoto/{id}")
+	@RequestMapping("/addPhoto/{id}")
 	public String requestNewPhoto(@PathVariable("id") Integer idLog,Model model, RedirectAttributes redirectAttribute) 
 	{
+		
 		photoMap.clear();
-		currentLog = logementRepository.findOne(idLog);
-		photoList = currentLog.getPhotoList();
-		if (photoList == null)
-		{
-			for(Photo p : photoList)
-			{
-				photoMap.put(p.getId(), p);
-			}
-			model.addAttribute("photoList", photoMap);
-		}
+		idLogement = idLog;
 		return "redirect:/addPhoto";
 	}
 	
@@ -72,6 +66,17 @@ public class PhotoController {
 	public String requestAddPhoto(Model model) 
 	{		
 		File fileModel = new File();
+		currentLog = logementRepository.findOne(idLogement);
+		photoList = currentLog.getPhotoList();
+				
+		if (photoList.size() !=0)
+		{
+			for(Photo p : photoList)
+			{
+				photoMap.put(p.getId(), p);
+			}
+		}
+		model.addAttribute("photoList", photoMap);
 		model.addAttribute("file", fileModel);
 		
 		return "/addPhoto";
@@ -101,10 +106,13 @@ public class PhotoController {
 		                    new BufferedOutputStream(new FileOutputStream(newFile));
 		            stream.write(bytes);
 		            stream.close();
-				
+				String pathImage = "../logement/" + currentLog.getId() +"/"+ multipartFile.getOriginalFilename();
+				System.out.println("Image : " + pathImage);
 				Photo photo = new Photo(newFile.getAbsolutePath());
 				photo.setName(multipartFile.getOriginalFilename());
-				photoRepository.save(photo);
+				photo.setPathImage(pathImage);
+				currentLog.setPhotoList(photoList);
+				photoRepository.save(photo);	
 				photoMap.put(photo.getId(),photo);				
 			}
 		}
@@ -123,7 +131,7 @@ public class PhotoController {
 		Photo photo = photoRepository.findOne(photoId);
 		java.io.File fileDel = new java.io.File(photo.getPath());
 		fileDel.delete();
-		photoRepository.delete(photo);
+		photoRepository.delete(photo);		
 		model.addAttribute("photoList", photoMap);
 		return "/addPhoto";
 	}

@@ -14,6 +14,7 @@ public class Photo {
 	private int Id;
 	private String Name;
 	private String Path;
+	private String PathImage;
 	
 	public Photo(){
 		super();
@@ -43,6 +44,14 @@ public class Photo {
 	}
 	public void setPath(String path) {
 		Path = path;
+	}
+
+	public String getPathImage() {
+		return PathImage;
+	}
+
+	public void setPathImage(String pathImage) {
+		PathImage = pathImage;
 	}
 
 }

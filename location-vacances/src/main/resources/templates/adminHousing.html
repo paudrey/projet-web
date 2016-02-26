@@ -65,7 +65,7 @@
                         <td th:text="${housing.Proprietaire.Prenom}"></td>
                         <td th:text="${housing.TypeLogement}"></td>
                         <td th:text="${housing.ShortDescription}"></td>
-                        <td><a class="form" th:href="@{'/newPhoto/'+${housing.Id}}">Ajouter photo</a></td>
+                        <td><a class="form" th:href="@{'/addPhoto/'+${housing.Id}}">Ajouter photo</a></td>
                         <td><a class="form" th:href="@{'/viewHousing/'+${housing.id}}">Voir</a></td>
                         <td><a class="form" th:href="@{'/deleteHousing/'+${housing.id}}">Supprimer</a></td>
                     </tr>
