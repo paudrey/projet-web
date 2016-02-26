@@ -1,5 +1,6 @@
 package demo.controller;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 
@@ -12,6 +13,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,17 +26,45 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.mail.smtp.SMTPTransport;
 
 import demo.model.Contact;
+import demo.model.Utilisateur;
 import demo.repository.ContactRepository;
+import demo.repository.UtilisateurRepository;
+import demo.workFunctions.UserManager;
 
 @Controller
 public class ContactController {
 
 	@Autowired
 	private ContactRepository contactRepository;
+	@Autowired
+	private UtilisateurRepository userRepository;
+	
+	UserManager userManager = new UserManager();
+	Utilisateur user;
 	
 	@RequestMapping("/contacts")
-	public String requestHome(Model model)
+	public String requestHome(Model model, HttpServletRequest request)
 	{	    
+		boolean userConnected;
+		Cookie myCookie;	
+		try{
+			myCookie = Arrays.asList(request.getCookies())
+					.stream()
+					.filter(c -> c.getName().equals("login"))
+					.filter(c -> c.getMaxAge() > 0)
+					.findFirst()
+					.orElse(null);
+		}
+		catch(Exception exception){
+			myCookie = null;
+		}
+
+		if(userManager.isUserConnected(myCookie, userRepository))
+			userConnected = true;
+		else 
+			userConnected = false;	
+		
+		model.addAttribute("userConnected", userConnected);
 		model.addAttribute("contact", new Contact());
 		return "contacts";
 	}

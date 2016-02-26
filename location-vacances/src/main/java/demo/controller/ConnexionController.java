@@ -1,5 +1,6 @@
 package demo.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -41,7 +42,7 @@ public class ConnexionController {
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
-	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpServletResponse response)
+	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpServletRequest request, HttpServletResponse response)
 	{
 		String pwdHashed = DigestUtils.sha512Hex(login.getPassword());
 		if(previousLogin == null || previousLogin.getId() != login.getId()) {
@@ -60,7 +61,26 @@ public class ConnexionController {
 			
 			if(loginToTest.getPassword().equals(pwdHashed) && userToTest.getCurrentUserStatus() != UserStatus.BLOCKED)
 			{
-				Cookie cookie = new Cookie("login", String.valueOf(loginToTest.getId())); // création du cookie
+				Cookie cookie;
+				try{
+					cookie = Arrays.asList(request.getCookies())
+							.stream()
+							.filter(c -> c.getName().equals("login"))
+							.findFirst()
+							.orElse(null);
+				}
+				catch(Exception exception){
+					cookie = null;
+				}
+				
+				if(cookie == null)
+				{
+					cookie = new Cookie("login", String.valueOf(loginToTest.getId())); // création du cookie
+				}
+				else
+				{
+					cookie.setValue(String.valueOf(loginToTest.getId()));					
+				}
 				cookie.setMaxAge(3600);
 				response.addCookie(cookie);
 				return "redirect:/adminGeneral";

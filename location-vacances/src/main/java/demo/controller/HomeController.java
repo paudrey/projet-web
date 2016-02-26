@@ -4,20 +4,16 @@ package demo.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import demo.model.Format_pays;
 import demo.model.Format_typeLogement;
 import demo.model.Logement;
-import demo.model.Login;
 import demo.model.Recherche;
 import demo.model.Reservation;
 import demo.model.Utilisateur;
@@ -35,6 +30,7 @@ import demo.repository.RechercheRepository;
 import demo.repository.ReservationRepository;
 import demo.repository.TypeLogementRepository;
 import demo.repository.UtilisateurRepository;
+import demo.workFunctions.UserManager;
 
 @Controller
 public class HomeController {
@@ -55,6 +51,7 @@ public class HomeController {
 	List<Format_pays> countryList = new ArrayList<Format_pays>();
 	List<Format_typeLogement> typeLogementList = new ArrayList<Format_typeLogement>();
 	
+	UserManager userManager = new UserManager();
 	Utilisateur user;
 	@Autowired
 	private UtilisateurRepository userRepository;
@@ -62,15 +59,30 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String requestHome(Model model, HttpServletRequest request)
 	{	
-		//nous ne gérons qu'un cookie à la fois
-		/*Cookie cookie = request.getCookies()[0];
-		user = userRepository.findOne(Integer.parseInt(cookie.getValue()));*/
+		boolean userConnected;
+		Cookie myCookie;	
+		try{
+			myCookie = Arrays.asList(request.getCookies())
+					.stream()
+					.filter(c -> c.getName().equals("login"))
+					.filter(c -> c.getMaxAge() > 0)
+					.findFirst()
+					.orElse(null);
+		}
+		catch(Exception exception){
+			myCookie = null;
+		}
+
+		if(userManager.isUserConnected(myCookie, userRepository))
+			userConnected = true;
+		else 
+			userConnected = false;		
 		
 		countryList.clear();
 		countryList.addAll((List<Format_pays>)paysRepository.findAll());
 		typeLogementList.addAll((List<Format_typeLogement>)typeLogRepository.findAll());
 		
-		//model.addAttribute("user", user);
+		model.addAttribute("userConnected", userConnected);
 		model.addAttribute("search", new Recherche());
 		model.addAttribute("countryList", countryList);
 		model.addAttribute("typeLogList", typeLogRepository.findAll());
