@@ -45,7 +45,7 @@
 		                <tr>
 		                	<td><label class="precision" th:text="${housing.Adresse.Adresse}"></label></td>
 		                	<td>Nuitée : <label class="precision" th:text="${housing.prixTTC}"></label> €</td>
-		                    <td rowspan="2"><label >Photo</label></td>
+		                    <td rowspan="2" ><img th:src=" ${housing.PhotoList[0].PathImage}" width="100" height="100" th:alt="${housing.PhotoList[0].Name}"/> </td>
 		                </tr>
 		                <tr>
 		                	<td><label class="precision" th:text="${housing.Adresse.CodePostal}"></label>  
