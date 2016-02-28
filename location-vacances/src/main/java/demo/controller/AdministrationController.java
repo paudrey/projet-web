@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,19 +60,10 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/adminGeneral/deconnect")
-	public String requestForDeconnexion(@CookieValue(value="login") String idLogin, Model model, HttpServletRequest request, HttpServletResponse response)
+	public String requestForDeconnexion(Model model, HttpSession session)
 	{
-		List<Cookie> cookies = Arrays.asList(request.getCookies());
-		Cookie myCookie = cookies.stream()
-				.filter(c -> c.getName().equals("login"))
-				.findFirst()
-				.orElse(null);
+		session.setAttribute("user", null);
 		
-		if(myCookie != null)
-		{
-			myCookie.setMaxAge(0);
-			response.addCookie(myCookie);			
-		}
 		return "redirect:/home";
 	}
 	

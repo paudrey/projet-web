@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,12 +90,11 @@ public class UserController {
 	}
 	
 	@RequestMapping("/editMyData")
-	public String requestEditMyData(@CookieValue(value="login") String idLogin, Model model)
+	public String requestEditMyData(Model model, HttpSession session)
 	{
 		countryList.clear();
 		countryList.addAll((List<Format_pays>)paysRepository.findAll());
-		int id = Integer.valueOf(idLogin);
-		user = userRepository.findOne(id);
+		user = (Utilisateur)session.getAttribute("user");
 		
 		model.addAttribute("user", user);
 		model.addAttribute("countryList", countryList);
@@ -154,8 +154,6 @@ public class UserController {
     {
         return (String) request.getAttribute("OldPassword");
     }
-	
-	
 	
 	/* Specific administration */
 	

@@ -73,40 +73,6 @@
             </table>
           
         </form>
-    
-        <!--  <form >
-            <h1 class="formTitle" >Logement</h1>
-            <table th:object="${housing}">
-               	<tr>
-                   <td colspan="2" class="topSection"><label th:text="${housing.ShortDescription}"></label></td>
-               </tr>
-               <tr>
-                   <td><label th:text="${housing.TypeLogement}"></label></td>
-                   <td><label>Prix TTC : </label><label th:text="${housing.prixTTC}"></label></td>
-               </tr>
-               <tr>
-               	<td colspan="2" class="topSection"><label th:text="${housing.Adresse.Adresse}"></label></td>
-               </tr>
-               <tr>
-               	<td><label th:text="${housing.Adresse.CodePostal}"></label></td>
-               	<td><label th:text="${housing.Adresse.Ville}"></label></td>
-               </tr>
-               <tr>
-                   <td><label>Description : </label></td>
-               </tr>
-               <tr>
-                   <td colspan="2" class="topSection"><label th:text="${housing.Description}"></label></td>
-               </tr>
-            	<tr>
-            		<td><a class="form" th:href="listHousing.html">Retour</a></td>
-                  	<td><a class="form" th:href="@{'/createBooking/creat/'+${housing.id}}">Réserver</a></td>
-              	</tr>
-               <tr th:each="photo : ${housing.PhotoList}">
-              		<img th:src="${photo.Path}" />
-              	</tr>
-            </table>
-          
-        </form> -->
 
     </div>
 
