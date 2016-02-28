@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,7 @@ public class ConnexionController {
 	}
 	
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
-	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpServletRequest request, HttpServletResponse response)
+	public String requestConnexion(Login login, RedirectAttributes redirectAttribute, HttpSession session)
 	{
 		String pwdHashed = DigestUtils.sha512Hex(login.getPassword());
 		if(previousLogin == null || previousLogin.getId() != login.getId()) {
@@ -61,28 +62,7 @@ public class ConnexionController {
 			
 			if(loginToTest.getPassword().equals(pwdHashed) && userToTest.getCurrentUserStatus() != UserStatus.BLOCKED)
 			{
-				Cookie cookie;
-				try{
-					cookie = Arrays.asList(request.getCookies())
-							.stream()
-							.filter(c -> c.getName().equals("login"))
-							.findFirst()
-							.orElse(null);
-				}
-				catch(Exception exception){
-					cookie = null;
-				}
-				
-				if(cookie == null)
-				{
-					cookie = new Cookie("login", String.valueOf(loginToTest.getId())); // création du cookie
-				}
-				else
-				{
-					cookie.setValue(String.valueOf(loginToTest.getId()));					
-				}
-				cookie.setMaxAge(3600);
-				response.addCookie(cookie);
+				session.setAttribute("user", userToTest);
 				return "redirect:/adminGeneral";
 			}
 			else{
@@ -101,4 +81,6 @@ public class ConnexionController {
 			return "connexion";
 		}
 	}
+	
+	
 }
