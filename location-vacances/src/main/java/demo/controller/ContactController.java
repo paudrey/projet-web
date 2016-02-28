@@ -15,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,23 +44,12 @@ public class ContactController {
 	Utilisateur user;
 	
 	@RequestMapping("/contacts")
-	public String requestHome(Model model, HttpServletRequest request)
+	public String requestHome(Model model, HttpSession session)
 	{	    
 		boolean userConnected;
-		Cookie myCookie;	
-		try{
-			myCookie = Arrays.asList(request.getCookies())
-					.stream()
-					.filter(c -> c.getName().equals("login"))
-					.filter(c -> c.getMaxAge() > 0)
-					.findFirst()
-					.orElse(null);
-		}
-		catch(Exception exception){
-			myCookie = null;
-		}
-
-		if(userManager.isUserConnected(myCookie, userRepository))
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		
+		if(user != null)
 			userConnected = true;
 		else 
 			userConnected = false;	
