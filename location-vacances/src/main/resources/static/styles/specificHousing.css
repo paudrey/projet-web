@@ -72,3 +72,24 @@ a.pseudoButton:hover{
 	cursor : pointer;
     background-color : rgb(68,162,255);
 }
+
+.photoSection{
+	width:600px;
+	height:200px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space:nowrap;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.photoContains{
+	width:auto;
+	height:120px;
+	position: relative;
+    display: inline-block;
+}
+img{
+	float:left;
+	height:120px;
+}

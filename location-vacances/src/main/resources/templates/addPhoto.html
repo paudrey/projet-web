@@ -8,7 +8,7 @@
     <link href="../styles/text.css" rel="stylesheet" />
     <link href="../styles/specificMyAccount.css" rel="stylesheet" />
     <link href="../styles/button.css" rel="stylesheet" />
-    <link href="../styles/liste.js" rel="javascript"/>
+
 </head>
 
 <body>
@@ -42,7 +42,6 @@
                <li class="item"><a>Tableau de bord</a></li>
                <li class="item"><a href="adminUsers.html">Utilisateurs</a></li>
                <li class="item selected"><a>Logements</a></li>
-               <li class="item"><a>Mailing</a></li>
            </ul>
        </div>
 	        <div id="innerContent">	
@@ -64,7 +63,7 @@
                         <td><a class="form" th:href="@{'/deletePhoto/'+${photo.id}}">Supprimer</a></td>
                    	</tr> -->
                    	<tr>
-                   	<td><a class="form" th:href="@{/retour}">Valider</a></td>
+                   	<td class="lastLine"><a class="pseudoButton" th:href="@{/retour}">Valider</a></td>
                    	</tr>
 		            </table>	          
 		        </form>

@@ -8,7 +8,7 @@
     <link href="../styles/text.css" rel="stylesheet" />
     <link href="../styles/specificInscription.css" rel="stylesheet" />
     <link href="../styles/button.css" rel="stylesheet" />
-    <link href="../styles/liste.js" rel="javascript"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 </head>
 
 <body>
@@ -38,8 +38,8 @@
             <h1 class="formTitle">Réserver</h1>
             <table>
                 <tr>
-                    <td><input placeholder="Date début" type="text" th:field="*{dateDebut}"/></td>
-                    <td><input placeholder="Date fin" type="text" th:field="*{dateFin}"/></td>
+                    <td><input id="datepickerBegin" placeholder="Date début" type="text" th:field="*{dateDebut}"/></td>
+                    <td><input id="datepickerEnd" placeholder="Date fin" type="text" th:field="*{dateFin}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="topSection"><button class="inscriptionButton">Valider</button></td>
@@ -55,5 +55,42 @@
         <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
     </div>
 </body>
+
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+$(function() {
+	$( "#datepickerBegin" ).datepicker({
+	altField: "#datepicker",
+	closeText: 'Fermer',
+	prevText: 'Précédent',
+	nextText: 'Suivant',
+	currentText: 'Aujourd\'hui',
+	monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+	monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+	dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+	dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+	weekHeader: 'Sem.',
+	dateFormat: 'dd/mm/yy'
+	});
+	$( "#datepickerEnd" ).datepicker({
+		altField: "#datepicker",
+		closeText: 'Fermer',
+		prevText: 'Précédent',
+		nextText: 'Suivant',
+		currentText: 'Aujourd\'hui',
+		monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+		monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+		dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+		dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+		dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+		weekHeader: 'Sem.',
+		dateFormat: 'dd/mm/yy'
+		});
+	});
+</script>
 
 </html>
