@@ -40,6 +40,7 @@
                <li class="title">Administration</li>
                <li class="item" th:if="${admin} == true"><a>Utilisateurs</a></li>
                <li class="item"><a href="adminHousing.html">Logements</a></li>
+               <li class="item"><a href="adminBooking.html">Réservations</a></li>
            </ul>
        </div>
 
@@ -49,18 +50,19 @@
                 <h1>Gestion des réservations</h1>
                 <table>
                     <tr class="rowTitle">
-                        <th>Id Propriéraire</th>
-                        <th>Id Locataire</th>
-                        <th>Id Logement</th>
+                    	<th>Id</th>
+                        <th>Propriéraire</th>
+                        <th>Locataire</th>
                         <th>Date début</th>
                         <th>Date fin</th>
                         <th>Statut</th>
-                        <th></th>
+                        <th>Détails</th>
+                        <th>Action</th>
                     </tr>
                     <tr th:each="booking : ${bookingList}">
-                    	<td th:text="${booking.Logement.Proprietaire.Id}"></td>
-                        <td th:text="${booking.locataire.Id}"></td>
-                        <td th:text="${booking.Logement.Id}"></td>
+                    	<td th:text="${booking.Logement.Id}"></td>
+                    	<td th:text="${booking.Logement.Proprietaire.Nom} + ${booking.Logement.Proprietaire.Prenom}"></td>
+                        <td th:text="${booking.locataire.Nom} + ${booking.locataire.Prenom}"></td>                        
                         <td th:text="${booking.dateDebut}"></td>
                         <td th:text="${booking.dateFin}"></td>
                         <td th:text="${booking.statut}"></td>
