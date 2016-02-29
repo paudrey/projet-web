@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.mail.smtp.SMTPTransport;
 
+import demo.enums.UserRole;
 import demo.model.Logement;
 import demo.model.Photo;
 import demo.model.Reservation;
@@ -88,9 +90,22 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/adminHousing")
-	public String requestAdminHousing(Model model)
+	public String requestAdminHousing(Model model,HttpSession session)
 	{
-		model.addAttribute("housingList", logementRepository.findAll());
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
+		{
+			if(user.getCurrentUserRole()== UserRole.ADMIN)
+				model.addAttribute("housingList", logementRepository.findAll());
+			else
+			{
+				List<Logement> listLog = (List<Logement>) logementRepository.findAll();
+				List<Logement> list = listLog.stream()
+						.filter(l -> l.getProprietaire().getId() == user.getId())
+						.collect(Collectors.toList());
+				model.addAttribute("housingList", list);
+			}		
+		}	
 		return "/adminHousing";
 	}
 	
@@ -118,9 +133,22 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/adminBooking")
-	public String requestAdminBooking(Model model)
+	public String requestAdminBooking(Model model, HttpSession session)
 	{
-		model.addAttribute("bookingList", bookingRepository.findAll());
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
+		{
+			if(user.getCurrentUserRole()== UserRole.ADMIN)
+				model.addAttribute("bookingList", bookingRepository.findAll());
+			else
+			{
+				List<Reservation> listRes = (List<Reservation>) bookingRepository.findAll();
+				List<Reservation> list = listRes.stream()
+						.filter(r -> r.getLocataire().getId() == user.getId() || r.getLogement().getProprietaire().getId()==user.getId())
+						.collect(Collectors.toList());
+				model.addAttribute("bookingList", list);
+			}
+		}
 		return "/adminBooking";
 	}
 	
