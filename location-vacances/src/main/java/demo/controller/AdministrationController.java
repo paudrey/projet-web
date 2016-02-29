@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.mail.smtp.SMTPTransport;
 
+import demo.enums.UserRole;
 import demo.model.Logement;
 import demo.model.Photo;
 import demo.model.Reservation;
@@ -50,13 +51,18 @@ public class AdministrationController {
 	@Autowired
 	private PhotoRepository photoRepository;
 	
+	static boolean admin = false;
+	
 	@RequestMapping("/adminGeneral")
 	public String requestAdminGeneral(Model model, HttpSession session)
 	{
 		Utilisateur user = (Utilisateur)session.getAttribute("user");
 		if(user != null)
 		{
+			if(user.getCurrentUserRole() == UserRole.ADMIN)
+				admin = true;
 			model.addAttribute("user", user);
+			model.addAttribute("admin", admin);
 			return "/adminGeneral";
 		}
 		else
@@ -69,6 +75,7 @@ public class AdministrationController {
 	public String requestForDeconnexion(Model model, HttpSession session)
 	{
 		session.setAttribute("user", null);
+		admin = false;
 		
 		return "redirect:/home";
 	}
