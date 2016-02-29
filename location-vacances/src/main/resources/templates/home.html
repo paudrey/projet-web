@@ -9,6 +9,7 @@
     <link href="../styles/text.css" rel="stylesheet" />
     <link href="../styles/specificHome.css" rel="stylesheet" />
     <link href="../styles/button.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 </head>
 
 <!-- Modification du pays et type de logement en string -->
@@ -54,9 +55,9 @@
 	                     </select>
                      </td>
 					
-                    <td><input placeholder="Date de début" th:field="*{DateDebut}" type="text"/></td>
+                    <td><input id="datepickerBegin" placeholder="Date de début" th:field="*{DateDebut}" type="text"/></td>
 
-                    <td><input placeholder="Date de fin" th:field="*{DateFin}" type="text"/></td>
+                    <td><input id="datepickerEnd" placeholder="Date de fin" th:field="*{DateFin}" type="text"/></td>
 
                     <td><input placeholder="Nb voyageurs" th:field="*{NbVoyageurs}" type="text"/></td>                  
                 </tr>
@@ -72,4 +73,38 @@
     </div>
 </body>
 
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+$(function() {
+	$( "#datepickerBegin" ).datepicker({
+	altField: "#datepicker",
+	closeText: 'Fermer',
+	prevText: 'Précédent',
+	nextText: 'Suivant',
+	currentText: 'Aujourd\'hui',
+	monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+	monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+	dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+	dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+	weekHeader: 'Sem.',
+	dateFormat: 'dd/mm/yy'
+	});
+	$( "#datepickerEnd" ).datepicker({
+		altField: "#datepicker",
+		closeText: 'Fermer',
+		prevText: 'Précédent',
+		nextText: 'Suivant',
+		currentText: 'Aujourd\'hui',
+		monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+		monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+		dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+		dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+		dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+		weekHeader: 'Sem.',
+		dateFormat: 'dd/mm/yy'
+		});
+	});
+</script>
 </html>

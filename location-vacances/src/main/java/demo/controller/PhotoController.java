@@ -128,19 +128,29 @@ public class PhotoController {
 			System.out.println("Erreur !!!");
 		}	
 		model.addAttribute("photoList", photoMap);
-		return "/addPhoto";
+		return "redirect:/addPhoto";
 	}
 	
 	@RequestMapping("/deletePhoto/{id}")
 	public String requestDeletePhoto(@PathVariable("id") Integer photoId,Model model)
 	{	
-		photoMap.remove(photoId);		
-		Photo photo = photoRepository.findOne(photoId);
-		java.io.File fileDel = new java.io.File(photo.getPath());
-		fileDel.delete();
-		photoRepository.delete(photo);		
+		try{
+			photoMap.remove(photoId);	
+			List<Photo> listPhoto = new ArrayList<Photo>();
+			 for (Map.Entry mapentry : photoMap.entrySet()) {
+				 listPhoto.add((Photo) mapentry.getValue());
+	        }	
+			 currentLog.setPhotoList(listPhoto);
+			 logementRepository.save(currentLog); 
+			Photo photo = photoRepository.findOne(photoId);
+			java.io.File fileDel = new java.io.File(photo.getPath());
+			fileDel.delete();
+			photoRepository.delete(photo);		
+		}
+		catch(Exception e)
+		{}
 		model.addAttribute("photoList", photoMap);
-		return "/addPhoto";
+		return "redirect:/addPhoto";
 	}
 	
 	@RequestMapping(value="/retour")

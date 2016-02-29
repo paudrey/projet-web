@@ -9,6 +9,7 @@
     <link href="../styles/text.css" rel="stylesheet" />
     <link href="../styles/specificInscription.css" rel="stylesheet" />
     <link href="../styles/button.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 </head>
 
 <body>
@@ -41,7 +42,7 @@
                     <td class="topSection"><input placeholder="Prénom" type="text" th:field="*{User.Prenom}" required="required" /></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Date de naissance" type="text" th:field="*{User.DateNaissance}"/></td>
+                    <td><input id="datepicker" placeholder="Date de naissance" type="text" th:field="*{User.DateNaissance}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="topSection"><input placeholder="Adresse" type="text"  th:field="*{User.Adresse.Adresse}" name="Adresse" required="required"/></td>
@@ -88,3 +89,23 @@
 
 <script language="javascript" type="text/javascript" src="../scripts/jquery-1.12.1.min.js"></script>
 <script language="javascript" type="text/javascript" src="../scripts/inputControls.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+$(function() {
+	$( "#datepicker" ).datepicker({
+	altField: "#datepicker",
+	closeText: 'Fermer',
+	prevText: 'Précédent',
+	nextText: 'Suivant',
+	currentText: 'Aujourd\'hui',
+	monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+	monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+	dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+	dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+	dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+	weekHeader: 'Sem.',
+	dateFormat: 'dd/mm/yy'
+	});
+	});
+</script>

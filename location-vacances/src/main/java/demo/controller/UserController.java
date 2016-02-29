@@ -79,6 +79,7 @@ public class UserController {
 	@RequestMapping(value="/inscription", method=RequestMethod.POST)
 	public String requestSaveCreate(Login login, RedirectAttributes redirectAttribute)
 	{
+		System.out.println(login.getUser().getDateNaissance());
 		AdressePostale adresse = login.getUser().getAdresse();		
 		adresseRepository.save(adresse);
 		
