@@ -33,7 +33,7 @@
        <div id="leftMenu">
            <ul>
                <li class="title">Mon compte</li>
-               <li class="item selected"><a>Mes données</a></li>
+               <li class="item"><a>Mes données</a></li>
                <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
                <li class="item"><a  href="/adminGeneral/deconnect">Déconnexion</a></li>
            </ul>
@@ -45,12 +45,12 @@
        </div>
 
         <div id="innerContent">
-	        <form th:object="${housing}" class="readOnly" method="POST">
-	            <h1 class="formTitle">Mes données</h1>
+	        <form th:object="${user}" class="readOnly" method="POST">
+	            <h1 class="formTitle">Données de l'utilisateur</h1>
 	            <table>
 	                <tr>
 	                	<td class="topSection description"><label>Nom :</label></td>
-	                    <td class="topSection"><label th:text="${user.Nom}"></label></td>
+	                    <td class="topSection"><label th:text="${user.Nom}" th:field="*{Nom}"></label></td>
 	                </tr>
 	                <tr>
 	                    <td class="description"><label>Prénom :</label></td>
@@ -81,8 +81,24 @@
 	                	<td class="topSection description"><label>Email :</label></td>
 	                    <td colspan="2" class="topSection"><label th:text="${user.Email}"></label></td>
 	                </tr>
+	                <tr th:if="${adminUser} == true">
+	                	<td class="topSection description"><label>Statut :</label></td>
+	                    <td>
+	                    	<select th:field="${user.CurrentUserStatus}" class="viewData">
+			                     	<option th:each="userStatus : ${userStatusList}" th:value="${userStatus}" th:text="${userStatus}"/>                
+		                     </select>
+	                    </td>
+	                </tr>
+	                <tr th:if="${adminUser} == true">
+	                	<td class="topSection description"><label>Rôle :</label></td>
+	                	<td>
+	                   		 <select th:field="${user.CurrentUserRole}" class="viewData">
+			                 	<option th:each="userRole : ${userRoleList}" th:value="${userRole}" th:text="${userRole}"/>                
+		                     </select>
+	                     </td>
+	                </tr>               
 	                <tr>
-	                	<td colspan="2" class="topSection"><button class="standardButton returnButton">Retour</button></td>
+	                	<td colspan="2" class="topSection"><button class="standardButton returnButton">Valider</button></td>
 	                </tr>
 	            </table>                
 	        </form>

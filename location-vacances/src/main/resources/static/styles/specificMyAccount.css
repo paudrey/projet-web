@@ -112,7 +112,7 @@
         	font-size : 16px;
         	color : rgb(41,143,244);
         }   
-        
+                
         /* Form et table EDIT */
 		#innerContent form.edit table
 		{
@@ -181,13 +181,22 @@ h1 {
         width : 85vw;    
     }
 
-select {
+select.viewData {
+	width : 40%;
     min-height : 40px;
     border : 2px solid rgb(41,143,244);
     background-color : rgba(255, 255, 255, 0.9);
 }
-	select:hover {
-    	cursor : pointer;
-	}
+
+select{
+	width : 100%;
+	min-height : 40px;
+    border : 2px solid rgb(41,143,244);
+    background-color : rgba(255, 255, 255, 0.9);
+}
+
+select:hover {
+   	cursor : pointer;
+}
 
 

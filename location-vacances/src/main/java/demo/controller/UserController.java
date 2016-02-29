@@ -54,8 +54,12 @@ public class UserController {
 	
 	private Utilisateur user;
 	List<Format_pays> countryList = new ArrayList<Format_pays>();
+	List<UserStatus> userStatusList = new ArrayList<UserStatus>();
+	List<UserRole> userRoleList = new ArrayList<UserRole>();
 	
 	private Login currentLogin;
+	
+	boolean adminUser;
 	
 
 	
@@ -160,18 +164,49 @@ public class UserController {
 	/* Specific administration */
 	
 	@RequestMapping("/suscribersViewData")
-	public String requestView(Model model)
+	public String requestView(Model model, HttpSession session, RedirectAttributes redirectAttributes)
 	{
+		userStatusList.clear();
+		userStatusList.add(UserStatus.CONFIRMED);
+		userStatusList.add(UserStatus.BLOCKED);
+		
+		userRoleList.clear();
+		userRoleList.add(UserRole.ADMIN);
+		userRoleList.add(UserRole.USER);
+		
 		int id = (int)model.asMap().get("userId");
 		Utilisateur user = userRepository.findOne(id);
 		user.setFormatPays(paysRepository.findOne(user.getPaysId()));
+		
+		Utilisateur currentUser = (Utilisateur)session.getAttribute("user");	
+		if(currentUser != null && currentUser.getCurrentUserRole() == UserRole.ADMIN){
+			adminUser = true;
+			session.setAttribute("userToEditId", id);
+		}
+		else{
+			adminUser = false;
+		}
+		
+		model.addAttribute("adminUser", adminUser);
+		model.addAttribute("userStatusList", userStatusList);
+		model.addAttribute("userRoleList", userRoleList);
 		model.addAttribute("user", user);		
 		return "suscribersViewData";
 	}
 	
 	@RequestMapping(value="/suscribersViewData", method=RequestMethod.POST)
-	public String requestView(Model model, RedirectAttributes redirectAttribute)
+	public String requestView(Model model, Utilisateur user, HttpSession session)
 	{		
+		
+		Utilisateur currentUser = (Utilisateur)session.getAttribute("user");
+		if(currentUser != null && currentUser.getCurrentUserRole() == UserRole.ADMIN)
+		{
+			Utilisateur userToEdit = userRepository.findOne((int)session.getAttribute("userToEditId"));
+			userToEdit.setCurrentUserStatus(user.getCurrentUserStatus());
+			userToEdit.setCurrentUserRole(user.getCurrentUserRole());
+			userRepository.save(userToEdit);
+			session.setAttribute("userToEditId", null);
+		}
 		return "redirect:adminUsers";
 	}
 	

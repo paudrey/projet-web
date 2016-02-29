@@ -2,6 +2,7 @@ package demo;
 
 import javax.persistence.GeneratedValue;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import demo.enums.UserRole;
 import demo.enums.UserStatus;
+import demo.model.AdressePostale;
 import demo.model.Format_pays;
 import demo.model.Format_typeLogement;
 import demo.model.Login;
 import demo.model.Utilisateur;
+import demo.repository.AdressePostaleRepository;
 import demo.repository.LoginRepository;
 import demo.repository.PaysRepository;
 import demo.repository.TypeLogementRepository;
@@ -29,6 +32,8 @@ public class LocationVacancesApplication implements CommandLineRunner{
 	private UtilisateurRepository userRepository;
 	@Autowired
 	private LoginRepository loginRepository;
+	@Autowired
+	private AdressePostaleRepository adresseRepository;
 	
     public static void main(String[] args) {  	
         SpringApplication.run(LocationVacancesApplication.class, args);
@@ -72,18 +77,25 @@ public class LocationVacancesApplication implements CommandLineRunner{
     	
     	
     	/****Utilisateur administrateur ********/
+    	AdressePostale adressAdmin = new AdressePostale();
+    	adresseRepository.save(adressAdmin);
+    	
     	 Utilisateur admin = new Utilisateur();
-    	 admin.setPrenom("Admin");
+    	 admin.setPrenom("Super");
+    	 admin.setNom("Administrateur");
+    	 admin.setAdresse(adressAdmin);
     	 admin.setCurrentUserStatus(UserStatus.CONFIRMED);
     	 admin.setCurrentUserRole(UserRole.ADMIN);
     	 admin.setEmail("holidayme@gmail.com");
+    	 admin.setFormatPays(paysRepository.findOne(1));
+    	 admin.setPaysId(1);
+    	 userRepository.save(admin);
     	 
     	 Login adminLogin = new Login();
+    	 adminLogin.setId(admin.getId());
     	 adminLogin.setLogin("holidayme");
-    	 adminLogin.setPassword("admin");
-    	 adminLogin.setUser(admin);
-    	 
-    	 userRepository.save(admin);
+    	 adminLogin.setPassword(DigestUtils.sha512Hex("admin"));
+    	 adminLogin.setUser(admin);   	 	 
     	 loginRepository.save(adminLogin);
     	
 	}

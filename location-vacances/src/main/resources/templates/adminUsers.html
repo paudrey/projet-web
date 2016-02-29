@@ -55,7 +55,7 @@
                         <th>Mail</th>
                         <th>Détails</th>
                         <th>Statut</th>
-                        <th>Écrire</th>
+                        <th>Rôle</th>
                     </tr>
                     <tr th:each="user : ${userList}">
                         <td th:text="${user.Id}"></td>
@@ -64,7 +64,7 @@
                         <td th:text="${user.Email}"></td>
                         <td><a class="form" th:href="@{'/view/'+${user.id}}">Voir</a></td>
                         <td th:text="${user.CurrentUserStatus}"></td>
-                        <td>ToDo</td>
+                        <td th:text="${user.CurrentUserRole}"></td>
                     </tr>
                 </table>
             </form>
