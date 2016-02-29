@@ -51,12 +51,18 @@ public class AdministrationController {
 	private PhotoRepository photoRepository;
 	
 	@RequestMapping("/adminGeneral")
-	public String requestAdminGeneral(@CookieValue(value="login") String idLogin, Model model)
+	public String requestAdminGeneral(Model model, HttpSession session)
 	{
-		int userId = Integer.valueOf(idLogin);
-		Utilisateur user = utilisateurRepository.findOne(userId);
-		model.addAttribute("user", user);
-		return "/adminGeneral";
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
+		{
+			model.addAttribute("user", user);
+			return "/adminGeneral";
+		}
+		else
+		{
+			return "/home";
+		}
 	}
 	
 	@RequestMapping("/adminGeneral/deconnect")
