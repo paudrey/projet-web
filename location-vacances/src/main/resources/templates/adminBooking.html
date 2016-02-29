@@ -18,11 +18,11 @@
         <div id="menu">
             <ul>
                 <li><a href="home.html">Accueil</a></li>
-                <li><a class="selected">Actualité</a></li>
+                <li><a href="news.html">Actualité</a></li>
                 <li><a href="community.html">Notre communauté</a></li>
                 <li><a href="project.html">Notre projet</a></li>
                 <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
+                <li><a class="selected">Mon compte</a></li>
             </ul>
         </div>
 
@@ -40,7 +40,7 @@
                <li class="title">Administration</li>
                <li class="item" th:if="${admin} == true"><a>Utilisateurs</a></li>
                <li class="item"><a href="adminHousing.html">Logements</a></li>
-               <li class="item"><a href="adminBooking.html">Réservations</a></li>
+               <li class="item selected"><a href="adminBooking.html">Réservations</a></li>
            </ul>
        </div>
 
@@ -61,8 +61,8 @@
                     </tr>
                     <tr th:each="booking : ${bookingList}">
                     	<td th:text="${booking.Logement.Id}"></td>
-                    	<td th:text="${booking.Logement.Proprietaire.Nom} + ${booking.Logement.Proprietaire.Prenom}"></td>
-                        <td th:text="${booking.locataire.Nom} + ${booking.locataire.Prenom}"></td>                        
+                    	<td th:text="${booking.Logement.Proprietaire.Nom} +' '+ ${booking.Logement.Proprietaire.Prenom}"></td>
+                        <td th:text="${booking.locataire.Nom} +' '+ ${booking.locataire.Prenom}"></td>                        
                         <td th:text="${booking.dateDebut}"></td>
                         <td th:text="${booking.dateFin}"></td>
                         <td th:text="${booking.statut}"></td>
