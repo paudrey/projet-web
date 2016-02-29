@@ -25,7 +25,12 @@
                 <li><a href="community.html">Notre communauté</a></li>
                 <li><a href="project.html">Notre projet</a></li>
                 <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
+                 <li th:if="${userConnected} == true">
+                	<a href="adminGeneral.html">Mon compte</a>
+                </li>
+                <li th:if="${userConnected} == false">
+                	<a href="connexion.html">Connexion</a>
+                </li>
             </ul>
         </div>
 
@@ -45,7 +50,7 @@
 		                <tr>
 		                	<td><label class="precision" th:text="${housing.Adresse.Adresse}"></label></td>
 		                	<td>Nuitée : <label class="precision" th:text="${housing.prixTTC}"></label> €</td>
-		                    <td rowspan="2" ><img th:src=" ${housing.PhotoList[0].PathImage}" width="100" height="100" th:alt="${housing.PhotoList[0].Name}"/> </td>
+		                    <td rowspan="2" th:if="${not #lists.isEmpty(housing.PhotoList)}" ><img th:src=" *{housing.PhotoList[0].PathImage}" width="100" height="100" th:alt="${housing.PhotoList[0].Name}"/> </td>
 		                </tr>
 		                <tr>
 		                	<td><label class="precision" th:text="${housing.Adresse.CodePostal}"></label>  
@@ -56,28 +61,6 @@
 	                 </table>
                 </tr>
             </table>
-          
-            <!-- <table>
-                 <tr th:each="housing : ${housingList}">
-	                 <table id="tabHousing">
-	                 	<tr>
-		                    <td><label th:text="${housing.ShortDescription}"></label></td>
-		                    <td><label th:text="${housing.prixTTC}"></label></td>
-		                </tr>
-		                <tr>
-		                	<td colspan="2" class="topSection"><label th:text="${housing.Adresse.Adresse}"></label></td>
-		                </tr>
-		                <tr>
-		                	<td><label th:text="${housing.Adresse.CodePostal}"></label></td>
-		                	<td><label th:text="${housing.Adresse.Ville}"></label></td>
-		                </tr>
-			            <tr>
-			            	<td><a class="form" th:href="@{'/detailsHousing/'+${housing.id}}">Voir détail</a></td>
-	                    	<td colspan="2" class="topSection"><button class="inscriptionButton" th:href="@{'/housingDetails/'+${housing.id}}">Voir détail</button></td>
-	                	</tr>
-	                 </table>
-                </tr>
-            </table> -->
         </form>
 
     </div>

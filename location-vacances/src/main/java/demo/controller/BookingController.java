@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,32 +69,36 @@ public class BookingController {
 	}
 	
 	@RequestMapping(value="/createEditBooking", method=RequestMethod.POST)
-	public String requestCreate(Reservation reservation,@CookieValue(value="login") String idLogin, RedirectAttributes redirectAttribute) throws ScriptException, IOException, NoSuchMethodException
+	public String requestCreate(Reservation reservation,HttpSession session, RedirectAttributes redirectAttribute) throws ScriptException, IOException, NoSuchMethodException
 	{
-		if (currentRes == null)
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
 		{
-			int userId = Integer.valueOf(idLogin);
-			Utilisateur locataire = userRepository.findOne(userId);
-			//reservation.setProrietaire(currentLog.getProprietaire());
-			reservation.setLocataire(locataire);
-			reservation.setLogement(currentLog);
-			reservation.setStatut("En attente validation");
-			bookingRespository.save(reservation);
-			EnvoieMailLocataire(reservation,"creation");
-			EnvoieMailProprietaire(reservation,"creation");
-			
+			if (currentRes == null)
+			{
+				
+				Utilisateur locataire = user;
+				//reservation.setProrietaire(currentLog.getProprietaire());
+				reservation.setLocataire(locataire);
+				reservation.setLogement(currentLog);
+				reservation.setStatut("En attente validation");
+				bookingRespository.save(reservation);
+				EnvoieMailLocataire(reservation,"creation");
+				EnvoieMailProprietaire(reservation,"creation");
+				
+			}
+			else
+			{
+				
+				currentRes.setDateDebut(reservation.getDateDebut());
+				currentRes.setDateFin(reservation.getDateFin());
+				currentRes.setStatut("Modification : en attente validation");
+				bookingRespository.save(currentRes);
+				EnvoieMailLocataire(currentRes,"modification");
+				EnvoieMailProprietaire(currentRes,"modification");
+			}
 		}
-		else
-		{
-			
-			currentRes.setDateDebut(reservation.getDateDebut());
-			currentRes.setDateFin(reservation.getDateFin());
-			currentRes.setStatut("Modification : en attente validation");
-			bookingRespository.save(currentRes);
-			EnvoieMailLocataire(currentRes,"modification");
-			EnvoieMailProprietaire(currentRes,"modification");
-		}
-		return "redirect:adminBooking";
+			return "redirect:adminBooking";
 	}
 	
 	public boolean EnvoieMailLocataire(Reservation booking,String typeMail) 

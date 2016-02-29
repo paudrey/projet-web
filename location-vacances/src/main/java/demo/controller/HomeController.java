@@ -82,7 +82,7 @@ public class HomeController {
 	/***Mise en place de la recherche 
 	 * @throws ParseException *******/
 	@RequestMapping(value="/home", method=RequestMethod.POST)
-	public String requestSearch(Recherche recherche, RedirectAttributes redirectAttribute, Model model) 
+	public String requestSearch(Recherche recherche, RedirectAttributes redirectAttribute, Model model, HttpSession session) 
 	{	  
 		List<Logement> listLog = (List<Logement>) logementRepository.findAll();
 		List<Logement> listHousing;
@@ -134,6 +134,14 @@ public class HomeController {
 			}
 			listHousing = logList;
 		}
+		boolean userConnected;
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+
+		if(user != null)
+			userConnected = true;
+		else
+			userConnected = false;
+		model.addAttribute("userConnected", userConnected);
 		
 		model.addAttribute("housingList",listHousing);
 		//Add flash attributes

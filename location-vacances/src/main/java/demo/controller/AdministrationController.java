@@ -102,23 +102,19 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/deleteHousing/{id}")
-	public String requestDeleteHousing(@PathVariable("id") Integer LogId,@CookieValue(value="login") String idLogin)
+	public String requestDeleteHousing(@PathVariable("id") Integer LogId,HttpSession session)
 	{
-		int userId = Integer.valueOf(idLogin);
-		Utilisateur user = utilisateurRepository.findOne(userId);
-		Logement log = logementRepository.findOne(LogId);
-		/*String folderPath = "src/main/resources/static/logement/" + log.getId();
-		java.io.File folder = new java.io.File(folderPath);
-		folder.delete();
-		List<Photo> photoList = log.getPhotoList();		
-		for(Photo p : photoList)
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
 		{
-			photoRepository.delete(p.getId());
-		}*/
-		List<Logement> logList = user.getLogementList();
-		logList.remove(log);
-		logementRepository.delete(LogId);
-		return "redirect:/adminHousing";
+			Logement log = logementRepository.findOne(LogId);
+			
+			List<Logement> logList = user.getLogementList();
+			logList.remove(log);
+			logementRepository.delete(LogId);
+			return "redirect:/adminHousing";
+		}
+		return "redirect:/home";
 	}
 	
 	@RequestMapping("/adminBooking")
@@ -137,14 +133,19 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/deleteBooking/{id}")
-	public String requestDeleteBooking(@PathVariable("id") Integer LogId,@CookieValue(value="login") String idLogin)
+	public String requestDeleteBooking(@PathVariable("id") Integer LogId,HttpSession session)
 	{
-		Reservation booking = bookingRepository.findOne(LogId);
-		booking.setStatut("En attente d'annulation");
-		bookingRepository.save(booking);
-		EnvoieMail(booking,"loc");
-		EnvoieMail(booking,"prop");
-		return "redirect:/adminBooking";
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
+		{
+			Reservation booking = bookingRepository.findOne(LogId);
+			booking.setStatut("En attente d'annulation");
+			bookingRepository.save(booking);
+			EnvoieMail(booking,"loc");
+			EnvoieMail(booking,"prop");
+			return "redirect:/adminBooking";
+		}
+		return "redirect:/home";
 	}
 	
 	public boolean EnvoieMail(Reservation booking,String typeMail) 

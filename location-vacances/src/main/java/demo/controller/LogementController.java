@@ -13,6 +13,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,8 +80,16 @@ public class LogementController {
 	}
 	
 	@RequestMapping("/listHousing")
-	public String requestListHousing(Model model)
+	public String requestListHousing(Model model, HttpSession session)
 	{
+		boolean userConnected;
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+
+		if(user != null)
+			userConnected = true;
+		else
+			userConnected = false;
+		model.addAttribute("userConnected", userConnected);
 		model.addAttribute("housingList", logementRepository.findAll());
 		return "/listHousing";
 	}
@@ -93,59 +102,86 @@ public class LogementController {
 	}
 	
 	@RequestMapping("/createBooking/{action}/{id}")
-	public String requestBooking(@PathVariable("id") Integer LogId,@PathVariable("action") String action, RedirectAttributes redirectAttributes)
+	public String requestBooking(@PathVariable("id") Integer LogId,@PathVariable("action") String action, RedirectAttributes redirectAttributes, HttpSession session)
 	{
-		redirectAttributes.addFlashAttribute("LogId", LogId);	
-		redirectAttributes.addFlashAttribute("action", "creat");	
-		return "redirect:/createEditBooking";	
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
+		{
+			redirectAttributes.addFlashAttribute("LogId", LogId);	
+			redirectAttributes.addFlashAttribute("action", "creat");	
+			return "redirect:/createEditBooking";	
+		}
+		else
+		{
+			return "redirect:/connexion";
+		}
+		
 	}
 	
 	@RequestMapping(value="/housingDetails")
-	public String requestDetailsHou(Model model)
+	public String requestDetailsHou(Model model, HttpSession session)
 	{
 		int id = (int)model.asMap().get("LogId");
 		Logement Log = logementRepository.findOne(id);
+		
+		boolean userConnected;
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+
+		if(user != null)
+			userConnected = true;
+		else
+			userConnected = false;
+		model.addAttribute("userConnected", userConnected);
+		
 		model.addAttribute("housing", Log);
 		return "housingDetails";
 	}
 	@RequestMapping(value="/createEditHousing", method=RequestMethod.POST)
-	public String requestCreate(Logement logement,@CookieValue(value="login") String idLogin, RedirectAttributes redirectAttribute, Model model) throws ScriptException, IOException, NoSuchMethodException
+	public String requestCreate(Logement logement, RedirectAttributes redirectAttribute, Model model, HttpSession session) throws ScriptException, IOException, NoSuchMethodException
 	{
-		//Récupération de l'user 
-		if (currentLog == null){
-			AdressePostale adresse = logement.getAdresse();
-			//ScriptEngineManager manager = new ScriptEngineManager();		
-			//Format_typeLogement type = logement.getTypeLogement();
-			//System.out.println(pays);
-			System.out.println(adresse.getPays());
-			int userId = Integer.valueOf(idLogin);
-			Utilisateur user = userRepository.findOne(userId);
-			logement.setProprietaire(user);
-			adresseRepository.save(adresse);
-			logementRepository.save(logement);
-			
-			List<Logement> logList = user.getLogementList();
-			logList.add(logement);
-			
-			user.setLogementList(logList);
-			userRepository.save(user);
-		}
-		else
+		
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
 		{
-			AdressePostale currentAdr = currentLog.getAdresse();
-			AdressePostale adresse = logement.getAdresse();
-			currentAdr.setAdresse(adresse.getAdresse());
-			currentAdr.setCodePostal(adresse.getCodePostal());
-			currentAdr.setVille(adresse.getVille());
-			currentAdr.setPays(adresse.getPays());
-			adresseRepository.save(currentAdr);
-			currentLog.setAdresse(currentAdr);
-			//currentLog.setProprietaire(logement.getProprietaire());
-			currentLog.setPrixTTC(logement.getPrixTTC());
-			currentLog.setShortDescription(logement.getShortDescription());
-			currentLog.setDescription(logement.getDescription());
-			currentLog.setTypeLogement(logement.getTypeLogement());
-			logementRepository.save(currentLog);
+			//Récupération de l'user 
+			if (currentLog == null){
+				AdressePostale adresse = logement.getAdresse();
+				logement.setProprietaire(user);
+				List<Photo> newPhotoList = new ArrayList<Photo>();
+				logement.setPhotoList(newPhotoList);
+				
+				try
+				{
+					adresseRepository.save(adresse);
+					logementRepository.save(logement);
+					
+					List<Logement> logList = user.getLogementList();
+					logList.add(logement);
+					
+					user.setLogementList(logList);
+			
+					userRepository.save(user);
+				}
+				catch(Exception e)
+				{}
+				
+			}
+			else
+			{
+				AdressePostale currentAdr = currentLog.getAdresse();
+				AdressePostale adresse = logement.getAdresse();
+				currentAdr.setAdresse(adresse.getAdresse());
+				currentAdr.setCodePostal(adresse.getCodePostal());
+				currentAdr.setVille(adresse.getVille());
+				currentAdr.setPays(adresse.getPays());
+				adresseRepository.save(currentAdr);
+				currentLog.setAdresse(currentAdr);
+				currentLog.setPrixTTC(logement.getPrixTTC());
+				currentLog.setShortDescription(logement.getShortDescription());
+				currentLog.setDescription(logement.getDescription());
+				currentLog.setTypeLogement(logement.getTypeLogement());
+				logementRepository.save(currentLog);
+			}
 		}
 		return "redirect:adminHousing";
 	}	

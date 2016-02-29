@@ -93,6 +93,7 @@ public class PhotoController {
 			}
 			else
 			{
+				
 				 MultipartFile multipartFile = file.getFile();
 				 String folderPath = "src/main/resources/static/logement/" + currentLog.getId();
 				 java.io.File folder = new java.io.File(folderPath);
@@ -111,9 +112,15 @@ public class PhotoController {
 				Photo photo = new Photo(newFile.getAbsolutePath());
 				photo.setName(multipartFile.getOriginalFilename());
 				photo.setPathImage(pathImage);
-				currentLog.setPhotoList(photoList);
-				photoRepository.save(photo);	
-				photoMap.put(photo.getId(),photo);				
+				
+				try
+				{
+					currentLog.setPhotoList(photoList);
+					photoRepository.save(photo);	
+					photoMap.put(photo.getId(),photo);
+				}
+				catch(Exception e){}
+								
 			}
 		}
 		catch(Exception e)
@@ -143,8 +150,11 @@ public class PhotoController {
 		 for (Map.Entry mapentry : photoMap.entrySet()) {
 			 listPhoto.add((Photo) mapentry.getValue());
 	        }	
-		 currentLog.setPhotoList(listPhoto);
-		 logementRepository.save(currentLog);
+		 try{
+			 currentLog.setPhotoList(listPhoto);
+			 logementRepository.save(currentLog); 
+		 }
+		 catch(Exception e){}
 		return "redirect:/adminHousing";
 	}
 }
