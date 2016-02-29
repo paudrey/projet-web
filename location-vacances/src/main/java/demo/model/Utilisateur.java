@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import demo.enums.UserRole;
 import demo.enums.UserStatus;
 
 @Entity
@@ -36,6 +37,8 @@ public class Utilisateur {
 	
 	private UserStatus CurrentUserStatus;
 	
+	private UserRole CurrentUserRole;
+	
 
 	public int getId() {
 		return Id;
@@ -43,12 +46,7 @@ public class Utilisateur {
 	public void setId(int id) {
 		Id = id;
 	}
-	/*public Login getLogin() {
-		return Login;
-	}
-	public void setLogin(Login login) {
-		Login = login;
-	}*/
+	
 	public String getNom() {
 		return Nom;
 	}
@@ -105,7 +103,10 @@ public class Utilisateur {
 	public void setCurrentUserStatus(UserStatus currentUserStatus) {
 		CurrentUserStatus = currentUserStatus;
 	}
-
-	
-	
+	public UserRole getCurrentUserRole() {
+		return CurrentUserRole;
+	}
+	public void setCurrentUserRole(UserRole currentUserRole) {
+		CurrentUserRole = currentUserRole;
+	}	
 }

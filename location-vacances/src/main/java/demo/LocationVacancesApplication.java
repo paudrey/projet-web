@@ -7,10 +7,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import demo.enums.UserRole;
+import demo.enums.UserStatus;
 import demo.model.Format_pays;
 import demo.model.Format_typeLogement;
+import demo.model.Login;
+import demo.model.Utilisateur;
+import demo.repository.LoginRepository;
 import demo.repository.PaysRepository;
 import demo.repository.TypeLogementRepository;
+import demo.repository.UtilisateurRepository;
 
 @SpringBootApplication
 public class LocationVacancesApplication implements CommandLineRunner{
@@ -19,6 +25,10 @@ public class LocationVacancesApplication implements CommandLineRunner{
 	private PaysRepository paysRepository;
 	@Autowired
 	private TypeLogementRepository typeLogRepository;
+	@Autowired
+	private UtilisateurRepository userRepository;
+	@Autowired
+	private LoginRepository loginRepository;
 	
     public static void main(String[] args) {  	
         SpringApplication.run(LocationVacancesApplication.class, args);
@@ -46,24 +56,6 @@ public class LocationVacancesApplication implements CommandLineRunner{
     	typeLogRepository.save(tl4);
     	typeLogRepository.save(tl5);
     	
-    	
-    	// Initialisation des la liste des pays
-    	/*Format_pays p1 = new Format_pays();
-    	p1.setId(1);
-    	p1.setPays("France");
-    	Format_pays p2 = new Format_pays();
-    	p2.setId(2);
-    	p2.setPays("Italie");
-    	Format_pays p3 = new Format_pays();
-    	p3.setId(3);
-    	p3.setPays("Espagne");
-    	Format_pays p4 = new Format_pays();
-    	p4.setId(4);
-    	p4.setPays("Etat-Unis");
-    	Format_pays p5 = new Format_pays();
-    	p5.setId(5);
-    	p5.setPays("Maldives");*/
-    	
     	Format_pays p1 = new Format_pays(1, "Non défini");
     	Format_pays p2 = new Format_pays(2, "France");
     	Format_pays p3 = new Format_pays(3, "Italie");
@@ -77,6 +69,23 @@ public class LocationVacancesApplication implements CommandLineRunner{
     	paysRepository.save(p4);
     	paysRepository.save(p5);  
     	paysRepository.save(p6);
+    	
+    	
+    	/****Utilisateur administrateur ********/
+    	 Utilisateur admin = new Utilisateur();
+    	 admin.setPrenom("Admin");
+    	 admin.setCurrentUserStatus(UserStatus.CONFIRMED);
+    	 admin.setCurrentUserRole(UserRole.ADMIN);
+    	 admin.setEmail("holidayme@gmail.com");
+    	 
+    	 Login adminLogin = new Login();
+    	 adminLogin.setLogin("holidayme");
+    	 adminLogin.setPassword("admin");
+    	 adminLogin.setUser(admin);
+    	 
+    	 userRepository.save(admin);
+    	 loginRepository.save(adminLogin);
+    	
 	}
     
     

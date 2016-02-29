@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.mail.smtp.SMTPTransport;
 
+import demo.enums.UserRole;
 import demo.enums.UserStatus;
 import demo.model.AdressePostale;
 import demo.model.Format_pays;
@@ -78,6 +79,7 @@ public class UserController {
 		adresseRepository.save(adresse);
 		
 		login.getUser().setCurrentUserStatus(UserStatus.CONFIRMED);
+		login.getUser().setCurrentUserRole(UserRole.USER);
 		userRepository.save(login.getUser());	
 		
 		String[] tabLogin = login.getUser().getEmail().split("@");
@@ -271,6 +273,12 @@ public class UserController {
 	@RequestMapping(value="/resetPasswdProcess" , method=RequestMethod.POST)
 	public String requestModifPassword(Model model, Login login)
 	{	
+		Utilisateur user = currentLogin.getUser();
+		if (user.getCurrentUserStatus() == UserStatus.BLOCKED)
+		{
+			user.setCurrentUserStatus(UserStatus.CONFIRMED);
+			userRepository.save(user);
+		}
 		currentLogin.setPassword(DigestUtils.sha512Hex(login.getPassword()));
 		loginRespository.save(currentLogin);
 		return "redirect:/connexion";		
