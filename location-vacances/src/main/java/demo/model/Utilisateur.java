@@ -32,8 +32,8 @@ public class Utilisateur {
 	private List<Logement> LogementList;
 	
 	private int PaysId;
-	@OneToOne
-	private Format_pays FormatPays;
+	/*@OneToOne
+	private Format_pays FormatPays;*/
 	
 	private UserStatus CurrentUserStatus;
 	
@@ -91,12 +91,12 @@ public class Utilisateur {
 	public void setPaysId(int paysId) {
 		PaysId = paysId;
 	}
-	public Format_pays getFormatPays() {
+/*	public Format_pays getFormatPays() {
 		return FormatPays;
 	}
 	public void setFormatPays(Format_pays formatPays) {
 		FormatPays = formatPays;
-	}
+	}*/
 	public UserStatus getCurrentUserStatus() {
 		return CurrentUserStatus;
 	}

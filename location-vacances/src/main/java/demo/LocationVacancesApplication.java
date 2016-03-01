@@ -87,7 +87,7 @@ public class LocationVacancesApplication implements CommandLineRunner{
     	 admin.setCurrentUserStatus(UserStatus.CONFIRMED);
     	 admin.setCurrentUserRole(UserRole.ADMIN);
     	 admin.setEmail("holidayme@gmail.com");
-    	 admin.setFormatPays(paysRepository.findOne(1));
+    	//admin.setFormatPays(paysRepository.findOne(1));
     	 admin.setPaysId(1);
     	 userRepository.save(admin);
     	 

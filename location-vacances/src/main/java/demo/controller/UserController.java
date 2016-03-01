@@ -177,7 +177,7 @@ public class UserController {
 		
 		int id = (int)model.asMap().get("userId");
 		Utilisateur user = userRepository.findOne(id);
-		user.setFormatPays(paysRepository.findOne(user.getPaysId()));
+		//user.setFormatPays(paysRepository.findOne(user.getPaysId()));
 		
 		Utilisateur currentUser = (Utilisateur)session.getAttribute("user");	
 		if(currentUser != null && currentUser.getCurrentUserRole() == UserRole.ADMIN){
