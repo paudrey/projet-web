@@ -175,4 +175,40 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping("/community")
+	public String requestCommunity(Model model, HttpSession session)
+	{	
+		boolean userConnected;
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+
+		if(user != null)
+			userConnected = true;
+		else
+			userConnected = false;
+		
+		
+		
+		model.addAttribute("userConnected", userConnected);
+	
+		return "community";
+	}
+	
+	@RequestMapping("/news")
+	public String requestNews(Model model, HttpSession session)
+	{	
+		boolean userConnected;
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+
+		if(user != null)
+			userConnected = true;
+		else
+			userConnected = false;
+		
+		
+		
+		model.addAttribute("userConnected", userConnected);
+	
+		return "news";
+	}
+	
 }

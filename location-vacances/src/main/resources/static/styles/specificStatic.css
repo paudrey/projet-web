@@ -1,0 +1,21 @@
+img{
+	float:left;
+	height:120px;
+}
+
+.photoContains{
+	width:auto;
+	height:120px;
+	position: relative;
+    display: inline-block;
+}
+
+.photoSection{
+	width:600px;
+	height:200px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space:nowrap;
+	margin-left: auto;
+    margin-right: auto;
+}

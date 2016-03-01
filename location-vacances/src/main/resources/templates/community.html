@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Holiday Me</title>
+    <link href="../styles/base.css" rel="stylesheet" />
+    <link href="../styles/specificHeader.css" rel="stylesheet" />
+    <link href="../styles/specificFooter.css" rel="stylesheet" />
+    <link href="../styles/text.css" rel="stylesheet" />
+    <link href="../styles/specificConstruction.css" rel="stylesheet" />
+    <link href="../styles/specificStatic.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div id="logo"></div>
+        <div id="menu">
+            <ul>
+                <li><a href="home.html">Accueil</a></li>
+                <li><a href="news.html">Actualité</a></li>
+                <li><a class="selected">Notre communauté</a></li>
+                <li><a href="project.html">Notre projet</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                  <li th:if="${userConnected} == true">
+                	<a href="adminGeneral.html">Mon compte</a>
+                </li>
+                <li th:if="${userConnected} == false">
+                	<a href="connexion.html">Connexion</a>
+               	</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="content">
+   		<div>
+	    	<div>
+		    	<p> La communauté d'Holiday Me est intègre et synchronisée avec la nature. Holiday Me vous permet d'ouvrir vos chakras et d'améliorer votre qualité de vie via l'assurance de la bonne santé de votre portemonnaie ainsi que du notre.</p>
+		    	<p>Notre communauté vous donne accès à différents avantages, comme par exemple :</p>
+	    	</div>
+	    	<div>
+	    		<div  class="photoContains">
+		    		<img alt="img1" src="../images/img1.png"/>
+		    	</div>
+			   	<div  class="photoContains">
+			   		<img alt="img2" src="../images/img2.png"/>
+			   	</div>
+	    	</div>
+    	</div>
+    	<div>
+	    	<div>
+	    		<h1 class="formTitle">L'état de l'appartement à la sortie garantie</h1>
+	    		<p> Holiday Me vous propose un service permettant l'installation de caméras cachées dans chaque pièce, vous offrant ainsi la possibilité de vous assurer du bon état de votre appartement au fil du séjour de votre locataire.</p>
+	    		<p> Vous pouvez également installer un verrou électronique permettant d'enfermer vos locataires à l'intérieur de votre appartement dans le cas où vous observeriez des détériorations de votre possession. Ceci dans le seul but de vous assurer le remboursement de vos pertes. </p>
+	    	</div>
+	    	<div  class="photoContains">
+			   		<img alt="pouce" src="../images/pouceLeve.png"/>
+			</div>
+		</div>
+		<div>
+			<div>
+	    		<h1 class="formTitle">La garantie Zéro Cadavres</h1>
+	    		<p> A l'instar de notre concurrent (que nous ne citerons pas 'logo airbnb') nous vous garantissons une absence de mauvaises surprises de style cadavérique dans le jardin de votre location.</p>
+	    		<p> Si un événement aussi malheureux parvenait tout de même à arriver, le propriétaire s'engage (eh oui, il n'a pas le choix) à vous rembourser 600% du montant que vous lui avez payé.</p>
+	    	</div>
+	    	<div  class="photoContains">
+			   		<img alt="tete" src="../images/tete.png"/>
+			</div>
+		</div>
+		<div>
+			<p>N’attendez plus,<a href="inscription.html" class="resetPassword">rejoignez-nous</a></p>
+		</div>
+    </div>
+
+    <div id="footer">
+        <p>Audrey <span class="smallCaps">Pautot</span> - Sophie <span class="smallCaps">Hantzperg</span></p>
+        <p>Master 2 en Méthodes Informatiques Appliquées à la Gestion des Entreprises</p>
+    </div>
+</body>
+
+</html>
