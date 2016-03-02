@@ -1,31 +1,54 @@
 #content{
 	box-sizing : border-box;
 	padding : 2%;	
-	height : 110vh;
 }
 
 .articles{
-	width : 65%;
+	width : 70%;
 	height : auto;
 	margin-left : auto;
 	margin-right : auto;
+	text-align : center;
 }
 .article{
-	float : left;
+	box-sizing : border-box;
+	width : 100%;
+	white-space: nowrap;
+}
+
+.articleLeft{
+	padding-right : 160px;
+}
+
+.articleRight{
+	padding-left : 160px;
 }
 
 .articleContent{
+	width : 100%;
 	box-sizing : border-box;
-	width : 75%;
+	display : inline-block;
+	vertical-align : middle;
+	white-space: normal;
 }
 
 .articleImage{
+	width : 160px;
 	box-sizing : border-box;
-	width : 20%;
+	display : inline-block;
+	vertical-align : middle;
 }
 
-.left{
-	float : left;
+.imageRight{
+	margin-right : -160px;
+}
+
+.imageLeft{
+	margin-left : -160px;
+}
+
+/*.left{
+	float:left;
 }
 .left img{
 	float : right;
@@ -36,7 +59,7 @@
 }
 .right img{
 	float : left;
-}
+}*/
 
 img.middle{
 	margin-top : 12%;
@@ -69,10 +92,6 @@ h1.articleTitle{
     font-size: 28px;
     font-family: 'Segoe UI';
     font-weight: 400;
-}
-
-img{
-	float:left;
 }
 
 .photoContains{
