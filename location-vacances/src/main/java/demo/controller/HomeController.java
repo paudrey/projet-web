@@ -86,14 +86,15 @@ public class HomeController {
 	{	  
 		List<Logement> listLog = (List<Logement>) logementRepository.findAll();
 		List<Logement> listHousing;
-		
-		
-		List <Logement> list = listLog.stream()
-				.filter(l-> l.getTypeLogement().equalsIgnoreCase(recherche.getTypeLogement()))
-				.collect(Collectors.toList());
-		
-		listHousing = list;
-		
+		listHousing = listLog;
+		if(!recherche.getTypeLogement().equals("Non défini"))
+		{
+			List <Logement> list = listLog.stream()
+					.filter(l-> l.getTypeLogement().equalsIgnoreCase(recherche.getTypeLogement()))
+					.collect(Collectors.toList());
+			
+			listHousing = list;
+		}
 		if(!recherche.getSelectedCountry().equals("Non défini"))
 		{
 			List <Logement> listFilter = listHousing.stream()
@@ -142,7 +143,7 @@ public class HomeController {
 		else
 			userConnected = false;
 		model.addAttribute("userConnected", userConnected);
-		
+		session.setAttribute("listHousing", listHousing);
 		model.addAttribute("housingList",listHousing);
 		//Add flash attributes
 		return "/listhousing";

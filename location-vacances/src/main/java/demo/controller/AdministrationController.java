@@ -196,13 +196,13 @@ public class AdministrationController {
 			case "loc":
 				objet = "Annulation de la réservation";
 				lienVal = "localhost:8080/validationDeleteBooking/loc/" + booking.getId();
-				message = "Vous avez réalisé une annulation de la réservation pour le logement : " + log + "\n\n Cliquez sur ce lien pour valider votre demande : \n" + lienVal;
+				message = "Vous avez réalisé une annulation de la réservation pour le logement : " + log + "\n\n Recopier ce lien dans votre navigateur pour valider votre demande : \n" + lienVal;
 				email = booking.getLocataire().getEmail();
 			break;
 			case "prop":
 				objet = "Annulation de la réservation";
 				lienVal = "localhost:8080/validationDeleteBooking/prop/" + booking.getId();
-				message = "Une annulation de la réservation a été faite pour le logement : " + log + "\n\n Cliquez sur ce lien pour valider votre demande : \n" + lienVal;
+				message = "Une annulation de la réservation a été faite pour le logement : " + log + "\n\n Recopier ce lien dans votre navigateur pour valider votre demande : \n" + lienVal;
 				email = booking.getLogement().getProprietaire().getEmail();
 			break;
 			default:

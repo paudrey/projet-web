@@ -115,12 +115,12 @@ public class BookingController {
 			case "creation":
 				objet = "Validation de la réservation";
 				lienVal = "localhost:8080/validationBooking/loc/" + booking.getId();
-				message = "Vous avez réalisé une réservation pour le logement : " + log + "\n\n Cliquez sur ce lien pour valider votre demande : \n" + lienVal;
+				message = "Vous avez réalisé une réservation pour le logement : " + log + "\n\n Recopier ce lien dans votre navigateur pour valider votre demande : \n" + lienVal;
 			break;
 			case "modification":
 				objet = "Modification de la demande";
 				lienVal = "localhost:8080/validationModifBooking/loc/" + booking.getId();
-				message = "Vous avez modifié la réservation pour le logement : " + log + "\n\n Cliquez sur ce lien pour valider votre demande : \n" + lienVal;
+				message = "Vous avez modifié la réservation pour le logement : " + log + "\n\n Recopier ce lien dans votre navigateur pour valider votre demande : \n" + lienVal;
 			break;
 			default:
 				objet = "";
@@ -171,12 +171,12 @@ public class BookingController {
 			case "creation":
 				objet = "Validation de la réservation";
 				lienVal = "localhost:8080/validationBooking/prop/" + booking.getId();
-				message = "Une réservation a été faite pour le logement : " + log + "\n\n Cliquez sur ce lien pour valider votre demande : \n" + lienVal;
+				message = "Une réservation a été faite pour le logement : " + log + "\n\n Recopier ce lien dans votre navigateur pour valider votre demande : \n" + lienVal;
 			break;
 			case "modification":
 				objet = "Modification de la demande";
 				lienVal = "localhost:8080/validationModifBooking/prop/" + booking.getId();
-				message = "Une modification a été faite pour la réservation pour le logement : " + log + "\n\n Cliquez sur ce lien pour valider votre demande : \n" + lienVal;
+				message = "Une modification a été faite pour la réservation pour le logement : " + log + "\n\n Recopier ce lien dans votre navigateur pour valider votre demande : \n" + lienVal;
 			break;
 			default:
 				objet = "";

@@ -249,7 +249,7 @@ public class UserController {
 		
 		objet = "Mot de passe oublié sur Holiday Me";
 		lienVal = "localhost:8080/resetPasswdProcess/" + user.getId();
-		message = " Cliquez sur ce lien pour changer votre mot de passe: \n" + lienVal;
+		message = "Recopier ce lien dans votre navigateur pour changer votre mot de passe: \n" + lienVal;
 
 		
 		try 

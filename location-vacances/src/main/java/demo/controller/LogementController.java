@@ -89,8 +89,10 @@ public class LogementController {
 			userConnected = true;
 		else
 			userConnected = false;
+		
+		List <Logement> listHousing = (List<Logement>) session.getAttribute("listHousing");
 		model.addAttribute("userConnected", userConnected);
-		model.addAttribute("housingList", logementRepository.findAll());
+		model.addAttribute("housingList", listHousing);
 		return "/listHousing";
 	}
 	
