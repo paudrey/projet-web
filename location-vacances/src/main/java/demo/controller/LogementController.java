@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.dom.Document;
 
+import demo.enums.UserRole;
 import demo.model.AdressePostale;
 import demo.model.Contact;
 import demo.model.File;
@@ -63,8 +64,13 @@ public class LogementController {
 	Logement currentLog = null;
 	
 	@RequestMapping(value="/createEditHousing",method=RequestMethod.GET)
-	public String requestHousing(Model model)
+	public String requestHousing(Model model, HttpSession session)
 	{	
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null && user.getCurrentUserRole() == UserRole.ADMIN)
+		{
+			model.addAttribute("admin", true);
+		}
 		model.addAttribute("typeLogList", typeLogRepository.findAll());
 		model.addAttribute("paysList", paysRepository.findAll());
 		try{

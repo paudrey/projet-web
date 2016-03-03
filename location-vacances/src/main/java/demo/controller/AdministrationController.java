@@ -102,7 +102,10 @@ public class AdministrationController {
 		if(user != null)
 		{
 			if(user.getCurrentUserRole()== UserRole.ADMIN)
+			{
+				model.addAttribute("admin", true);
 				model.addAttribute("housingList", logementRepository.findAll());
+			}				
 			else
 			{
 				List<Logement> listLog = (List<Logement>) logementRepository.findAll();
@@ -145,7 +148,11 @@ public class AdministrationController {
 		if(user != null)
 		{
 			if(user.getCurrentUserRole()== UserRole.ADMIN)
+			{
+				model.addAttribute("admin", true);
 				model.addAttribute("bookingList", bookingRepository.findAll());
+			}
+				
 			else
 			{
 				List<Reservation> listRes = (List<Reservation>) bookingRepository.findAll();

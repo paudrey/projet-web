@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.mail.smtp.SMTPTransport;
 
+import demo.enums.UserRole;
 import demo.model.AdressePostale;
 import demo.model.Contact;
 import demo.model.Logement;
@@ -52,8 +53,17 @@ public class BookingController {
 	Reservation currentRes;
 	
 	@RequestMapping(value="/createEditBooking")
-	public String requestBooking(Model model)
+	public String requestBooking(Model model, HttpSession session)
 	{
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null)
+		{
+			model.addAttribute("userConnected", true);
+		}
+		else{
+			model.addAttribute("userConnected", false);
+		}
+		
 		int id = (int)model.asMap().get("LogId");
 		String action = (String)model.asMap().get("action");
 		if (action == "mod")

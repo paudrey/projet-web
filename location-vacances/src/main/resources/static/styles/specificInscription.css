@@ -3,9 +3,7 @@ body{
 }
 
 #content {
-    min-height : 90vh;
     padding-top : 2vh;
-    /*background-image : url('../images/summer_holiday.jpg');*/
     background-position : center;
     background-size : cover;
     background-repeat : no-repeat;

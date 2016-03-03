@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -32,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import demo.LocationVacancesApplication;
+import demo.enums.UserRole;
 import demo.model.File;
 import demo.model.Logement;
 import demo.model.Photo;
@@ -63,8 +65,14 @@ public class PhotoController {
 	}
 	
 	@RequestMapping("/addPhoto")
-	public String requestAddPhoto(Model model) 
+	public String requestAddPhoto(Model model, HttpSession session) 
 	{		
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user != null && user.getCurrentUserRole() == UserRole.ADMIN)
+		{
+			model.addAttribute("admin", true);
+		}
+		
 		File fileModel = new File();
 		currentLog = logementRepository.findOne(idLogement);
 		photoList = currentLog.getPhotoList();

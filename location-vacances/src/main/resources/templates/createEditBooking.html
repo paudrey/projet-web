@@ -24,7 +24,12 @@
                 <li><a class="selected">Actualité</a></li>
                 <li><a href="community.html">Notre communauté</a></li>
                 <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="connexion.html">Connexion</a></li>
+                <li th:if="${userConnected} == true">
+                	<a href="adminGeneral.html">Mon compte</a>
+                </li>
+                <li th:if="${userConnected} == false">
+                	<a href="connexion.html">Connexion</a>
+                </li>
             </ul>
         </div>
 

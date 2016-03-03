@@ -4,14 +4,15 @@
     background-repeat : no-repeat;
 	background-color : whitesmoke;
     opacity : 0.9;
-    overflow : hidden;
 }
 
 #leftMenu {
-    margin-top : 5vh;
+    margin-top : 4vh;
     width : 15vw;
+    min-width : 150px;
     background-color : rgb(150,150,150);
-    float : left;
+    display : inline-block;
+    vertical-align : top;
     height : 72vh;
 }
 #leftMenu ul{
@@ -49,13 +50,14 @@
     }
 
 #innerContent {
-    margin-top : 5vh;
-    width : 85vw;
+    margin-top : 4vh;
+    width : 80vw;
+    min-width : 550px;
     min-height : 72vh;
-    height : 10vh;
-    float : right;
+    display : inline-block;
     background-color : whitesmoke;
-    overflow : auto;
+    vertical-align : top;
+    /*overflow : auto;*/
 }
 
 /* Form et table standards */
@@ -138,6 +140,8 @@
 
 		#innerContent form.addContent table{
 			width : 80%;
+			margin-right : auto;
+			margin-left : auto;
 		}
 		#innerContent form.addContent table tr
 		{

@@ -58,21 +58,6 @@ select:hover {
     cursor : pointer;
 }
 
-a.pseudoButton{
-	box-sizing : border-box;
-	text-decoration: none;
-	font-variant : small-caps;
-	padding : 5px;
-	color : rgb(245,245,245);
-	background-color: rgb(41,143,244);
-	margin-left : 48%;
-}
-
-a.pseudoButton:hover{
-	cursor : pointer;
-    background-color : rgb(68,162,255);
-}
-
 .photoSection{
 	width:600px;
 	height:200px;

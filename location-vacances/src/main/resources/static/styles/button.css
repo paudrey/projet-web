@@ -75,6 +75,31 @@
 	cursor : default;
 }
 
+.validationButton {
+    width : 200px;
+    height : 40px;
+    margin-left : 25vw;
+    margin-right : auto;
+    padding : 2px;
+
+    background-color : rgb(41,143,244);
+    border : none;
+
+    font-variant : small-caps;
+    font-size : 18px;
+    color : rgb(245,245,245);
+}
+.validationButton:hover {
+        cursor : pointer;
+        background-color : rgb(68,162,255);
+    }
+.validationButton:disabled
+{
+	color : rgb(117,117,117);
+	background-color : rgb(219,219,219);
+	cursor : default;
+}
+
 .standardButton {
     width : 200px;
     height : 40px;
@@ -124,7 +149,27 @@
 	background-color : rgb(68,162,255);
 }
 
-    
-    
+ a.pseudoButton{
+	box-sizing : border-box;
+	text-decoration: none;
+	font-variant : small-caps;
+	padding : 5px;
+	color : rgb(245,245,245);
+	background-color: rgb(41,143,244);
+	margin-left : 48%;
+	padding-left : 20px;
+	padding-right : 20px;
+	padding-top : 5px;
+	padding-bottom : 5px;
+}
+
+a.pseudoButton:hover{
+	cursor : pointer;
+    background-color : rgb(68,162,255);
+}   
+
+ a.leftAlign{
+	margin-left : 0;
+}    
 
     
