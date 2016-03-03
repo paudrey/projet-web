@@ -174,7 +174,7 @@ public class BookingController {
 		
 		String log = logementRepository.findOne(booking.getLogement().getId()).getShortDescription();
 		String lienVal;
-		String emailLocataire = booking.getLocataire().getEmail();
+		String emailProprietaire = booking.getLogement().getProprietaire().getEmail();
 		
 		switch(typeMail)
 		{
@@ -203,7 +203,7 @@ public class BookingController {
 	        Message msg = new MimeMessage(session);
 	        msg.setFrom(new InternetAddress("holidayme.project@gmail.com"));;
 	        msg.setRecipients(Message.RecipientType.TO,
-	        InternetAddress.parse(emailLocataire, false));
+	        InternetAddress.parse(emailProprietaire, false));
 	        msg.setSubject(objet);
 	        msg.setText(message);
 	        msg.setSentDate(new Date());
