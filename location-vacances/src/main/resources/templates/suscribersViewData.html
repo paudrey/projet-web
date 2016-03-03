@@ -22,7 +22,7 @@
                 <li><a href="news.html">Actualité</a></li>
                 <li><a href="community.html">Notre communauté</a></li>
                 <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="adminGeneral.html">Mon compte</a></li>
+                <li><a class="selected" href="adminGeneral.html">Mon compte</a></li>
             </ul>
         </div>
 
@@ -32,13 +32,13 @@
        <div id="leftMenu">
            <ul>
                <li class="title">Mon compte</li>
-               <li class="item"><a>Mes données</a></li>
+               <li class="item"><a href="editMyData.html">Mes données</a></li>
                <li class="item"><a href="suscribersEditPass.html">Changer de mot de passe</a></li>
                <li class="item"><a  href="/adminGeneral/deconnect">Déconnexion</a></li>
            </ul>
            <ul>
                <li class="title">Administration</li>
-               <li class="item selected" th:if="${admin} == true"><a>Utilisateurs</a></li>
+               <li class="item selected" th:if="${adminUser} == true"><a>Utilisateurs</a></li>
                <li class="item"><a href="adminHousing.html">Logements</a></li>
                <li class="item"><a href="adminBooking.html">Réservations</a></li>
            </ul>

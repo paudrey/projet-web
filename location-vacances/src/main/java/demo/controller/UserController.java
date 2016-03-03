@@ -103,6 +103,14 @@ public class UserController {
 		countryList.addAll((List<Format_pays>)paysRepository.findAll());
 		user = (Utilisateur)session.getAttribute("user");
 		
+		if(user.getCurrentUserRole() == UserRole.ADMIN)
+		{
+			model.addAttribute("admin", true);
+		}
+		else{
+			model.addAttribute("admin", false);
+		}
+		
 		model.addAttribute("user", user);
 		model.addAttribute("countryList", countryList);
 		return "editMyData";
@@ -127,8 +135,17 @@ public class UserController {
 	}
 	
 	@RequestMapping("/editPassword")
-	public String requestChangePassword(Model model)
+	public String requestChangePassword(Model model, HttpSession session)
 	{
+		Utilisateur user = (Utilisateur)session.getAttribute("user");
+		if(user.getCurrentUserRole() == UserRole.ADMIN)
+		{
+			model.addAttribute("admin", true);
+		}
+		else{
+			model.addAttribute("admin", false);
+		}
+		
 		model.addAttribute("login", new Login());
 		return "editPassword";
 	}
